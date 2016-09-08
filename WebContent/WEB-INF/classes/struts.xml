@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+  <!DOCTYPE struts PUBLIC
+      "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+      "http://struts.apache.org/dtds/struts-2.0.dtd">
+  <struts>
+
+     
+  <package name="audit" namespace="/" extends="struts-default">
+     	<action name="login" class="com.demo.action.LoginAction">
+     		<!-- action result and page mapping -->
+     		<result name="success">/console/pages/success.jsp</result>
+     		<result name="error">/console/pages/error.jsp</result>
+     	</action>
+     </package>
+  </struts>

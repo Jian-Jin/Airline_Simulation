@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>healthcare</display-name>
+  
+  <!-- initialization -->  
+  <context-param>  
+     <param-name>contextConfigLocation</param-name>  
+      
+       <param-value>/WEB-INF/applicationContext.xml</param-value>  
+  </context-param>  
+  <!-- listener -->  
+  <!-- configure of spring listener -->    
+  <listener>    
+       <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>    
+  </listener>    
+  
+  <!-- define struts2 core filter -->    
+  <filter>  
+      <filter-name>struts2</filter-name>  
+      <filter-class>
+           org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter     
+       </filter-class>  
+  </filter>  
+   <!-- let struts core filter to process all the requests -->  
+  <filter-mapping>  
+       <filter-name>struts2</filter-name>  
+      <url-pattern>/*</url-pattern>  
+  </filter-mapping>  
+     
+   <!-- welcome page -->  
+   <welcome-file-list>  
+       <welcome-file>/console/pages/index.jsp</welcome-file>  
+   </welcome-file-list>  
+ 
+</web-app>
