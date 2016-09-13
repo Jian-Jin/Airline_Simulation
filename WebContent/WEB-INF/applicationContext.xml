@@ -71,7 +71,7 @@
 
 
     
-	<bean id="userDAO" class="com.demo.action.UserDAOImpl" > 
+	<bean id="userDAO" class="com.demo.DAO.impl.UserDAOImpl" > 
          <!--injection of SqlSessionTemplate instance -->
 		 <property name="sqlSessionTemplate" ref="sqlSession" /> 
 	</bean> 
