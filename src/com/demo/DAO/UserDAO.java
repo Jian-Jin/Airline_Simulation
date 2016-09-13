@@ -1,4 +1,4 @@
-package com.demo.action;
+package com.demo.DAO;
 
 import java.util.List;
 

@@ -1,10 +1,11 @@
-package com.demo.action;
+package com.demo.DAO.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import com.demo.DAO.UserDAO;
 import com.demo.model.User;
 
 public class UserDAOImpl implements UserDAO {

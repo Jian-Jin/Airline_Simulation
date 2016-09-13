@@ -1,5 +1,6 @@
 package com.demo.action;
 
+import com.demo.DAO.UserDAO;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class LoginAction extends ActionSupport {
