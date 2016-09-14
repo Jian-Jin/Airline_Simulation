@@ -1,9 +1,12 @@
 package com.demo.DAO;
-
+import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
-public interface UserDAO {
-	public boolean checkLogin(String userName,String passWord);
-    //public List<?>  find(int id);
+import com.demo.model.User;
 
+public interface UserDAO {
+	
+	public List<User> selectUser(
+			@Param(value = "username") String username,
+			@Param(value = "password") String password);
 }

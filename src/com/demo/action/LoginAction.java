@@ -1,25 +1,20 @@
 package com.demo.action;
-
-import com.demo.DAO.UserDAO;
+import com.demo.service.LoginService;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class LoginAction extends ActionSupport {
-	/**
-	 * @date 2014-12-03
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
-	
-	
+
 	private String userName;
 	private String passWord;
-	private UserDAO userDAO;
+	private LoginService loginService;
 
 	@Override
 	public String execute() throws Exception {
 		 
         // a simple check
-		if(userDAO.checkLogin(userName, passWord)){
+		if(loginService.checkLogin(userName, passWord)){
 			return SUCCESS;
 		}else{
 			return ERROR;
@@ -41,13 +36,13 @@ public class LoginAction extends ActionSupport {
 	public void setPassWord(String passWord) {
 		this.passWord = passWord;
 	}
-
-	public UserDAO getUserDAO() {
-		return userDAO;
+	
+	public LoginService getLoginService() {
+		return loginService;
 	}
 
-	public void setUserDAO(UserDAO userDAO) {
-		this.userDAO = userDAO;
+	public void setLoginService(LoginService loginService) {
+		this.loginService = loginService;
 	}
 
 }
