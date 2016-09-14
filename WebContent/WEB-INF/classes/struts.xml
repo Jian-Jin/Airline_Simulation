@@ -5,8 +5,8 @@
   <struts>
 
      
-  <package name="audit" namespace="/" extends="struts-default">
-     	<action name="login" class="com.demo.action.LoginAction">
+  <package name="loginAction" namespace="/" extends="struts-default">
+     	<action name="login" class="com.demo.action.LoginAction" method="userLogin">
      		<!-- action result and page mapping -->
      		<result name="success">/console/pages/success.jsp</result>
      		<result name="error">/console/pages/error.jsp</result>

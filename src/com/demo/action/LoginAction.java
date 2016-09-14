@@ -10,8 +10,7 @@ public class LoginAction extends ActionSupport {
 	private String passWord;
 	private LoginService loginService;
 
-	@Override
-	public String execute() throws Exception {
+	public String userLogin() throws Exception {
 		 
         // a simple check
 		if(loginService.checkLogin(userName, passWord)){
