@@ -33,6 +33,13 @@ table, td, th {
     border: 1px solid black;
 }
 </style>
+
+  <script type="text/javascript">
+            function greeting(){
+                alert("Comfirm your aircraft purchase!")
+            }
+        </script>
+        
 </head>
 
 <body>
@@ -65,7 +72,7 @@ table, td, th {
     </tr>
  </s:iterator>
 </table>
-  <s:form action="buyPlane" method="post" namespace="/">
+  <s:form action="buyPlane" method="post" namespace="/" onsubmit="greeting()">
   <h2>
    <s:radio label="aircraftToBuy" name="aircraftToBuy" list="names" value="" />
    </h2>
