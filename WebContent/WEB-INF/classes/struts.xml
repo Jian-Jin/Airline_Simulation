@@ -5,14 +5,25 @@
   <struts>
 
      
-  <package name="loginAction" namespace="/" extends="struts-default">
+  <package name="LoginAction" namespace="/login" extends="struts-default">
      	<action name="login" class="com.demo.action.LoginAction" method="userLogin">
      		<!-- action result and page mapping -->
-     		<result name="success">/console/pages/success.jsp</result>
+     		<result name="success">/console/pages/index.jsp</result>
      		<result name="error">/console/pages/error.jsp</result>
      	</action>
-     	
-     	<action name="aircraft" class="com.demo.action.AircraftAction" method="getPlane">
+  </package>
+    
+   <package name="RegisterAction" namespace="/register" extends="struts-default">
+     	<action name="register" class="com.demo.action.RegisterAction" method="register">
+     		<!-- action result and page mapping -->
+     		<result name="success">/console/pages/index.jsp</result>
+     		<result name="error">/console/pages/error.jsp</result>
+     	</action>
+     </package>
+   
+    <package name="aircraftAction" namespace="/aircraft" extends="struts-default">  
+        
+        <action name="showAircraft" class="com.demo.action.AircraftAction" method="getPlane">
      		<!-- action result and page mapping -->
      		<result name="success">/console/pages/aircraft.jsp</result>
      		<result name="error">/console/pages/error.jsp</result>
@@ -23,5 +34,6 @@
      		<result name="success">/console/pages/showplane.jsp</result>
      		<result name="error">/console/pages/error.jsp</result>
      	</action>
-     </package>
+    </package>
+    
   </struts>

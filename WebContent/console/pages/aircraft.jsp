@@ -9,30 +9,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <title>Aircraft</title>
-<style>
-.button {
-    background-color: #33A2FF;
-    border: none;
-    color: black;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-}
-
-table {
-    border-collapse: collapse;
-}
-
-table, td, th {
-    border: 1px solid black;
-}
-</style>
 
   <script type="text/javascript">
             function greeting(){
@@ -43,8 +31,7 @@ table, td, th {
 </head>
 
 <body>
-
-<table>
+<table class="table table-striped">
  <tr>
     <!-- <th>Purchase</th> -->
     <th>Name</th>
@@ -80,6 +67,5 @@ table, td, th {
    <button class="button">purchase</button>
   
   </s:form>
-
 </body>
 </html>

@@ -73,6 +73,10 @@
 		scope="prototype">
 		<property name="loginService" ref="loginService"></property>
 	</bean>
+	<bean id="registerAction" class="com.demo.action.RegisterAction"
+		scope="prototype">
+		<property name="registerService" ref="registerService"></property>
+	</bean>
 	<bean id="aircraftAction" class="com.demo.action.AircraftAction"
 		scope="prototype">
 		<property name="aircraftService" ref="aircraftService"></property>
@@ -80,6 +84,9 @@
 
     <!-- Service Bean -->
     <bean id="loginService" class="com.demo.service.impl.LoginServiceImpl">
+		<property name="userDAO" ref="userDAO"></property>
+	</bean>
+	<bean id="registerService" class="com.demo.service.impl.RegisterServiceImpl">
 		<property name="userDAO" ref="userDAO"></property>
 	</bean>
 	<bean id="aircraftService" class="com.demo.service.impl.AircraftServiceImpl">

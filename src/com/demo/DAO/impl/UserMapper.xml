@@ -13,5 +13,13 @@
       <select id="selectUser"  resultMap="UserResult">
        select * from user where name = #{username} and password = #{password}
     </select>
+    
+    <select id="selectUserByUsername"  resultMap="UserResult">
+       select * from user where name = #{username}
+    </select>
+    
+     <insert id="addUser"  useGeneratedKeys="true" keyProperty="id">
+       insert into user (name, password) values (#{username},#{password})
+    </insert>
 
 </mapper>

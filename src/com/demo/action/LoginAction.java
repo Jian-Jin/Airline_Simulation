@@ -15,7 +15,6 @@ public class LoginAction extends ActionSupport {
 	private LoginService loginService;
 	private String errorMsg;
 
-
 	public String userLogin() throws Exception {
 		User user = loginService.checkLogin(userName, passWord);
         // a simple check

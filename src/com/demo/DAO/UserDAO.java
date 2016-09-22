@@ -9,4 +9,11 @@ public interface UserDAO {
 	public List<User> selectUser(
 			@Param(value = "username") String username,
 			@Param(value = "password") String password);
+	
+	public List<User> selectUserByUsername(
+			@Param(value = "username") String username);
+	
+	public void addUser(
+			@Param(value = "username") String username,
+			@Param(value = "password") String password);
 }
