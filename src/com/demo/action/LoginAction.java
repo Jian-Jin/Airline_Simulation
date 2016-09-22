@@ -1,5 +1,9 @@
 package com.demo.action;
+import java.util.Map;
+
+import com.demo.model.User;
 import com.demo.service.LoginService;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class LoginAction extends ActionSupport {
@@ -9,13 +13,19 @@ public class LoginAction extends ActionSupport {
 	private String userName;
 	private String passWord;
 	private LoginService loginService;
+	private String errorMsg;
+
 
 	public String userLogin() throws Exception {
-		 
+		User user = loginService.checkLogin(userName, passWord);
         // a simple check
-		if(loginService.checkLogin(userName, passWord)){
+		if(user != null){
+			Map session = ActionContext.getContext().getSession();
+			session.put("logined","true");
+			session.put("userId", user.getId());
 			return SUCCESS;
 		}else{
+			setErrorMsg("Log in failed, please try again");
 			return ERROR;
 		}
 	}
@@ -42,6 +52,13 @@ public class LoginAction extends ActionSupport {
 
 	public void setLoginService(LoginService loginService) {
 		this.loginService = loginService;
+	}
+	public String getErrorMsg() {
+		return errorMsg;
+	}
+
+	public void setErrorMsg(String errorMsg) {
+		this.errorMsg = errorMsg;
 	}
 
 }

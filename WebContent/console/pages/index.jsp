@@ -11,6 +11,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Airline Simulation</title>
+<link rel="stylesheet" type="text/css" href="mystyles.css" media="screen" />
+
 <style>
 .button {
     background-color: #33A2FF;
@@ -24,6 +26,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     margin: 4px 2px;
     cursor: pointer;
 }
+
+table {
+    border-collapse: collapse;
+}
+
+table, td, th {
+    border: 1px solid black;
+}
 </style>
 
 </head>
@@ -33,7 +43,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <font face="Comic Sans MS" size="5" color="black">
 <h1><center>AIRLINE SIMULATION</center></h1>
 </font>
-<button class="button">Aircraft</button><br>
+  <s:form action="aircraft" method="post" namespace="/">
+    	<button class="button">Aircraft</button>
+  </s:form>
+<br>
 <button class="button">Route</button><br>
 <button class="button">Airport</button><br>
 <button class="button">Profitability Analysis</button><br>
@@ -44,6 +57,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<s:textfield name="userName" label="USERNAME" key="user"></s:textfield>
     	<s:password  name="passWord" label="PASSWORD" key="password"></s:password>
     	<s:submit key="login" value="SUBMIT"></s:submit>
-    </s:form>
+  </s:form>
 </body>
 </html>

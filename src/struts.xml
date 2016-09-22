@@ -11,5 +11,17 @@
      		<result name="success">/console/pages/success.jsp</result>
      		<result name="error">/console/pages/error.jsp</result>
      	</action>
+     	
+     	<action name="aircraft" class="com.demo.action.AircraftAction" method="getPlane">
+     		<!-- action result and page mapping -->
+     		<result name="success">/console/pages/aircraft.jsp</result>
+     		<result name="error">/console/pages/error.jsp</result>
+     	</action>
+     	
+     	<action name="buyPlane" class="com.demo.action.AircraftAction" method="buyPlane">
+     		<!-- action result and page mapping -->
+     		<result name="success">/console/pages/showplane.jsp</result>
+     		<result name="error">/console/pages/error.jsp</result>
+     	</action>
      </package>
   </struts>

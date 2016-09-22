@@ -1,7 +1,9 @@
 package com.demo.service;
 
+import com.demo.model.User;
+
 public interface LoginService {
 	
-	public boolean checkLogin(String userName,String passWord);
+	public User checkLogin(String userName,String passWord);
 	
 }

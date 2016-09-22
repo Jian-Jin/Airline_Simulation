@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.DAO.AircraftDAO">
+	 
+	 <resultMap type="com.demo.model.Aircraft" id="AircraftResult">
+		<result property="id" column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+		<result column="name" property="name"/>
+		<result column="cost" property="cost"/>
+		<result column="maxSeat" property="maxSeat"/>
+		<result column="rangeVal" property="range"/>
+		<result column="speed" property="speed"/>
+		<result column="fuelCapacity" property="fuelCapacity"/>
+		<result column="fuelBurn" property="fuelBurn"/>
+		<result column="takeOffDis" property="takingOffDis"/>
+		<result column="landingDis" property="landingDis"/>
+		
+	 </resultMap>
+	 
+      <select id="getPlane"  resultMap="AircraftResult">
+       select * from aircraft
+      </select>
+      
+       <select id="getPlaneId"  resultType="int">
+       select id from aircraft where name = #{name}
+      </select>
+      
+       <insert id="buyPlane">
+         insert into user_aircraft values (#{userId},#{aircraftId})
+      </insert>
+      
+      <select id="getPlanes"  resultMap="AircraftResult">
+       select a.* from aircraft a join user_aircraft b on a.id = b.aircraftId where b.userId = #{userId}
+      </select>
+
+</mapper>
