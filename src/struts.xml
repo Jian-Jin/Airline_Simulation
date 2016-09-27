@@ -36,4 +36,16 @@
      	</action>
     </package>
     
+    <package name="airportAction" namespace="/airport" extends="struts-default">  
+        
+     <action name="getAirport" class="com.demo.action.AirportAction" method="getAirport">
+     		<result name="success">/console/pages/showairport.jsp</result>
+     		<result name="error">/console/pages/error.jsp</result>
+     </action>
+     <action name="showAirport">
+        <result>/console/pages/airport.jsp</result>
+      </action>
+     	
+    </package>
+    
   </struts>

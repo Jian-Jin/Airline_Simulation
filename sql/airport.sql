@@ -1,7 +1,7 @@
 
 #sql to create and populate airport data
 DROP TABLE if exists airport;
-CREATE TABLE airport(id INT, state VARCHAR(30),identifier VARCHAR(30), city VARCHAR(30), name VARCHAR(30), size VARCHAR(10),enplanements INT, dailyUsage INT, scaled INT,landingFee INT, runwayLength INT, timeZone INT,longitude DOUBLE,latitude DOUBLE, PRIMARY KEY(id));
+CREATE TABLE airport(id INT, state VARCHAR(30),identifier VARCHAR(30), city VARCHAR(30), name VARCHAR(100), size VARCHAR(10),enplanements INT, dailyUsage INT, scaled INT,landingFee INT, runwayLength INT, timeZone INT,longitude DOUBLE,latitude DOUBLE, PRIMARY KEY(id));
 
 INSERT INTO airport(id,state,identifier,city,name,size,enplanements,dailyUsage,scaled,landingFee,runwayLength,timeZone,longitude,latitude) VALUES(1,'GA','ATL','Atlanta','Hartsfield - Jackson Atlanta International','L',49340732,135180,6759,200,12390,-5,33.63669968,-84.42810059);
 INSERT INTO airport(id,state,identifier,city,name,size,enplanements,dailyUsage,scaled,landingFee,runwayLength,timeZone,longitude,latitude) VALUES(2,'CA','LAX','Los Angeles','Los Angeles International','L',36351226,99592,4980,200,12091,-8,33.94250107,-118.4079971);

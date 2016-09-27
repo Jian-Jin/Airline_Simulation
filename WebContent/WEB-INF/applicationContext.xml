@@ -81,6 +81,10 @@
 		scope="prototype">
 		<property name="aircraftService" ref="aircraftService"></property>
 	</bean>
+	<bean id="airportAction" class="com.demo.action.AirportAction"
+		scope="prototype">
+		<property name="airportService" ref="airportService"></property>
+	</bean>
 
     <!-- Service Bean -->
     <bean id="loginService" class="com.demo.service.impl.LoginServiceImpl">
@@ -92,6 +96,9 @@
 	<bean id="aircraftService" class="com.demo.service.impl.AircraftServiceImpl">
 		<property name="aircraftDao" ref="aircraftDAO"></property>
 	</bean>
+	<bean id="airportService" class="com.demo.service.impl.AirportServiceImpl">
+		<property name="airportDao" ref="airportDAO"></property>
+	</bean>
 	
     <!-- DAO Bean -->
 	<bean id="userDAO" class="org.mybatis.spring.mapper.MapperFactoryBean" > 
@@ -100,6 +107,10 @@
 	</bean> 
 	<bean id="aircraftDAO" class="org.mybatis.spring.mapper.MapperFactoryBean" > 
 		<property name="mapperInterface" value="com.demo.DAO.AircraftDAO" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
+	</bean> 
+	<bean id="airportDAO" class="org.mybatis.spring.mapper.MapperFactoryBean" > 
+		<property name="mapperInterface" value="com.demo.DAO.AirportDAO" />
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
 	</bean> 
 </beans>
