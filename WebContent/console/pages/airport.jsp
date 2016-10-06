@@ -20,7 +20,17 @@
 </head>
 
 <body>
+<font face="Comic Sans MS" size="5" color="black">
+<h1><center>AIRLINE SIMULATION</center></h1>
+</font>
 
+<ul class="nav nav-pills">
+<li role="presentation" ><a href="/Demo/console/pages/home.jsp">Home</a></li>
+<li role="presentation" ><a href="<s:url action='showAircraft' namespace="/aircraft"/>">Aircraft</a></li>
+<li role="presentation" class="active"><a href="<s:url action='showAirport' namespace="/airport"/>">Airport</a></li>
+<li role="presentation"><a href="#">Route</a></li>
+<li role="presentation"><a href="#">Profitability Analysis</a></li>
+</ul>
 
 
 <s:form action="getAirport">

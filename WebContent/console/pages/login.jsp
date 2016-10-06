@@ -22,7 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     
     <link href="css/login.css" rel="stylesheet">
-<title>Insert title here</title>
+<title>Login</title>
 </head>
 <body>
 <div class="container">
