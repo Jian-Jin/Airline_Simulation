@@ -34,7 +34,7 @@ table, td, th {
 <s:property value="errorMsg" />
 </h1>
 
-	<s:form action="http://localhost:8080/Demo/console/pages/index.jsp"
+	<s:form action="http://localhost:8080/Demo/console/pages/home.jsp"
 		method="post" namespace="/">
 		<button class="button">HOME</button>
 	</s:form>

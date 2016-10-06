@@ -26,8 +26,11 @@
        select id from aircraft where name = #{name}
       </select>
       
-       <insert id="buyPlane">
+       <insert id="buyPlane"  useGeneratedKeys="true" keyProperty="id" keyColumn="id">
          insert into user_aircraft(userId,aircraftId) values (#{userId},#{aircraftId})
+         <selectKey keyProperty="id" resultType="int" order="AFTER">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
       </insert>
       
       <select id="getPlanes"  resultMap="AircraftResult">

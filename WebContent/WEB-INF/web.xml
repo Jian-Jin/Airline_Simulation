@@ -29,7 +29,7 @@
      
    <!-- welcome page -->  
    <welcome-file-list>  
-       <welcome-file>/console/pages/index.jsp</welcome-file>  
+       <welcome-file>/console/pages/login.jsp</welcome-file>  
    </welcome-file-list>  
  
 </web-app>

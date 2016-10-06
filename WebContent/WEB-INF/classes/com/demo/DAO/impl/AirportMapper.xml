@@ -22,10 +22,19 @@
 		
 	 </resultMap>
 	 
-      <select id="getAirport"  resultMap="AirportResult">
+      <select id="getAirportByName"  resultMap="AirportResult">
        select * from airport where name = #{name}
       </select>
       
+      <insert id="buyAirport" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+         insert into user_airport(userId,airportId) values (#{userId},#{airportId})
+        <selectKey keyProperty="id" resultType="int" order="AFTER">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+      </insert>
       
+      <select id="getAirportsByUserId"  resultMap="AirportResult">
+       select a.* from airport a join user_airport b on a.id = b.airportId where b.userId = #{userId}
+      </select>
 
 </mapper>

@@ -64,7 +64,7 @@ table, td, th {
     </tr>
  </s:iterator>
 </table>
- <s:form action="http://localhost:8080/Demo/console/pages/index.jsp" method="post" namespace="/">
+ <s:form action="http://localhost:8080/Demo/console/pages/home.jsp" method="post" namespace="/">
     	<button class="button">HOME</button>
  </s:form>
 </body>

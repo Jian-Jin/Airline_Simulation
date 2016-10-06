@@ -8,7 +8,7 @@
   <package name="LoginAction" namespace="/login" extends="struts-default">
      	<action name="login" class="com.demo.action.LoginAction" method="userLogin">
      		<!-- action result and page mapping -->
-     		<result name="success">/console/pages/index.jsp</result>
+     		<result name="success">/console/pages/home.jsp</result>
      		<result name="error">/console/pages/error.jsp</result>
      	</action>
   </package>
@@ -16,7 +16,7 @@
    <package name="RegisterAction" namespace="/register" extends="struts-default">
      	<action name="register" class="com.demo.action.RegisterAction" method="register">
      		<!-- action result and page mapping -->
-     		<result name="success">/console/pages/index.jsp</result>
+     		<result name="success">/console/pages/home.jsp</result>
      		<result name="error">/console/pages/error.jsp</result>
      	</action>
      </package>
@@ -45,7 +45,9 @@
      <action name="showAirport">
         <result>/console/pages/airport.jsp</result>
       </action>
-     	
+     <action name="buyAirport" class="com.demo.action.AirportAction" method = "buyAirport">
+     	<result>/console/pages/showMyHub.jsp</result>
+     </action>
     </package>
     
   </struts>

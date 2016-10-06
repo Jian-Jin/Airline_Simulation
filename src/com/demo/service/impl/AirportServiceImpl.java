@@ -1,5 +1,7 @@
 package com.demo.service.impl;
 
+import java.util.List;
+
 import com.demo.DAO.AirportDAO;
 import com.demo.model.Airport;
 import com.demo.service.AirportService;
@@ -9,7 +11,7 @@ public class AirportServiceImpl implements AirportService{
     
 	@Override
 	public Airport getAirport(String name) {
-		return airportDao.getAirport(name);
+		return airportDao.getAirportByName(name);
 	}
 
 	
@@ -44,7 +46,18 @@ public class AirportServiceImpl implements AirportService{
 	    return Math.sqrt(distance);
 	}
 
-
+	@Override
+	public List<Airport> buyAirport(int userId, String airportName) {
+		int airportId = airportDao.getAirportByName(airportName).getId();
+		airportDao.buyAirport(userId, airportId);
+		List<Airport> result = airportDao.getAirportsByUserId(userId);
+		System.out.println("====");
+		for(Airport a : result){
+			System.out.println(a.getName());
+		}
+		return result;
+	}
+	
 	public AirportDAO getAirportDao() {
 		return airportDao;
 	}

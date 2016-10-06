@@ -1,7 +1,12 @@
 package com.demo.action;
 
+import java.util.List;
+import java.util.Map;
+
+import com.demo.model.Aircraft;
 import com.demo.model.Airport;
 import com.demo.service.AirportService;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class AirportAction extends ActionSupport{
@@ -12,7 +17,9 @@ public class AirportAction extends ActionSupport{
   private Airport fromAirport;
   private Airport toAirport;
   private String errorMsg;
-
+  private String airportToBuy;
+  private List<Airport> userAirport;
+  
 public String getAirport(){
 	  fromAirport = airportService.getAirport(fromAirportName);
 	  toAirport = airportService.getAirport(toAirportName);
@@ -27,7 +34,23 @@ public String getAirport(){
 	  return SUCCESS;
 	  
   }
-  
+
+public String buyAirport(){
+	Map session = ActionContext.getContext().getSession();
+    if(session.get("logined")==null){
+    	setErrorMsg("Please sign in first");
+    	return ERROR;
+    }
+    if(airportToBuy==null || airportToBuy.isEmpty()){
+    	setErrorMsg("Please choose an aircraft first");
+    	return ERROR;
+    }
+    int userId = (Integer)session.get("userId");
+    List<Airport> list = airportService.buyAirport(userId,airportToBuy);
+    setUserAirport(list);
+	return SUCCESS;
+}
+
 public AirportService getAirportService() {
 	return airportService;
 }
@@ -75,4 +98,22 @@ public String getErrorMsg() {
 public void setErrorMsg(String errorMsg) {
 	this.errorMsg = errorMsg;
 }
+
+public String getAirportToBuy() {
+	return airportToBuy;
+}
+
+public void setAirportToBuy(String airportToBuy) {
+	this.airportToBuy = airportToBuy;
+}
+
+public List<Airport> getUserAirport() {
+	return userAirport;
+}
+
+public void setUserAirport(List<Airport> userAirport) {
+	this.userAirport = userAirport;
+}
+
+
 }

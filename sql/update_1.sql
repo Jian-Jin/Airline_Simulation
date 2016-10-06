@@ -29,5 +29,5 @@ INSERT INTO aircraft(id,name,cost,maxSeat,rangeVal,speed,fuelCapacity,fuelBurn,t
 INSERT INTO aircraft(id,name,cost,maxSeat,rangeVal,speed,fuelCapacity,fuelBurn,takeOffDis,landingDis) VALUES(21,'MD-83',45,155,2900,504,7000,999,8000,4500);
 
 CREATE TABLE user(id INT, name VARCHAR(30), password VARCHAR(30), PRIMARY KEY(id));
-CREATE TABLE user_aircraft(id INT, userId INT, aircraftId INT, PRIMARY KEY(id));
-CREATE TABLE user_airport(id INT, userId INT, airportId INT, PRIMARY KEY(id));
+CREATE TABLE user_aircraft(id INT NOT NULL AUTO_INCREMENT, userId INT, aircraftId INT, PRIMARY KEY(id));
+CREATE TABLE user_airport(id INT NOT NULL AUTO_INCREMENT, userId INT, airportId INT, PRIMARY KEY(id));
