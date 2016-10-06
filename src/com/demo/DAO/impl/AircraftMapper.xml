@@ -27,7 +27,7 @@
       </select>
       
        <insert id="buyPlane">
-         insert into user_aircraft values (#{userId},#{aircraftId})
+         insert into user_aircraft(userId,aircraftId) values (#{userId},#{aircraftId})
       </insert>
       
       <select id="getPlanes"  resultMap="AircraftResult">
