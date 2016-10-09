@@ -68,8 +68,8 @@
 
 </tx:advice>
 	
-	<!-- Action Bean --><bean id="userAction"
-		class="com.demo.action.UserAction" scope="prototype">
+	<!-- Action Bean -->
+<bean id="userAction" class="com.demo.action.UserAction" scope="prototype">
 	<property name="userService" ref="userService"></property>
 </bean>
 	<bean id="loginAction" class="com.demo.action.LoginAction"
@@ -88,6 +88,12 @@
 		scope="prototype">
 		<property name="airportService" ref="airportService"></property>
 	</bean>
+	<bean id="routeAction" class="com.demo.action.RouteAction"
+		scope="prototype">
+		<property name="airportService" ref="airportService"></property>
+		<property name="aircraftService" ref="aircraftService"></property>
+		<property name="routeService" ref="routeService"></property>
+	</bean>
 
     <!-- Service Bean -->
     <bean id="loginService" class="com.demo.service.impl.LoginServiceImpl">
@@ -103,10 +109,17 @@
 		<property name="airportDao" ref="airportDAO"></property>
 	</bean>
 	<bean id="userService" class="com.demo.service.impl.UserServiceImpl">
-		<property name="userDao" ref="userDAO"></property></bean>
-
-	<!-- DAO Bean -->
-	<bean id="userDAO" class="org.mybatis.spring.mapper.MapperFactoryBean" > 
+		<property name="userDao" ref="userDAO"></property>
+	</bean>
+	<bean id="routeService" class="com.demo.service.impl.RouteServiceImpl">
+		<property name="airportDao" ref="airportDAO"></property>
+		<property name="aircraftDao" ref="aircraftDAO"></property>
+		<property name="routeDao" ref="routeDAO"></property>
+		<property name="airportService" ref="airportService"></property>
+	</bean>
+	
+    <!-- DAO Bean -->
+   <bean id="userDAO" class="org.mybatis.spring.mapper.MapperFactoryBean" > 
 		<property name="mapperInterface" value="com.demo.DAO.UserDAO" />
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
 	</bean> 
@@ -116,6 +129,10 @@
 	</bean> 
 	<bean id="airportDAO" class="org.mybatis.spring.mapper.MapperFactoryBean" > 
 		<property name="mapperInterface" value="com.demo.DAO.AirportDAO" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
+	</bean> 
+	<bean id="routeDAO" class="org.mybatis.spring.mapper.MapperFactoryBean" > 
+		<property name="mapperInterface" value="com.demo.DAO.RouteDAO" />
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
 	</bean> 
 </beans>

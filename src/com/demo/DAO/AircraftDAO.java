@@ -8,6 +8,7 @@ import com.demo.model.Aircraft;
 
 public interface AircraftDAO {
   public List<Aircraft> getPlane();
+  public List<Aircraft> getPlaneById(@Param(value = "planeId") int planeId);
   public int getPlaneId(@Param(value = "name") String name);
   public void buyPlane(@Param(value = "userId") int userId, @Param(value = "aircraftId") int aircraftId);
   public List<Aircraft> getPlanes(@Param(value = "userId") int userId);

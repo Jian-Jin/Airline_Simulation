@@ -38,7 +38,7 @@
      	</action>
     </package>
     
-    <package name="airportAction" namespace="/airport" extends="struts-default">  
+  <package name="airportAction" namespace="/airport" extends="struts-default">  
         
      <action name="getAirport" class="com.demo.action.AirportAction" method="getAirport">
      		<result name="success">/console/pages/showairport.jsp</result>
@@ -47,9 +47,27 @@
      <action name="showAirport">
         <result>/console/pages/airport.jsp</result>
       </action>
-     <action name="buyAirport" class="com.demo.action.AirportAction" method = "buyAirport">
-     	<result>/console/pages/showMyHub.jsp</result>
+     <action name="buyAirport" class="com.demo.action.AirportAction" method ="buyAirport">
+     <result name="success">/console/pages/showMyHub.jsp</result>
+     <result name="error">/console/pages/error.jsp</result>
      </action>
+  </package>
+     
+      <package name="routeAction" namespace="/route" extends="struts-default">  
+        
+     <action name="getRoute" class="com.demo.action.RouteAction" method="getRoute">
+     		<result name="success">/console/pages/routehome.jsp</result>
+     		<result name="error">/console/pages/error.jsp</result>
+     </action>
+      <action name="aircraftRoute" class="com.demo.action.RouteAction" method="aircraftRoute">
+     		<result name="success">/console/pages/aircraftRoute.jsp</result>
+     		<result name="error">/console/pages/error.jsp</result>
+     </action>
+       <action name="addRoute" class="com.demo.action.RouteAction" method="addRoute">
+     		<result name="success">/console/pages/aircraftRoute.jsp</result>
+     		<result name="error">/console/pages/error.jsp</result>
+     </action>
+     	
     </package>
     <package name="UserAction" namespace="/user"
     	extends="struts-default">

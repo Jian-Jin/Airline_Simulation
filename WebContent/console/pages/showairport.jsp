@@ -6,9 +6,33 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
+<font face="Comic Sans MS" size="5" color="black">
+<h1><center>AIRLINE SIMULATION</center></h1>
+</font>
+
+<ul class="nav nav-pills"> 
+<li role="presentation" ><a href="/Demo/console/pages/home.jsp">Home</a></li>
+<li role="presentation" ><a href="<s:url action='showAircraft' namespace="/aircraft"/>">Aircraft</a></li>
+<li role="presentation" class="active"><a href="<s:url action='showAirport' namespace="/airport"/>">Airport</a></li>
+<li role="presentation"><a href="<s:url action='getRoute' namespace="/route"/>">Route Setup</a></li>
+
+<li role="presentation"><a href="#">Profitability Analysis</a></li>
+<br>
+<br>
 FROM AIRPORT:
 <br>
 NAME:<s:property value="fromAirport.name" /><br>

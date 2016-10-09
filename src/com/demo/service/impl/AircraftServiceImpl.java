@@ -19,10 +19,7 @@ public class AircraftServiceImpl implements AircraftService{
 		int aircraftId = aircraftDao.getPlaneId(aircraftName);
 		aircraftDao.buyPlane(userId, aircraftId);
 		List<Aircraft> result = aircraftDao.getPlanes(userId);
-		System.out.println("====");
-		for(Aircraft a : result){
-			System.out.println(a.getName());
-		}
+		
 		return result;
 	}
 
@@ -32,6 +29,11 @@ public class AircraftServiceImpl implements AircraftService{
 
 	public void setAircraftDao(AircraftDAO aircraftDao) {
 		this.aircraftDao = aircraftDao;
+	}
+
+	@Override
+	public List<Aircraft> getPlanes(int userId) {
+		return aircraftDao.getPlanes(userId);
 	}
 
 

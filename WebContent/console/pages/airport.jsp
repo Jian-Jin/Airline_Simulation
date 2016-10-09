@@ -32,7 +32,7 @@
 <li role="presentation"><a href="#">Profitability Analysis</a></li>
 </ul>
 
-
+<br>
 <s:form action="getAirport">
 departure airport: <input type="search"  name="fromAirportName" id="fromAirportName" list="airports" placeholder="Pick the departure airport..">
 <br>
@@ -141,6 +141,7 @@ destination airport: <input type="search" name="toAirportName" id="toAirportName
 <br>
 <input type="submit">
 </s:form>
+<br>
 <br>
 <br>
 <s:form action="buyAirport">

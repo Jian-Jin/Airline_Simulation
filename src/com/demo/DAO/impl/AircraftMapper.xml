@@ -22,6 +22,10 @@
        select * from aircraft
       </select>
       
+      <select id="getPlaneById"  resultMap="AircraftResult">
+       select * from aircraft where id = #{planeId}
+      </select>
+      
        <select id="getPlaneId"  resultType="int">
        select id from aircraft where name = #{name}
       </select>

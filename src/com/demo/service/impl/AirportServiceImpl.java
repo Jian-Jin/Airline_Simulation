@@ -66,6 +66,12 @@ public class AirportServiceImpl implements AirportService{
 	public void setAirportDao(AirportDAO airportDAO) {
 		this.airportDao = airportDAO;
 	}
+
+
+	@Override
+	public List<Airport> getAllAirport() {
+		return airportDao.getAllAitport();
+	}
 	
 	
 }

@@ -9,4 +9,6 @@ public interface AirportService {
    double distance(Airport a1, Airport a2);
    
    public List<Airport> buyAirport(int userId, String airportName);
+   
+   public List<Airport> getAllAirport();
 }
