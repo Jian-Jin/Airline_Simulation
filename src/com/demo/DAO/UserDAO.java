@@ -6,6 +6,7 @@ import com.demo.model.User;
 
 public interface UserDAO {
 	
+	public List<User> getUser();
 	public List<User> selectUser(
 			@Param(value = "username") String username,
 			@Param(value = "password") String password);
@@ -15,5 +16,8 @@ public interface UserDAO {
 	
 	public void addUser(
 			@Param(value = "username") String username,
-			@Param(value = "password") String password);
+			@Param(value = "password") String password,
+			@Param(value = "osudotnum") String osudotnum,
+			@Param(value = "superuser") boolean superuser);
+
 }

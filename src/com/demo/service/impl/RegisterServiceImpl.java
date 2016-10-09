@@ -10,14 +10,14 @@ public class RegisterServiceImpl implements RegisterService {
 
 	private UserDAO userDAO;
 	
-	public boolean register(String userName, String passWord) {
+	public boolean register(String userName, String passWord, String osuDotnum, boolean superUser) {
 
 		List<User> result = new ArrayList<User>();
 		result = userDAO.selectUserByUsername(userName);
 		//username already exist
 		if(result.size()>0)
 			return false;
-		userDAO.addUser(userName, passWord);
+		userDAO.addUser(userName, passWord, osuDotnum, superUser);
 		return true;
 		
 	}

@@ -4,6 +4,10 @@ public class User {
 	private int id;
 	private String name;
 	private String password;
+	private boolean superuser;
+	private String osudotnum;
+	
+	//
 	
 	public int getId() {
 		return id;
@@ -13,6 +17,8 @@ public class User {
 		this.id = id;
 	}
 
+	//
+	
 	public String getName() {
 		return name;
 	}
@@ -21,6 +27,8 @@ public class User {
 		this.name = name;
 	}
 
+	//
+	
 	public String getPassword() {
 		return password;
 	}
@@ -29,6 +37,26 @@ public class User {
 		this.password = password;
 	}
    
+	//
+	
+	public String getOsudotnum(){
+		return osudotnum;
+	}
+	
+	public void setOsudotnum(String osudotnum){
+		this.osudotnum = osudotnum;
+	}
+	
+	//
+	
+	public boolean getSuperuser(){
+		return superuser;
+	}
 
+	public void setSuperuser(boolean superuser){
+		this.superuser = superuser;
+	}
+	
+	
 
 }

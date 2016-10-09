@@ -8,11 +8,13 @@ public class RegisterAction extends ActionSupport  {
 	private static final long serialVersionUID = 1L;
 	private String userName;
 	private String passWord;
+	private String osuDotnum;
+	private boolean superUser;
 	private RegisterService registerService;
 	private String errorMsg;
 	
 	public String register(){
-		if(registerService.register(userName, passWord))
+		if(registerService.register(userName, passWord, osuDotnum, superUser))
 			return SUCCESS;
 		else{
 			setErrorMsg("Register failed, this username has been registered!");
@@ -28,6 +30,8 @@ public class RegisterAction extends ActionSupport  {
 		this.userName = userName;
 	}
 
+	//
+	
 	public String getPassWord() {
 		return passWord;
 	}
@@ -36,6 +40,8 @@ public class RegisterAction extends ActionSupport  {
 		this.passWord = passWord;
 	}
 
+	//
+	
 	public RegisterService getRegisterService() {
 		return registerService;
 	}
@@ -44,6 +50,8 @@ public class RegisterAction extends ActionSupport  {
 		this.registerService = registerService;
 	}
 
+	//
+	
 	public String getErrorMsg() {
 		return errorMsg;
 	}
@@ -52,6 +60,8 @@ public class RegisterAction extends ActionSupport  {
 		this.errorMsg = errorMsg;
 	}
 
+	//
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}

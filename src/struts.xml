@@ -19,7 +19,9 @@
      		<result name="success">/console/pages/home.jsp</result>
      		<result name="error">/console/pages/error.jsp</result>
      	</action>
-     </package>
+     	<action name="manageStudents">
+     		<result>/console/pages/adminpages/managestudents.jsp</result></action>
+   </package>
    
     <package name="aircraftAction" namespace="/aircraft" extends="struts-default">  
         
@@ -49,5 +51,20 @@
      	<result>/console/pages/showMyHub.jsp</result>
      </action>
     </package>
-    
-  </struts>
+    <package name="UserAction" namespace="/user"
+    	extends="struts-default">
+    	<action name="showUser" class="com.demo.action.UserAction"
+    		method="getUser">
+    		<result name="success">/console/pages/student.jsp</result>
+    		<result name="error">/console/pages/error.jsp</result>
+    	</action>
+    	<action name="getUser" class="com.demo.action.UserAction"
+    		method="getUsers">
+    		<result name="success"></result>
+    		<result name="error">/console/pages/error.jsp</result>
+    	</action>
+    	<action name="showAdmin">
+    		<result>/console/pages/adminpages/admin.jsp</result></action>
+    </package>
+
+</struts>

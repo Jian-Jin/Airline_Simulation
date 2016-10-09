@@ -7,7 +7,8 @@
 	 <resultMap type="com.demo.model.User" id="UserResult">
 		<result property="id" column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
 		<result column="name" property="name"/>
-		<result column="password" property="password"/>
+		<result column="password" property="password"/><result column="superuser"
+			property="superuser" /><result column="osudotnum" property="osudotnum" />
 	 </resultMap>
 	 
       <select id="selectUser"  resultMap="UserResult">

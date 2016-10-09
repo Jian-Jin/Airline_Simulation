@@ -68,7 +68,10 @@
 
 </tx:advice>
 	
-	<!-- Action Bean -->
+	<!-- Action Bean --><bean id="userAction"
+		class="com.demo.action.UserAction" scope="prototype">
+	<property name="userService" ref="userService"></property>
+</bean>
 	<bean id="loginAction" class="com.demo.action.LoginAction"
 		scope="prototype">
 		<property name="loginService" ref="loginService"></property>
@@ -99,8 +102,10 @@
 	<bean id="airportService" class="com.demo.service.impl.AirportServiceImpl">
 		<property name="airportDao" ref="airportDAO"></property>
 	</bean>
-	
-    <!-- DAO Bean -->
+	<bean id="userService" class="com.demo.service.impl.UserServiceImpl">
+		<property name="userDao" ref="userDAO"></property></bean>
+
+	<!-- DAO Bean -->
 	<bean id="userDAO" class="org.mybatis.spring.mapper.MapperFactoryBean" > 
 		<property name="mapperInterface" value="com.demo.DAO.UserDAO" />
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
