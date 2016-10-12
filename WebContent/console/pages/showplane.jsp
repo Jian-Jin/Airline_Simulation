@@ -44,6 +44,9 @@
  <table class="table table-striped">
  <tr>
     <th>Name</th>
+    <th>Aircraft</th>
+    <th>FirstClassRatio</th>
+    <th>BusinessClassRatio</th>
     <th>Cost New (Million USD)</th>
     <th>Max Seats</th>
     <th>Range (SM, full capacity)</th>
@@ -56,7 +59,10 @@
  <s:iterator value="userPlanes" var="p">
  <tr>
    <!--<td><input type="radio" name="planeId" value="#p.id"></td>  -->
+   <td> <s:property value="#p.customizedName" /></td>
    <td> <s:property value="#p.name" /></td>
+   <td> <s:property value="#p.firstClassRatio" /></td>
+   <td> <s:property value="#p.businessClassRatio" /></td>
    <td> <s:property value="#p.cost" /></td>
    <td> <s:property value="#p.maxSeat" /></td>
    <td> <s:property value="#p.range" /></td>

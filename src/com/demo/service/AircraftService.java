@@ -6,7 +6,8 @@ import com.demo.model.Aircraft;
 
 public interface AircraftService {
 	public List<Aircraft> getPlane();
-	public List<Aircraft> buyPlane(int userId, String aircraftName);
-	public List<Aircraft> getPlanes(int userId);
+	public List<Aircraft> buyPlane(int userId, int aircraftId, String customizedName, double firstClassRatio, double businessClassRatio2);
+	public List<Aircraft> getUserPlanes(int userId);
+	List<Aircraft> getPlaneByName(String name);
   
 }

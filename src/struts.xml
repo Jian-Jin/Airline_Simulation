@@ -33,8 +33,15 @@
      	
      	<action name="buyPlane" class="com.demo.action.AircraftAction" method="buyPlane">
      		<!-- action result and page mapping -->
-     		<result name="success">/console/pages/showplane.jsp</result>
+     		<!--<result name="success">/console/pages/showplane.jsp</result>-->
+     		<result name="success">/console/pages/aircraftcustomize.jsp</result>
      		<result name="error">/console/pages/error.jsp</result>
+     	</action>
+     	
+     	<action name="customizePlane" class="com.demo.action.AircraftAction" method="customizePlane">
+     		<!-- action result and page mapping -->
+     		<result name="success">/console/pages/showplane.jsp</result>
+     		<result name="error">/console/pages/aircraftcustomize.jsp</result>
      	</action>
     </package>
     

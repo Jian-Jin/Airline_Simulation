@@ -43,11 +43,12 @@
     </div>
 </nav>
 
-
 <div class="container">
     <div class="row">
         <div class="col-md-9">
-        <h1>Query airport information :</h1>
+        <font face="Comic Sans MS" size="3" color="orange">
+        
+        <h2>Query airport information :</h2>
  
 
 <s:actionerror theme="bootstrap"/>
@@ -167,7 +168,7 @@ destination airport:   <input type="search" name="toAirportName" id="toAirportNa
 </s:form>   
 <br>
 <br>
-<h1> Buy a hub : </h1>
+<h2> Buy a hub : </h2>
 <s:form action="buyAirport" theme="bootstrap" cssClass="form-horizontal" onsubmit="greeting()">
 Choose your hub: <input type="search" name="airportToBuy" id="airportToBuy" size="40" list="airports" placeholder="Pick a hub to buy">
 <br>

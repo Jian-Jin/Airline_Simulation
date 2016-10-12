@@ -41,14 +41,14 @@ public class RouteAction extends ActionSupport{
 	    }
 	    int userId = (Integer)session.get("userId");
 
-		planes = aircraftService.getPlanes(userId);
+		planes = aircraftService.getUserPlanes(userId);
 		if(planes==null || planes.isEmpty()){
 			setErrorMsg("You have no aircrafts yet");
 	    	return ERROR;
 		}
 		myPlanes = new ArrayList<String>();
 		for(Aircraft a : planes){
-			myPlanes.add(a.getName());
+			myPlanes.add(a.getCustomizedName());
 		}
 		return SUCCESS;
 	}

@@ -13,14 +13,18 @@ public class AircraftServiceImpl implements AircraftService{
 	public List<Aircraft> getPlane() {
 		return aircraftDao.getPlane();
 	}
+	@Override
+	public List<Aircraft> getPlaneByName(String name) {
+		return aircraftDao.getPlaneByName(name);
+	}
+	
+
 	
 	@Override
-	public List<Aircraft> buyPlane(int userId, String aircraftName) {
-		int aircraftId = aircraftDao.getPlaneId(aircraftName);
-		aircraftDao.buyPlane(userId, aircraftId);
-		List<Aircraft> result = aircraftDao.getPlanes(userId);
-		
-		return result;
+	public List<Aircraft> buyPlane(int userId, int aircraftId, String customizedName, double firstClassRatio,
+			double businessClassRatio) {
+		aircraftDao.buyPlane(userId, aircraftId, customizedName, firstClassRatio, businessClassRatio);
+		return getUserPlanes(userId);
 	}
 
 	public AircraftDAO getAircraftDao() {
@@ -32,9 +36,10 @@ public class AircraftServiceImpl implements AircraftService{
 	}
 
 	@Override
-	public List<Aircraft> getPlanes(int userId) {
-		return aircraftDao.getPlanes(userId);
+	public List<Aircraft> getUserPlanes(int userId) {
+		return aircraftDao.getUserPlanes(userId);
 	}
+
 
 
 

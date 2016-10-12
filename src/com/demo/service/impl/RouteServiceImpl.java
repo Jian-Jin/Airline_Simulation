@@ -22,8 +22,9 @@ public class RouteServiceImpl implements RouteService{
 
 	@Override
 	public List<Route> getAircraftRoutes(int userId, String planeName) {
-		int planeId = aircraftDao.getPlaneId(planeName);
-		List<Route> routes = routeDao.getRoutes(userId, planeId);
+		int userAircraftId = aircraftDao.getPlaneUniqueId(userId, planeName);
+		
+		List<Route> routes = routeDao.getRoutes(userId, userAircraftId);
 		populateAirport();
 		for(Route r : routes){
 			r.setDepartureAirportName(airports.get(r.getFromAirport()).getName());
@@ -53,9 +54,10 @@ public class RouteServiceImpl implements RouteService{
 	@Override
 	public void addRoute(int userId, String planeToSet, String planeCurrentLocation, String depatureTime,
 			String airportToGo) {
-		System.out.println("====="+planeToSet);
-		int planeId = aircraftDao.getPlaneId(planeToSet);
-		Aircraft plane = aircraftDao.getPlaneById(planeId).get(0);
+		// the unique id of user_aircraft
+		int userAircraftId = aircraftDao.getPlaneUniqueId(userId, planeToSet);
+		
+		Aircraft plane = aircraftDao.getPlaneByUserPlaneId(userAircraftId).get(0);
 		int speed = plane.getSpeed();
 		Airport fromAirport = airportDao.getAirportByName(planeCurrentLocation);
 		Airport toAirport = airportDao.getAirportByName(airportToGo);
@@ -74,13 +76,13 @@ public class RouteServiceImpl implements RouteService{
 		result += ":";
 		result += minute<10?"0"+minute : String.valueOf(minute);
 		
-		List<Route> routes = routeDao.getRoutes(userId, planeId);
+		List<Route> routes = routeDao.getRoutes(userId, userAircraftId);
 		int maxSeq = 0;
 		for(Route r : routes){
 			maxSeq = Math.max(r.getSequence(), maxSeq);
 		}
 		int sequence = maxSeq + 1;
-		routeDao.addRoute(userId, planeId, fromAirport.getId(), depatureTime, toAirport.getId(), result, sequence);
+		routeDao.addRoute(userId, userAircraftId, fromAirport.getId(), depatureTime, toAirport.getId(), result, sequence);
 		
 	}
 

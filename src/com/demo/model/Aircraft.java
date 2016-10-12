@@ -12,6 +12,10 @@ public class Aircraft {
    private int takingOffDis;
    private int landingDis;
    
+   private String customizedName;
+   private double firstClassRatio;
+   private double businessClassRatio;
+   
 public int getId() {
 	return id;
 }
@@ -72,5 +76,27 @@ public int getLandingDis() {
 public void setLandingDis(int landingDis) {
 	this.landingDis = landingDis;
 }
+public String getCustomizedName() {
+	return customizedName;
+}
+public void setCustomizedName(String customizedName) {
+	this.customizedName = customizedName;
+}
+public double getFirstClassRatio() {
+	return firstClassRatio;
+}
+public void setFirstClassRatio(double firstClassRatio) {
+	this.firstClassRatio = firstClassRatio;
+}
+public double getBusinessClassRatio() {
+	return businessClassRatio;
+}
+public void setBusinessClassRatio(double businessClassRatio) {
+	this.businessClassRatio = businessClassRatio;
+}
+
+
+
+
    
 }

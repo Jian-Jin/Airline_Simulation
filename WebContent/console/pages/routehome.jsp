@@ -46,6 +46,9 @@
  <tr>
     <!-- <th>Purchase</th> -->
     <th>Name</th>
+    <th>Aircraft</th>
+    <th>FirstClassRatio</th>
+    <th>BusinessClassRatio</th>
     <th>Cost New (Million USD)</th>
     <th>Max Seats</th>
     <th>Range (SM, full capacity)</th>
@@ -57,7 +60,10 @@
   </tr>
  <s:iterator value="planes" var="p">
  <tr>
+    <td> <s:property value="#p.customizedName" /></td>
    <td> <s:property value="#p.name" /></td>
+   <td> <s:property value="#p.firstClassRatio" /></td>
+   <td> <s:property value="#p.businessClassRatio" /></td>
    <td> <s:property value="#p.cost" /></td>
    <td> <s:property value="#p.maxSeat" /></td>
    <td> <s:property value="#p.range" /></td>
