@@ -3,6 +3,8 @@ DROP TABLE if exists user;
 DROP TABLE if exists aircraft;
 DROP TABLE if exists user_aircraft;
 DROP TABLE if exists user_airport;
+DROP TABLE if exists route;
+
 CREATE TABLE aircraft(id INT, name VARCHAR(30),cost DOUBLE, maxSeat INT, rangeVal INT, speed INT, fuelCapacity DOUBLE,fuelBurn INT, takeOffDis INT, landingDis INT, PRIMARY KEY(id));
 
 
@@ -31,3 +33,4 @@ INSERT INTO aircraft(id,name,cost,maxSeat,rangeVal,speed,fuelCapacity,fuelBurn,t
 CREATE TABLE user(id INT NOT NULL AUTO_INCREMENT, name VARCHAR(30), password VARCHAR(30), superuser BOOLEAN, osudotnum VARCHAR(30), PRIMARY KEY(id));
 CREATE TABLE user_aircraft(id INT NOT NULL AUTO_INCREMENT, userId INT, aircraftId INT, PRIMARY KEY(id));
 CREATE TABLE user_airport(id INT NOT NULL AUTO_INCREMENT, userId INT, airportId INT, PRIMARY KEY(id));
+CREATE TABLE route(userId INT, aircraftId INT, fromAirport INT, departureTime varchar(20), toAirport INT, arrivalTime varchar(20), sequence INT);
