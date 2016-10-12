@@ -11,4 +11,6 @@ public interface AirportService {
    public List<Airport> buyAirport(int userId, String airportName);
    
    public List<Airport> getAllAirport();
+
+List<Airport> getMyAirport(int userId);
 }

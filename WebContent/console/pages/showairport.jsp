@@ -1,60 +1,98 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib prefix="sb" uri="/struts-bootstrap-tags" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<title>Insert title here</title>
+<sb:head includeScripts="true" includeStyles="false"/>
+    <link rel="stylesheet" href="<s:url value="/styles/bootstrap-superhero.css" />" type="text/css"/>
+    <style type="text/css">
+        body {
+            padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+        }
+    </style>
 </head>
 <body>
-<font face="Comic Sans MS" size="5" color="black">
-<h1><center>AIRLINE SIMULATION</center></h1>
-</font>
 
-<ul class="nav nav-pills"> 
-<li role="presentation" ><a href="/Demo/console/pages/home.jsp">Home</a></li>
-<li role="presentation" ><a href="<s:url action='showAircraft' namespace="/aircraft"/>">Aircraft</a></li>
-<li role="presentation" class="active"><a href="<s:url action='showAirport' namespace="/airport"/>">Airport</a></li>
-<li role="presentation"><a href="<s:url action='getRoute' namespace="/route"/>">Route Setup</a></li>
 
-<li role="presentation"><a href="#">Profitability Analysis</a></li>
-<br>
-<br>
-FROM AIRPORT:
-<br>
-NAME:<s:property value="fromAirport.name" /><br>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#">AirLine Simulation - <s:text name="test.version"/></a>
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+    </div>
+    <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+            <li><s:a href="/Demo/console/pages/home.jsp">Home</s:a></li>
+            <li><a href="<s:url action='showAircraft' namespace="/aircraft"/>">Aircraft</a></li>
+            <li class="active"><a href="<s:url action='showAirport' namespace="/airport"/>">Airport</a></li>
+            <li><a href="<s:url action='getRoute' namespace="/route"/>">Route Setup</a></li>
+        </ul>
+    </div>
+</nav>
 
-STATE:<s:property value="fromAirport.state" /><br>
-IDENTIFIER:<s:property value="fromAirport.identifier" /><br>
-CITY:<s:property value="fromAirport.city" /><br>
-LANDING FEE:<s:property value="fromAirport.landingFee" /><br>
-RUNWAY LENGTH:<s:property value="fromAirport.runwayLength" /><br>
-<br>
 
-TO AIRPORT:
-<br>
-NAME:<s:property value="toAirport.name" /><br>
-STATE:<s:property value="toAirport.state" /><br>
-IDENTIFIER:<s:property value="toAirport.identifier" /><br>
-CITY:<s:property value="toAirport.city" /><br>
-LANDING FEE:<s:property value="toAirport.landingFee" /><br>
-RUNWAY LENGTH:<s:property value="toAirport.runwayLength" /><br>
-<br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+        <h1>Departure airport :</h1>
+ <table class="table table-striped">
+ <tr>
+    <th>Name</th>
+    <th>State</th>
+    <th>Identifier</th>
+    <th>City</th>
+    <th>Landing Fee</th>
+    <th>Runway Length</th>
+  </tr>
+ <tr>
+   <td> <s:property value="fromAirport.name" /></td>
+   <td> <s:property value="fromAirport.state" /></td>
+   <td> <s:property value="fromAirport.identifier" /></td>
+   <td> <s:property value="fromAirport.city" /></td>
+   <td> <s:property value="fromAirport.landingFee" /></td>
+   <td> <s:property value="fromAirport.runwayLength" /></td>
+    </tr>
+</table>
 
-DISTANCE BETWEEN TWO AIRPORTS IS <s:property value="distance" /> METERS<br>
+        <h1>Arrival airport :</h1>
+ <table class="table table-striped">
+ <tr>
+    <th>Name</th>
+    <th>State</th>
+    <th>Identifier</th>
+    <th>City</th>
+    <th>Landing Fee</th>
+    <th>Runway Length</th>
+  </tr>
+ <tr>
+   <td> <s:property value="toAirport.name" /></td>
+   <td> <s:property value="toAirport.state" /></td>
+   <td> <s:property value="toAirport.identifier" /></td>
+   <td> <s:property value="toAirport.city" /></td>
+   <td> <s:property value="toAirport.landingFee" /></td>
+   <td> <s:property value="toAirport.runwayLength" /></td>
+    </tr>
+</table>
+
+<br>
+<br>
+<h2>Distance Between above two airports is <s:property value="distance" /> miles<br>
+</h2>
+
+        </div>    
+    </div>
+    
+    
+    <footer class="footer">
+        <p class="pull-right"><a href="#">Back to top</a></p>
+    </footer>
+</div>
 
 </body>
 </html>

@@ -29,7 +29,7 @@ public class RouteServiceImpl implements RouteService{
 			r.setDepartureAirportName(airports.get(r.getFromAirport()).getName());
 			r.setArrivalAirportName(airports.get(r.getToAirport()).getName());
 		}
-		// the last element is the info of the current plane location
+		// the last element used to store the info of the current plane location
 		Route nextRoute = new Route();
 		if(routes.isEmpty()){
 			String airport = airportDao.getAirportsByUserId(userId).get(0).getName();
@@ -59,8 +59,8 @@ public class RouteServiceImpl implements RouteService{
 		int speed = plane.getSpeed();
 		Airport fromAirport = airportDao.getAirportByName(planeCurrentLocation);
 		Airport toAirport = airportDao.getAirportByName(airportToGo);
-		double distanceInMeter = airportService.distance(fromAirport, toAirport);
-		double miles =  distanceInMeter / 1609.344d;
+		double miles = airportService.distance(fromAirport, toAirport);
+		//double miles =  distanceInMeter / 1609.344d;
 		int timeInMinutes = (int)(miles/(double)speed * 60);
 		int hour = timeInMinutes/60;
 		int minute = timeInMinutes%60;

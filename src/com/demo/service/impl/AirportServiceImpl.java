@@ -42,20 +42,29 @@ public class AirportServiceImpl implements AirportService{
 	    double distance = R * c * 1000; // convert to meters
 
 	    distance = Math.pow(distance, 2);
-
-	    return Math.sqrt(distance);
+	    // convert to miles
+	    return Math.sqrt(distance)/1609.344d;
 	}
 
+	/* 
+	 * return null if user already owns one hub
+	 */
 	@Override
 	public List<Airport> buyAirport(int userId, String airportName) {
+		List<Airport> curairports = airportDao.getAirportsByUserId(userId);
+		if(curairports.size()>=1){
+			return null;
+		}
 		int airportId = airportDao.getAirportByName(airportName).getId();
 		airportDao.buyAirport(userId, airportId);
 		List<Airport> result = airportDao.getAirportsByUserId(userId);
-		System.out.println("====");
-		for(Airport a : result){
-			System.out.println(a.getName());
-		}
+	
 		return result;
+	}
+	
+	@Override
+	public List<Airport> getMyAirport(int userId){
+		return airportDao.getAirportsByUserId(userId);
 	}
 	
 	public AirportDAO getAirportDao() {

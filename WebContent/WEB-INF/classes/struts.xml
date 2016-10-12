@@ -44,12 +44,12 @@
      		<result name="success">/console/pages/showairport.jsp</result>
      		<result name="error">/console/pages/error.jsp</result>
      </action>
-     <action name="showAirport">
-        <result>/console/pages/airport.jsp</result>
-      </action>
+     <action name="showAirport" class="com.demo.action.AirportAction" method="airportHome">
+        <result name="success">/console/pages/airport.jsp</result>
+         <result name="error">/console/pages/error.jsp</result>      </action>
      <action name="buyAirport" class="com.demo.action.AirportAction" method ="buyAirport">
-     <result name="success">/console/pages/showMyHub.jsp</result>
-     <result name="error">/console/pages/error.jsp</result>
+       <result name="success">/console/pages/airport.jsp</result>
+        <result name="error">/console/pages/error.jsp</result>
      </action>
   </package>
      

@@ -29,6 +29,10 @@ public class RouteAction extends ActionSupport{
 	private List<String> airports;
 
 
+	/**
+	 * Route setup home page, show all the aircrafts of the user 
+	 * a select list of planes name to choose from
+	 */
 	public String getRoute(){
 		Map session = ActionContext.getContext().getSession();
 	    if(session.get("logined")==null){
@@ -50,6 +54,9 @@ public class RouteAction extends ActionSupport{
 	}
 	
 	
+	/**
+	 * return the route page of one specific aircraft  after passing in planeToSet
+	 */
 	public String aircraftRoute(){
 		Map session = ActionContext.getContext().getSession();
 	    if(session.get("logined")==null){
@@ -57,18 +64,27 @@ public class RouteAction extends ActionSupport{
 	    	return ERROR;
 	    }
 	    int userId = (Integer)session.get("userId");
+	    if(getPlaneToSet()==null || getPlaneToSet().isEmpty()){
+	    	setErrorMsg("Please choose an aircraft first");
+	    	return ERROR;
+	    }
 		String planeName = planeToSet;
+		
+		session.put("routePlane", planeName);
+
 		routes = routeService.getAircraftRoutes(userId, planeName);
 		Route nextRoute = routes.get(routes.size()-1);
 		setPlaneCurrentLocation(nextRoute.getDepartureAirportName());
 		routes.remove(routes.size()-1);
 	
 		populateTimeSlots();
-		session.put("routePlane", planeName);
 		session.put("planeCurLocation", planeCurrentLocation);
 		return SUCCESS;
 	}
 	
+	/**
+	 *  populate variable airports and timeslots used to be shown in selector list
+	 */
 	private void populateTimeSlots(){
 		if(airports == null || airports.isEmpty()){
 			airports = new ArrayList<String>();
@@ -92,6 +108,10 @@ public class RouteAction extends ActionSupport{
 		}
 	}
 	
+	/**
+	 * add a new route of a airplane's route list
+	 * parameters passed in : depatureTime, airportToGo
+	 */
 	public String addRoute(){
 		Map session = ActionContext.getContext().getSession();
 	    if(session.get("logined")==null){
@@ -105,14 +125,13 @@ public class RouteAction extends ActionSupport{
 		
 		populateTimeSlots();
 		routeService.addRoute(userId,planeName,planeLocation,depatureTime,airportToGo);
-		System.out.println("===="+depatureTime);
-//		return aircraftRoute();
+
 		routes = routeService.getAircraftRoutes(userId, planeName);
 		Route nextRoute = routes.get(routes.size()-1);
-		setPlaneCurrentLocation(nextRoute.getDepartureAirportName());
+		session.put("planeCurLocation", nextRoute.getDepartureAirportName());
+
 		routes.remove(routes.size()-1);
-		session.put("routePlane", planeName);
-		session.put("planeCurLocation", planeCurrentLocation);
+
 		return SUCCESS;
 	}
 

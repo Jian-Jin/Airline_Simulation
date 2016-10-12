@@ -19,7 +19,19 @@ public class AirportAction extends ActionSupport{
   private String errorMsg;
   private String airportToBuy;
   private List<Airport> userAirport;
+
   
+  public String airportHome(){
+		Map session = ActionContext.getContext().getSession();
+	    if(session.get("logined")==null){
+	    	setErrorMsg("Please sign in first");
+	    	return ERROR;
+	    }
+	    int userId = (Integer)session.get("userId");
+
+	  setUserAirport(airportService.getMyAirport(userId));
+	  return SUCCESS;
+  }
 public String getAirport(){
 	  fromAirport = airportService.getAirport(fromAirportName);
 	  toAirport = airportService.getAirport(toAirportName);
@@ -47,6 +59,10 @@ public String buyAirport(){
     }
     int userId = (Integer)session.get("userId");
     List<Airport> list = airportService.buyAirport(userId,airportToBuy);
+    if(list == null){
+    	setErrorMsg("Each user could only own one hub");
+    	return ERROR;
+    }
     setUserAirport(list);
 	return SUCCESS;
 }
