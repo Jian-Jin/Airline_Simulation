@@ -7,12 +7,17 @@
 	 <resultMap type="com.demo.model.User" id="UserResult">
 		<result property="id" column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
 		<result column="name" property="name"/>
-		<result column="password" property="password"/><result column="superuser"
-			property="superuser" /><result column="osudotnum" property="osudotnum" />
+		<result column="password" property="password"/>
+		<result column="superuser" property="superuser" />
+		<result column="osudotnum" property="osudotnum" />
 	 </resultMap>
 	 
       <select id="selectUser"  resultMap="UserResult">
        select * from user where name = #{username} and password = #{password}
+    </select>
+    
+     <select id="getAllUsers"  resultMap="UserResult">
+       select * from user where superuser = 0
     </select>
     
     <select id="selectUserByUsername"  resultMap="UserResult">
@@ -20,7 +25,7 @@
     </select>
     
      <insert id="addUser"  useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-       insert into user (name, password) values (#{username},#{password})
+       insert into user (name, password,osudotnum,superuser) values (#{username},#{password},#{osudotnum},#{superuser})
        <selectKey keyProperty="id" resultType="int" order="AFTER">
             SELECT LAST_INSERT_ID();
         </selectKey>

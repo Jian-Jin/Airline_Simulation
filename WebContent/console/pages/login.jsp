@@ -21,10 +21,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- Latest compiled JavaScript -->
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     
-    <link href="css/login.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/console/pages/css/login.css" rel="stylesheet">
 <title>Login</title>
+
 </head>
-<body>
+<img src='${pageContext.request.contextPath}/console/images/airline2.jpg' style='position:fixed;top:0px;left:0px;width:100%;height:100%;z-index:-1;'><body>
+<font face="Comic Sans MS" size="6" color="black">
+<h1><center>AIRLINE SIMULATION</center></h1></font>
+<br>
 <div class="container">
     	<div class="row">
 			<div class="col-md-6 col-md-offset-3">
@@ -35,7 +39,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<a href="#" class="active" id="login-form-link">Login</a>
 							</div>
 							<div class="col-xs-6">
-								<a href="#" id="register-form-link">Register</a>
+								<a href="#" id="register-form-link">Login As Admin</a>
 							</div>
 						</div>
 						<hr>
@@ -58,20 +62,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										</div>
 									</div>
 								</s:form>
-								<s:form id="register-form" theme="simple" action="register" namespace="/register" method="post" role="form" style="display: none;">
+								<s:form id="register-form" theme="simple" action="loginAsAdmin" namespace="/login" method="post" role="form" style="display: none;">
 									<div class="form-group">
 										<input type="text" name="userName" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
 									</div>
 									<div class="form-group">
 										<input type="password" name="passWord" id="password" tabindex="2" class="form-control" placeholder="Password">
 									</div>
-									<div class="form-group">
-										<input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
-									</div>
+								
 									<div class="form-group">
 										<div class="row">
 											<div class="col-sm-6 col-sm-offset-3">
-												<input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now">
+												<input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Log in">
 											</div>
 										</div>
 									</div>
@@ -83,6 +85,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 		</div>
 	</div>
-	<script src="js/loginForm.js"></script>
+	<script src="${pageContext.request.contextPath}/console/pages/js/loginForm.js"></script>
 </body>
 </html>

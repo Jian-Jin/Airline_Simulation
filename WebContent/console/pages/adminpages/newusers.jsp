@@ -47,39 +47,20 @@
 <div class="container">
     <div class="row">
         <div class="col-md-9">
-        <h1>Below are all the users information :</h1>
+        <h1>Below are all the users that are generated :</h1>
  <table class="table table-striped">
  <tr>
     <th>Name</th>
+    <th>Password</th>
   </tr>
- <s:iterator value="allUsers" var="u">
+ <s:iterator value="newAddedUsers" var="u">
  <tr>
    <td> <s:property value="#u.name" /></td>
+   <td> <s:property value="#u.password" /></td>
     </tr>
  </s:iterator>
 </table>
-
-<s:actionerror theme="bootstrap"/>
-<s:actionmessage theme="bootstrap"/>
-<s:fielderror theme="bootstrap"/>
- <s:form action="generateUser" method="post" namespace="/login" theme="bootstrap" cssClass="form-horizontal">
-  <s:textfield
-                        label="Enter the count of users to generate here"
-                        name="newUserCount"
-                        cssClass="input-sm"
-                        elementCssClass="col-sm-3"
-                        value="0"
-                        tooltip="Enter the count of users to generate here"/>
-   <div class="form-group">
-          <div class="col-sm-offset-3 col-md-9">
-                 <s:submit value="GENERATE" name="GENERATE" cssClass="btn btn-primary"/>
-          </div>
-  </div>
-  
-  </s:form>  
-     
-
-
+   
         </div>    
     </div>
     
