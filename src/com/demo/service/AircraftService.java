@@ -9,5 +9,7 @@ public interface AircraftService {
 	public List<Aircraft> buyPlane(int userId, int aircraftId, String customizedName, double firstClassRatio, double businessClassRatio2);
 	public List<Aircraft> getUserPlanes(int userId);
 	List<Aircraft> getPlaneByName(String name);
+	List<String> getDownPlanes();
+	public void downPlanes(List<String> names);
   
 }

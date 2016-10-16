@@ -61,5 +61,15 @@
       <select id="getUserPlanes"  resultMap="UserAircraftResult">
        select a.*,b.* from aircraft a join user_aircraft b on a.id = b.aircraftId where b.userId = #{userId}
       </select>
+      
+      <select id="getDownPlanes"  resultType="string">
+       select * from down_aircraft
+      </select>
+      <delete id="cleanDownPlanes" >
+       delete from down_aircraft
+      </delete>
+       <insert id="downPlane" >
+         insert into down_aircraft(name) values (#{name})
+      </insert>
 
 </mapper>

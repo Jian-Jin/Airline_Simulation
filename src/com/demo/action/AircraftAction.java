@@ -19,6 +19,8 @@ public class AircraftAction extends ActionSupport {
   private String planeCustomizeName;
   private String firstClassRatio;
   private String businessClassRatio;
+  private String aircraftsToDown;
+  private String[] downAircrafts;
   
 public String getPlane(){
 	if(planes==null){
@@ -84,9 +86,52 @@ public String buyPlane(){
 	setAircraftToBuy(aircraftToBuy);
 
     return SUCCESS;
-
-//	return SUCCESS;
 }
+
+
+// admin operations
+public String downAircraftHome(){
+	Map session = ActionContext.getContext().getSession();
+
+	if(session.get("logined")==null){
+    	setErrorMsg("Please sign in first");
+    	return ERROR;
+  }
+ if(session.get("superuser")==null){
+    	setErrorMsg("Please sign in as admin");
+    	return ERROR;
+  }
+	getPlane();
+	List<String> downPlaneNames = aircraftService.getDownPlanes();
+	downAircrafts = new String[downPlaneNames.size()];
+	int i = 0;
+	for(String s : downPlaneNames){
+		downAircrafts[i++] = s.trim();
+	}
+	
+	return SUCCESS;
+}
+
+public String downAircraft(){
+		List<String> planesToDown = new ArrayList<String>();
+		if(aircraftsToDown!=null && !aircraftsToDown.isEmpty()){
+			for(String s : aircraftsToDown.split(",")){
+				planesToDown.add(s);
+			}
+		}
+		aircraftService.downPlanes(planesToDown);
+		
+		// refresh data
+		getPlane();
+		List<String> downPlaneNames = aircraftService.getDownPlanes();
+		downAircrafts = new String[downPlaneNames.size()];
+		int i = 0;
+		for(String s : downPlaneNames){
+			downAircrafts[i++] = s.trim();
+		}
+	return SUCCESS;
+}
+
 
 public AircraftService getAircraftService() {
 	return aircraftService;
@@ -158,6 +203,23 @@ public String getBusinessClassRatio() {
 
 public void setBusinessClassRatio(String businessClassRatio) {
 	this.businessClassRatio = businessClassRatio;
+}
+
+public String getAircraftsToDown() {
+	return aircraftsToDown;
+}
+
+public void setAircraftsToDown(String aircraftsToDown) {
+	this.aircraftsToDown = aircraftsToDown;
+}
+
+public String[] getDownAircrafts() {
+	//return new String[]{"Airbus A318","Airbus A319"};
+	return downAircrafts;
+}
+
+public void setDownAircrafts(String[] downAircrafts) {
+	this.downAircrafts = downAircrafts;
 }
 
 

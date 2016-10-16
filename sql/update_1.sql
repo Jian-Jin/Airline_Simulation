@@ -33,3 +33,4 @@ INSERT INTO aircraft(id,name,cost,maxSeat,rangeVal,speed,fuelCapacity,fuelBurn,t
 CREATE TABLE user(id INT NOT NULL AUTO_INCREMENT, name VARCHAR(30), password VARCHAR(30), superuser BOOLEAN, osudotnum VARCHAR(30), PRIMARY KEY(id));
 CREATE TABLE user_aircraft(id INT NOT NULL AUTO_INCREMENT, userId INT, aircraftId INT, customizedName varchar(100), firstClassRatio double, businessClassRatio double, PRIMARY KEY(id));CREATE TABLE user_airport(id INT NOT NULL AUTO_INCREMENT, userId INT, airportId INT, PRIMARY KEY(id));
 CREATE TABLE route(userId INT, aircraftId INT, fromAirport INT, departureTime varchar(20), toAirport INT, arrivalTime varchar(20), sequence INT);
+CREATE TABLE down_aircraft(name VARCHAR(30));

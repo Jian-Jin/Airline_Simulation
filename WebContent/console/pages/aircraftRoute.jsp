@@ -33,6 +33,7 @@
             <li><a href="<s:url action='showAircraft' namespace="/aircraft"/>">Aircraft</a></li>
             <li><a href="<s:url action='showAirport' namespace="/airport"/>">Airport</a></li>
             <li class="active"><a href="<s:url action='getRoute' namespace="/route"/>">Route Setup</a></li>
+           <li><a href="<s:url action='signout' namespace="/login"/>">Log Out</a></li>
         </ul>
     </div>
 </nav>
@@ -67,12 +68,18 @@
 <h2>Add a new leg to its route:</h2>
 <s:form action="addRoute" namespace="/" theme="bootstrap" cssClass="form-horizontal">
 <h2>
-<s:select label="Select your aircraft departure time"
-	headerKey="-1" headerValue="Select your aircraft departure time"
-	list="timeslots"
-	name="depatureTime" />
-
-<s:select label="Select the aircraft arrival airport"
+<s:select label="1.departure Hour"
+	headerKey="-1" headerValue="00"
+	list="hours"
+	name="hour" />
+	
+	<s:select label="departure Min"
+	headerKey="-1" headerValue="00"
+	list="mins"
+	name="min" />
+	<br>
+<br>
+<s:select label="2. Select the aircraft arrival airport"
 	headerKey="-1" headerValue="Select the aircraft arrival airpor"
 	list="airports"
 	name="airportToGo" />

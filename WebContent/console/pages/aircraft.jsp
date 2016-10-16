@@ -39,7 +39,8 @@
             <li><s:a href="/Demo/console/pages/home.jsp">Home</s:a></li>
             <li><a href="<s:url action='showAircraft' namespace="/aircraft"/>">Aircraft</a></li>
             <li><a href="<s:url action='showAirport' namespace="/airport"/>">Airport</a></li>
-            <li class="active"><a href="<s:url action='getRoute' namespace="/route"/>">Route Setup</a></li>
+            <li><a href="<s:url action='getRoute' namespace="/route"/>">Route Setup</a></li>
+            <li><a href="<s:url action='signout' namespace="/login"/>">Log Out</a></li>
         </ul>
     </div>
 </nav>
@@ -83,7 +84,7 @@
        
   <s:form action="buyPlane" method="post" namespace="/" theme="bootstrap" cssClass="form-horizontal">
   <h2>
-   <s:radio label="Select the aircraft to buy" name="aircraftToBuy" list="names" value="" />
+   <s:select label="Select the aircraft to buy" name="aircraftToBuy" list="names" value="" />
    </h2>
    <div class="form-group">
           <div class="col-sm-offset-3 col-md-9">

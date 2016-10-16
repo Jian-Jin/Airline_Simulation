@@ -12,6 +12,7 @@
             padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
         }
     </style>
+    
 
     <script type="text/javascript">
             function greeting(){
@@ -35,6 +36,7 @@
             <li class="active"><a href="<s:url action='showAircraft' namespace="/aircraft"/>">Aircraft</a></li>
             <li><a href="<s:url action='showAirport' namespace="/airport"/>">Airport</a></li>
             <li><a href="<s:url action='getRoute' namespace="/route"/>">Route Setup</a></li>
+           <li><a href="<s:url action='signout' namespace="/login"/>">Log Out</a></li>
         </ul>
     </div>
 </nav>
@@ -49,29 +51,32 @@
 <s:fielderror theme="bootstrap"/>
        
   <s:form action="customizePlane" method="post" namespace="/" theme="bootstrap" cssClass="form-horizontal" onsubmit="greeting()">
-  <s:textfield
-                        label="Enter your Customized Aircraft Name here"
-                        name="planeCustomizeName"
-                        cssClass="input-sm"
-                        elementCssClass="col-sm-3"
-                        value="input your customized aircraft name"
-                        tooltip="Enter your Customized Aircraft Name here"/>
-                        
-     <s:textfield
-                        label="Enter the percentage of first class seat here (0-100)"
-                        name="firstClassRatio"
-                        cssClass="input-sm"
-                        elementCssClass="col-sm-3"
-                        value="0"
-                        tooltip="Enter the percentage of first class seat here (0-100)"/>
-                        
-     <s:textfield
-                        label="Enter the percentage of first class seat(0-100) here"
-                        name="businessClassRatio"
-                        cssClass="input-sm"
-                        elementCssClass="col-sm-3"
-                        value="0"
-                        tooltip="Enter the percentage of business class seat(0-100) here"/>
+ <font face="Comic Sans MS" size="4" color="orange">
+                        <h3>1. the percentage of first class seat here (0-100%)</h3>
+                        <br>
+                        <input type="range" name="firstClassRatio" min="0" max="100" value="0" step="5" class="slider-width100" onchange="showValue(this.value,this.name)" />
+<span id="firstClassRatio">0</span>
+
+                     <br>  
+                     <br>
+                        <h3>2. the percentage of business class seat here (0-100%)</h3>
+
+                        <input type="range" name="businessClassRatio" min="0" max="100" value="0" step="5" onchange="showValue(this.value,this.name)" />
+                        <span id="businessClassRatio">0</span>
+
+
+     <script type="text/javascript">
+function showValue(newValue,id)
+{
+	document.getElementById(id).innerHTML=newValue;
+}
+</script>                   
+
+<br>
+<br>
+ <h3>3. customize aircraft name:
+<input type="text" name="planeCustomizeName"  value="input your customized aircraft name"></h3>
+</font>
                         
    <div class="form-group">
           <div class="col-sm-offset-3 col-md-9">

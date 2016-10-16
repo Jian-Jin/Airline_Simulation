@@ -23,9 +23,13 @@ public class RouteAction extends ActionSupport{
 	private List<Route> routes;
 	private RouteService routeService;
 	private String planeCurrentLocation;
-	private String depatureTime;
+	//private String depatureTime;
+	private String hour;
+	private String min;
 	private String airportToGo;
-	private List<String> timeslots;
+	//private List<String> timeslots;
+	private List<String> hours;
+	private List<String> mins;
 	private List<String> airports;
 
 
@@ -68,6 +72,10 @@ public class RouteAction extends ActionSupport{
 	    	setErrorMsg("Please choose an aircraft first");
 	    	return ERROR;
 	    }
+	    if(airportService.getMyAirport(userId).isEmpty()){
+	    	setErrorMsg("Please buy a hub first in airport page");
+	    	return ERROR;
+	    }
 		String planeName = planeToSet;
 		
 		session.put("routePlane", planeName);
@@ -94,16 +102,26 @@ public class RouteAction extends ActionSupport{
 			}
 		}
 		
-		if(timeslots == null || timeslots.isEmpty()){
-			timeslots = new ArrayList<String>();
+		if(hours == null || hours.isEmpty()){
+			hours = new ArrayList<String>();
 			for(int i=0;i<24;i++){
 				String s ="";
 				if(i<10){
 					s+="0";
 				}
 				s+=i;
-				timeslots.add(s+":00");
-				timeslots.add(s+":30");
+				hours.add(s);
+			}
+		}
+		if(mins == null || mins.isEmpty()){
+			mins = new ArrayList<String>();
+			for(int i=0;i<60;i+=5){
+				String s ="";
+				if(i<10){
+					s+="0";
+				}
+				s+=i;
+				mins.add(s);
 			}
 		}
 	}
@@ -124,6 +142,7 @@ public class RouteAction extends ActionSupport{
 	    setPlaneToSet(planeName);
 		
 		populateTimeSlots();
+		String depatureTime = hour+":"+min;
 		routeService.addRoute(userId,planeName,planeLocation,depatureTime,airportToGo);
 
 		routes = routeService.getAircraftRoutes(userId, planeName);
@@ -221,14 +240,14 @@ public class RouteAction extends ActionSupport{
 	}
 
 
-	public String getDepatureTime() {
-		return depatureTime;
-	}
-
-
-	public void setDepatureTime(String depatureTime) {
-		this.depatureTime = depatureTime;
-	}
+//	public String getDepatureTime() {
+//		return depatureTime;
+//	}
+//
+//
+//	public void setDepatureTime(String depatureTime) {
+//		this.depatureTime = depatureTime;
+//	}
 
 
 	public String getAirportToGo() {
@@ -241,14 +260,14 @@ public class RouteAction extends ActionSupport{
 	}
 
 
-	public List<String> getTimeslots() {
-		return timeslots;
-	}
-
-
-	public void setTimeslots(List<String> timeslots) {
-		this.timeslots = timeslots;
-	}
+//	public List<String> getTimeslots() {
+//		return timeslots;
+//	}
+//
+//
+//	public void setTimeslots(List<String> timeslots) {
+//		this.timeslots = timeslots;
+//	}
 
 
 	public List<String> getAirports() {
@@ -268,6 +287,46 @@ public class RouteAction extends ActionSupport{
 
 	public void setAirportService(AirportService airportService) {
 		this.airportService = airportService;
+	}
+
+
+	public String getHour() {
+		return hour;
+	}
+
+
+	public void setHour(String hour) {
+		this.hour = hour;
+	}
+
+
+	public String getMin() {
+		return min;
+	}
+
+
+	public void setMin(String min) {
+		this.min = min;
+	}
+
+
+	public List<String> getHours() {
+		return hours;
+	}
+
+
+	public void setHours(List<String> hours) {
+		this.hours = hours;
+	}
+
+
+	public List<String> getMins() {
+		return mins;
+	}
+
+
+	public void setMins(List<String> mins) {
+		this.mins = mins;
 	}
 	
 	

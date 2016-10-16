@@ -37,7 +37,7 @@
         <ul class="nav navbar-nav">
             <li class="active"><a href="<s:url action='manageUser' namespace="/login"/>">manageUser</a></li>
             <li><a href="<s:url action='manageDemand' namespace="/login"/>">manageDemand</a></li>
-            <li><a href="<s:url action='downAircraft' namespace="/login"/>">downAircraft</a></li>
+            <li><a href="<s:url action='downAircraftHome' namespace="/aircraft"/>">downAircraft</a></li>
         </ul>
     </div>
 </nav>
@@ -64,7 +64,7 @@
 <s:fielderror theme="bootstrap"/>
  <s:form action="generateUser" method="post" namespace="/login" theme="bootstrap" cssClass="form-horizontal">
   <s:textfield
-                        label="Enter the count of users to generate here"
+                        label="Enter the count of new users to generate here"
                         name="newUserCount"
                         cssClass="input-sm"
                         elementCssClass="col-sm-3"

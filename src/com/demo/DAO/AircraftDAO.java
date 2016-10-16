@@ -15,5 +15,8 @@ public interface AircraftDAO {
 public void buyPlane(@Param(value = "userId") int userId, @Param(value = "aircraftId") int aircraftId,
 		@Param(value = "customizedName") String customizedName, @Param(value = "firstClassRatio") double firstClassRatio,
 		@Param(value = "businessClassRatio") double businessClassRatio);
+public List<String> getDownPlanes();
+public void cleanDownPlanes();
+public void downPlane(String name);
 }
   

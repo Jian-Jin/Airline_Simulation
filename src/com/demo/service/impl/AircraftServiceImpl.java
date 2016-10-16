@@ -17,7 +17,6 @@ public class AircraftServiceImpl implements AircraftService{
 	public List<Aircraft> getPlaneByName(String name) {
 		return aircraftDao.getPlaneByName(name);
 	}
-	
 
 	
 	@Override
@@ -25,6 +24,11 @@ public class AircraftServiceImpl implements AircraftService{
 			double businessClassRatio) {
 		aircraftDao.buyPlane(userId, aircraftId, customizedName, firstClassRatio, businessClassRatio);
 		return getUserPlanes(userId);
+	}
+	
+	@Override
+	public List<String> getDownPlanes() {
+		return aircraftDao.getDownPlanes();
 	}
 
 	public AircraftDAO getAircraftDao() {
@@ -38,6 +42,14 @@ public class AircraftServiceImpl implements AircraftService{
 	@Override
 	public List<Aircraft> getUserPlanes(int userId) {
 		return aircraftDao.getUserPlanes(userId);
+	}
+	@Override
+	public void downPlanes(List<String> names) {
+		aircraftDao.cleanDownPlanes();
+		for(String plane : names){
+			aircraftDao.downPlane(plane);
+		}
+		
 	}
 
 

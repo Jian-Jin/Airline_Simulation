@@ -2,6 +2,8 @@ package com.demo.action;
 import java.util.List;
 import java.util.Map;
 
+import com.demo.model.Aircraft;
+import com.demo.model.Airport;
 import com.demo.model.User;
 import com.demo.service.UserService;
 import com.opensymphony.xwork2.ActionContext;
@@ -33,6 +35,12 @@ public class LoginAction extends ActionSupport {
 		}
 	}
 	
+	public String signout() throws Exception {
+		ActionContext.getContext().getSession().clear();
+		return SUCCESS;
+	}
+
+	
 	public String loginAsAdmin(){
 		User user = userService.getUser(userName, passWord);
         // a simple check
@@ -47,6 +55,7 @@ public class LoginAction extends ActionSupport {
 			return ERROR;
 		}
 	}
+	// below are actions for admin account
 	// home page of manage user 
 	public String manageUser(){
 		Map session = ActionContext.getContext().getSession();
@@ -77,6 +86,8 @@ public class LoginAction extends ActionSupport {
 		setNewAddedUsers(newUsers);
 		return SUCCESS;
 	}
+	
+
 
 	public String getUserName() {
 		return userName;
@@ -133,6 +144,7 @@ public class LoginAction extends ActionSupport {
 	public void setNewUserCount(int newUserCount) {
 		this.newUserCount = newUserCount;
 	}
+
 	
 
 }
