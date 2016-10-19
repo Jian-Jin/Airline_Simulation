@@ -17,8 +17,19 @@ public interface UserDAO {
 			@Param(value = "username") String username,
 			@Param(value = "password") String password,
 			@Param(value = "osudotnum") String osudotnum,
-			@Param(value = "superuser") boolean superuser);
+			@Param(value = "superuser") boolean superuser,
+			@Param(value = "money") double money);
 	
 	public List<User> getAllUsers();
+	
+	public double getInitializeMoney(@Param(value = "id") int id);
+	
+	public double getUserMoney(@Param(value = "id") int id);
+	
+	public void updateUserMoney(
+			@Param(value = "id") int id,
+			@Param(value = "money") double money);
+	
+	public User getUserById(@Param(value = "id") int id);
 	
 }

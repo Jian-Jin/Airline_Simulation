@@ -6,6 +6,7 @@ public class User {
 	private String password;
 	private boolean superuser;
 	private String osudotnum;
+	private Double money;
 	
 	//
 	
@@ -55,6 +56,14 @@ public class User {
 
 	public void setSuperuser(boolean superuser){
 		this.superuser = superuser;
+	}
+
+	public Double getMoney() {
+		return money;
+	}
+
+	public void setMoney(Double money) {
+		this.money = money;
 	}
 	
 	

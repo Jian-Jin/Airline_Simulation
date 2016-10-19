@@ -23,12 +23,22 @@ public class LoginAction extends ActionSupport {
 
 	public String userLogin() throws Exception {
 		User user = userService.getUser(userName, passWord);
-        // a simple check
-		if(user != null){
+		//admin
+		if(user != null && user.getSuperuser()){
+			Map session = ActionContext.getContext().getSession();
+			session.put("logined","true");
+			session.put("superuser","true");
+			session.put("userId", user.getId());
+			return manageUser();
+		}
+		//student
+		else if(user != null){
 			Map session = ActionContext.getContext().getSession();
 			session.put("logined","true");
 			session.put("userId", user.getId());
-			return SUCCESS;
+			double money = userService.getUserMoney(user.getId());
+			session.put("money", money);
+			return "studentsuccess";
 		}else{
 			setErrorMsg("Log in failed, please try again");
 			return ERROR;
@@ -40,21 +50,7 @@ public class LoginAction extends ActionSupport {
 		return SUCCESS;
 	}
 
-	
-	public String loginAsAdmin(){
-		User user = userService.getUser(userName, passWord);
-        // a simple check
-		if(user != null && user.getSuperuser()){
-			Map session = ActionContext.getContext().getSession();
-			session.put("logined","true");
-			session.put("superuser","true");
-			session.put("userId", user.getId());
-			return manageUser();
-		}else{
-			setErrorMsg("Log in failed, please try again");
-			return ERROR;
-		}
-	}
+
 	// below are actions for admin account
 	// home page of manage user 
 	public String manageUser(){
@@ -68,7 +64,7 @@ public class LoginAction extends ActionSupport {
 		    	return ERROR;
 		  }
 		setAllUsers(userService.getAllUsers());
-		return SUCCESS;
+		return "adminsuccess";
 	}
 	
 	public String generateUser(){

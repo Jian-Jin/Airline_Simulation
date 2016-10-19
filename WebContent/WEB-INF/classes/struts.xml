@@ -8,7 +8,8 @@
   <package name="LoginAction" namespace="/login" extends="struts-default">
      	<action name="login" class="com.demo.action.LoginAction" method="userLogin">
      		<!-- action result and page mapping -->
-     		<result name="success">/console/pages/home.jsp</result>
+     		<result name="studentsuccess">/console/pages/home.jsp</result>
+     		<result name="adminsuccess">/console/pages/adminpages/managestudents.jsp</result>
      		<result name="error">/console/pages/error.jsp</result>
      	</action>
      	
@@ -118,6 +119,28 @@
     	</action>
     	<action name="showAdmin">
     		<result>/console/pages/adminpages/admin.jsp</result></action>
+    </package>
+    
+     <package name="ProfileAction" namespace="/profile"
+    	extends="struts-default">
+    	<action name="getUserProfile" class="com.demo.action.ProfileAction"
+    		method="getUserProfile">
+    		<result name="success">/console/pages/myProfile.jsp</result>
+    		<result name="error">/console/pages/error.jsp</result>
+    	</action>
+    	
+    	<action name="getUserAirport" class="com.demo.action.ProfileAction"
+    		method="getUserAirport">
+    		<result name="success">/console/pages/myHub.jsp</result>
+    		<result name="error">/console/pages/error.jsp</result>
+    	</action>
+    	
+    	<action name="getUserAircrafts" class="com.demo.action.ProfileAction"
+    		method="getUserAircrafts">
+    		<result name="success">/console/pages/myAircrafts.jsp</result>
+    		<result name="error">/console/pages/error.jsp</result>
+    	</action>
+
     </package>
 
 </struts>

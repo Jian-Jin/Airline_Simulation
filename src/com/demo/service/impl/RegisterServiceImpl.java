@@ -17,7 +17,8 @@ public class RegisterServiceImpl implements RegisterService {
 		//username already exist
 		if(result.size()>0)
 			return false;
-		userDAO.addUser(userName, passWord, osuDotnum, superUser);
+		double money = userDAO.getInitializeMoney(1);
+		userDAO.addUser(userName, passWord, osuDotnum, superUser,money);
 		return true;
 		
 	}

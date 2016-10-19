@@ -2,7 +2,6 @@ package com.demo.service.impl;
 
 import java.util.*;
 import java.util.List;
-
 import com.demo.DAO.UserDAO;
 import com.demo.model.User;
 import com.demo.service.UserService;
@@ -52,7 +51,9 @@ public class UserServiceImpl implements UserService{
 			String passwd = getRandomString(6);
 			if(names.contains(userName))
 				continue;
-			userDao.addUser(userName, passwd, "", false);
+			//get the initialize money, id = 1 ,first row
+			double money = userDao.getInitializeMoney(1);
+			userDao.addUser(userName, passwd, "", false,money);
 			User user = new User();
 			user.setName(userName);
 			user.setPassword(passwd);
@@ -74,6 +75,19 @@ public class UserServiceImpl implements UserService{
 		
 	}
 
+	@Override
+	public double getUserMoney(int id){
+		return userDao.getUserMoney(id);
+	}
 
+	@Override
+	public void updateUserMoney(int id, double money){
+		userDao.updateUserMoney(id, money);
+	}
+	
+	@Override
+	public User getUserById(int id){
+		return userDao.getUserById(id);
+	}
 
 }

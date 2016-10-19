@@ -7,6 +7,7 @@ public class Airport {
 	private String city;
 	private String name;
 	private String size;
+	private double cost;
 	private int enplanements;
 	private int dailyUsage;
 	private int scaled;
@@ -50,6 +51,12 @@ public class Airport {
 	}
 	public void setSize(String size) {
 		this.size = size;
+	}
+	public double getCost() {
+		return cost;
+	}
+	public void setCost(double cost) {
+		this.cost = cost;
 	}
 	public int getEnplanements() {
 		return enplanements;

@@ -25,10 +25,25 @@
     </select>
     
      <insert id="addUser"  useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-       insert into user (name, password,osudotnum,superuser) values (#{username},#{password},#{osudotnum},#{superuser})
+       insert into user (name, password,osudotnum,superuser,money) values (#{username},#{password},#{osudotnum},#{superuser},#{money})
        <selectKey keyProperty="id" resultType="int" order="AFTER">
             SELECT LAST_INSERT_ID();
         </selectKey>
     </insert>
-
+	
+	  <select id="getInitializeMoney"  resultType="double">
+       select money from initial_money where id = #{id}
+      </select>
+      
+      <select id="getUserMoney"  resultType="double">
+       select money from user where id = #{id}
+      </select>
+      
+      <update id="updateUserMoney">
+      update user set money = #{money} where id = #{id}
+      </update>
+      
+      <select id="getUserById"  resultType="com.demo.model.User">
+       select * from user where id = #{id}
+      </select>
 </mapper>
