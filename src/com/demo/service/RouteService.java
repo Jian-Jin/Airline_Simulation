@@ -6,8 +6,10 @@ import com.demo.model.Route;
 
 public interface RouteService {
 
-	List<Route> getAircraftRoutes(int userId, String planeName);
+	public List<Route> getAircraftRoutes(int userId, String planeName);
 
 	void addRoute(int userId, String planeToSet, String planeCurrentLocation, String depatureTime, String airportToGo, boolean dayPlus);
+
 	
+	public void deleteUserRouteByAircraftId(int userId, int aircraftId);
 }

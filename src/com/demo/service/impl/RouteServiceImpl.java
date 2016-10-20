@@ -134,6 +134,12 @@ public class RouteServiceImpl implements RouteService{
 		this.airportService = airportService;
 	}
 
+	@Override
+	public void deleteUserRouteByAircraftId(int userId, int aircraftId) {
+		this.routeDao.deleteUserRouteByAircraftId(userId, aircraftId);
+		
+	}
+
 
 
 

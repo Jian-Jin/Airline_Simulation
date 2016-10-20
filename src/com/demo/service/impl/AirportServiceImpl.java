@@ -80,6 +80,13 @@ public class AirportServiceImpl implements AirportService{
 	@Override
 	public List<Airport> getAllAirport() {
 		return airportDao.getAllAirport();
+
+	}
+
+
+	@Override
+	public void deleteUserAirport(int userId, int airportId) {
+		 airportDao.deleteUserAirport(userId, airportId);
 	}
 	
 	

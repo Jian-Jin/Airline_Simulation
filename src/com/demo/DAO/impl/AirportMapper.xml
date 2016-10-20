@@ -11,6 +11,7 @@
 		<result column="city" property="city"/>
 		<result column="name" property="name"/>
 		<result column="size" property="size"/>
+		<result column="cost" property="cost"/>
 		<result column="enplanements" property="enplanements"/>
 		<result column="dailyUsage" property="dailyUsage"/>
 		<result column="scaled" property="scaled"/>
@@ -40,5 +41,10 @@
        <select id="getAllAirport"  resultMap="AirportResult">
        select * from airport
       </select>
+      
+      <delete id="deleteUserAirport">
+      	delete from user_airport where userId = #{userId} and airportId = #{airportId}
+      </delete>
+      
 
 </mapper>

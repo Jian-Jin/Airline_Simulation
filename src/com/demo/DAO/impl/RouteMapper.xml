@@ -28,5 +28,9 @@
        <select id="getAllRoutes"  resultMap="RouteResult">
        select * from route order by aircraftId,sequence
       </select>
+      
+      <delete id = "deleteUserRouteByAircraftId">
+      	delete from route where userId = #{userId} and aircraftId = #{aircraftId}
+      </delete>
 
 </mapper>

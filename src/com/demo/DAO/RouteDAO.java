@@ -16,4 +16,7 @@ public interface RouteDAO {
 					@Param(value = "sequence") int sequence);
 	List<Route> getAllRoutes();
 
+	
+	public void deleteUserRouteByAircraftId(@Param(value = "userId") int userId,
+											@Param(value = "aircraftId")int aircraftId);
 }

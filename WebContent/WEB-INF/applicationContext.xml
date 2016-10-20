@@ -81,16 +81,24 @@
 	<bean id="aircraftAction" class="com.demo.action.AircraftAction"
 		scope="prototype">
 		<property name="aircraftService" ref="aircraftService"></property>
+		<property name="userService" ref="userService"></property>
 	</bean>
 	<bean id="airportAction" class="com.demo.action.AirportAction"
 		scope="prototype">
 		<property name="airportService" ref="airportService"></property>
+		<property name="userService" ref="userService"></property>
 	</bean>
 	<bean id="routeAction" class="com.demo.action.RouteAction"
 		scope="prototype">
 		<property name="airportService" ref="airportService"></property>
 		<property name="aircraftService" ref="aircraftService"></property>
 		<property name="routeService" ref="routeService"></property>
+	</bean>
+	<bean id="ProfileAction" class="com.demo.action.ProfileAction"
+		scope="prototype">
+		<property name="userService" ref="userService"></property>
+		<property name="airportService" ref="airportService"></property>
+		<property name="aircraftService" ref="aircraftService"></property>
 	</bean>
 
     <!-- Service Bean -->

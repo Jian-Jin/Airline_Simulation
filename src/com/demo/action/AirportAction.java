@@ -6,11 +6,13 @@ import java.util.Map;
 import com.demo.model.Aircraft;
 import com.demo.model.Airport;
 import com.demo.service.AirportService;
+import com.demo.service.UserService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class AirportAction extends ActionSupport{
   private AirportService airportService;
+  private UserService userService;
   private String fromAirportName;
   private String toAirportName;
   private String distance;
@@ -58,6 +60,15 @@ public String buyAirport(){
     	return ERROR;
     }
     int userId = (Integer)session.get("userId");
+    double cost = airportService.getAirport(airportToBuy).getCost();
+    double money = (double)session.get("money");
+    if(money<cost){
+		setErrorMsg("Not enough money to buy this aircraft.");
+		return ERROR;
+	}
+	money -= cost;
+	userService.updateUserMoney(userId, money);
+	session.put("money", money);
     List<Airport> list = airportService.buyAirport(userId,airportToBuy);
     if(list == null){
     	setErrorMsg("Each user could only own one hub");
@@ -131,5 +142,12 @@ public void setUserAirport(List<Airport> userAirport) {
 	this.userAirport = userAirport;
 }
 
+public UserService getUserService() {
+	return userService;
+}
+
+public void setUserService(UserService userService) {
+	this.userService = userService;
+}
 
 }

@@ -75,5 +75,8 @@
        <insert id="downPlane" >
          insert into down_aircraft(name) values (#{name})
       </insert>
-
+		
+		<delete id="deleteUserAircraft">
+      	delete from user_aircraft where userId = #{userId} and customizedName = #{customizedName}
+      </delete>
 </mapper>

@@ -6,11 +6,13 @@ import java.util.Map;
 
 import com.demo.model.Aircraft;
 import com.demo.service.AircraftService;
+import com.demo.service.UserService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class AircraftAction extends ActionSupport {
   private AircraftService aircraftService;
+  private UserService userService;
   private List<Aircraft> planes;
   private List<String> names;
   private List<Aircraft> userPlanes;
@@ -55,10 +57,18 @@ public String customizePlane(){
 	try{
 	double d1 = Double.valueOf(firstClassRatio);
 	double d2 = Double.valueOf(businessClassRatio);
+	double money = (double)session.get("money");
 	if(d1>=0 && d2>=0 && d1+d2<=100){
-		  List<Aircraft> list = aircraftService.buyPlane(userId,plane.getId(),planeCustomizeName, d1, d2);
-		  setUserPlanes(list);
-		  return SUCCESS;
+		if(money<plane.getCost()){
+			setErrorMsg("Not enough money to buy this aircraft.");
+			return ERROR;
+		}
+		money -= plane.getCost()*1000000;
+		userService.updateUserMoney(userId, money);
+		session.put("money", money);
+		List<Aircraft> list = aircraftService.buyPlane(userId,plane.getId(),planeCustomizeName, d1, d2);
+		setUserPlanes(list);
+		return SUCCESS;
 	}else{
 		setErrorMsg("Please input a valid value of firstClassRatio and businessClassRatio ");
 		return ERROR;
@@ -222,6 +232,12 @@ public void setDownAircrafts(String[] downAircrafts) {
 	this.downAircrafts = downAircrafts;
 }
 
+public UserService getUserService() {
+	return userService;
+}
 
+public void setUserService(UserService userService) {
+	this.userService = userService;
+}
   
 }
