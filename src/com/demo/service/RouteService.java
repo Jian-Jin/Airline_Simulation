@@ -12,4 +12,6 @@ public interface RouteService {
 
 	
 	public void deleteUserRouteByAircraftId(int userId, int aircraftId);
+	
+	public void deleteUserRoute(int userId);
 }

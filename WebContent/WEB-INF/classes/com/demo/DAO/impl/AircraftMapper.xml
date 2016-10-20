@@ -79,4 +79,5 @@
 		<delete id="deleteUserAircraft">
       	delete from user_aircraft where userId = #{userId} and customizedName = #{customizedName}
       </delete>
+      
 </mapper>

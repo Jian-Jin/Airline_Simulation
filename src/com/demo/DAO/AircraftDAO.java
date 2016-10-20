@@ -23,5 +23,6 @@ public List<Aircraft> getPlaneByUserAircraftId(@Param(value = "userAircraftId") 
 
 public void deleteUserAircraft(@Param(value = "userId") int userId, 
 								@Param(value = "customizedName") String customizedName);
+
 }
   

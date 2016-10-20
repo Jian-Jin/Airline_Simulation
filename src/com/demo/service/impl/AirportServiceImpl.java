@@ -85,8 +85,8 @@ public class AirportServiceImpl implements AirportService{
 
 
 	@Override
-	public void deleteUserAirport(int userId, int airportId) {
-		 airportDao.deleteUserAirport(userId, airportId);
+	public void updateUserAirport(int userId, int airportId) {
+		 airportDao.updateUserAirport(userId, airportId);
 	}
 	
 	

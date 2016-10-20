@@ -32,5 +32,8 @@
       <delete id = "deleteUserRouteByAircraftId">
       	delete from route where userId = #{userId} and aircraftId = #{aircraftId}
       </delete>
-
+	
+		<delete id = "deleteUserRoute">
+      	delete from route where userId = #{userId}
+      </delete>
 </mapper>

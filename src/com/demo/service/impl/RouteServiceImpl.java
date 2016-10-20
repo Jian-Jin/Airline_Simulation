@@ -140,7 +140,11 @@ public class RouteServiceImpl implements RouteService{
 		
 	}
 
-
+	@Override
+	public void deleteUserRoute(int userId) {
+		this.routeDao.deleteUserRoute(userId);
+		
+	}
 
 
 }

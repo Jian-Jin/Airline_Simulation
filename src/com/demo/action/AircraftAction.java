@@ -57,7 +57,7 @@ public String customizePlane(){
 	try{
 	double d1 = Double.valueOf(firstClassRatio);
 	double d2 = Double.valueOf(businessClassRatio);
-	double money = (double)session.get("money");
+	double money = userService.getUserMoney(userId);
 	if(d1>=0 && d2>=0 && d1+d2<=100){
 		if(money<plane.getCost()){
 			setErrorMsg("Not enough money to buy this aircraft.");
