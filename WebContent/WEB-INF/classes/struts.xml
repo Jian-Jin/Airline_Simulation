@@ -49,6 +49,12 @@
      		<result name="success">/console/pages/adminpages/simulateHome.jsp</result>
      		 <result name="error">/console/pages/error.jsp</result>
      	</action>
+     	<action name="manageDemand" class="com.demo.action.LoginAction" method="manageDemand">
+     		<!-- action result and page mapping -->
+     		<result name="success">/console/pages/adminpages/managedemand.jsp</result>
+     		<result name="error">/console/pages/error.jsp</result>     		
+     	</action>
+     	
      	
   </package>
     
