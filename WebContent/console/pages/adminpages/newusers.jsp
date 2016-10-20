@@ -38,6 +38,8 @@
             <li class="active"><a href="<s:url action='manageUser' namespace="/login"/>">manageUser</a></li>
             <li><a href="<s:url action='manageDemand' namespace="/login"/>">manageDemand</a></li>
             <li><a href="<s:url action='downAircraft' namespace="/login"/>">downAircraft</a></li>
+            <li><a href="<s:url action='signout' namespace="/login"/>">Log Out</a></li>
+
         </ul>
     </div>
 </nav>

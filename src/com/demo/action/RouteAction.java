@@ -32,7 +32,7 @@ public class RouteAction extends ActionSupport{
 	private List<String> mins;
 	private List<String> airports;
 	
-	private static String dayPlusText="(Day+1)";
+	private static String dayPlusText=" (Day+1)";
 
 	/**
 	 * Route setup home page, show all the aircrafts of the user 

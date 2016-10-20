@@ -16,24 +16,8 @@
 </head>
 </head>
 <body>
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="navbar-header">
-        <a class="navbar-brand" href="#">AirLine Simulation - <s:text name="test.version"/></a>
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-    </div>
-    <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-            <li><s:a href="/Demo/console/pages/home.jsp">Home</s:a></li>
-            <li><a href="<s:url action='showAircraft' namespace="/aircraft"/>">Aircraft</a></li>
-            <li><a href="<s:url action='showAirport' namespace="/airport"/>">Airport</a></li>
-            <li><a href="<s:url action='getRoute' namespace="/route"/>">Route Setup</a></li>
-        </ul>
-    </div>
-</nav>
+<%@include file="header.jsp"%>
+
 
 
 

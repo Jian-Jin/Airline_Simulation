@@ -39,7 +39,8 @@
      	
      	<action name="simulateHome" class="com.demo.action.LoginAction" method="simulateHome">
      		<!-- action result and page mapping -->
-     		<result name="success">/console/pages/adminpages/simulateHome.jsp</result>
+     		  <result name="success">/console/pages/profitResult.jsp</result>
+     		<result name="adminsuccess">/console/pages/adminpages/simulateHome.jsp</result>
      		 <result name="error">/console/pages/error.jsp</result>
      	</action>
      	

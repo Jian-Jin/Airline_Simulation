@@ -98,13 +98,13 @@ public class LoginAction extends ActionSupport {
 	    	setErrorMsg("Please sign in first");
 	    	return ERROR;
 		}
-		if(session.get("superuser")==null){
-	    	setErrorMsg("Please sign in as admin");
-	    	return ERROR;
-		}
+		
 		 setProfits(simulateService.getProfits());
 		 setSimulateRunTime(simulateService.getSimulateRunTime());
-		return SUCCESS;
+		 if(session.get("superuser")==null){
+		    	return SUCCESS;
+			}
+		return "adminsuccess";
 	}
 	
 	public String runSimulate(){
