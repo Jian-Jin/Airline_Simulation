@@ -7,12 +7,14 @@
 	 <resultMap type="com.demo.model.Route" id="RouteResult">
 
 		<result column="userId" property="userId"/>
-		<result column="aircraftId" property="aircraftId"/>
+		<result column="aircraftId" property="userAircraftId"/>
 		<result column="fromAirport" property="fromAirport"/>
 		<result column="departureTime" property="departureTime"/>
 		<result column="toAirport" property="toAirport"/>
 		<result column="arrivalTime" property="arrivalTime"/>
 		<result column="sequence" property="sequence"/>
+		<result column="departureDay" property="departureDay"/>
+		<result column="arrivalDay" property="arrivalDay"/>
 		
 		
 	 </resultMap>
@@ -21,8 +23,10 @@
        select * from route where userId = #{userId} and aircraftId = #{aircraftId} order by sequence
       </select>
       <insert id="addRoute">
-      insert into route(userId, aircraftId, fromAirport, departureTime, toAirport, arrivalTime, sequence) values (#{userId},#{aircraftId},#{fromAirport},#{departureTime},#{toAirport},#{arrivalTime},#{sequence})
+      insert into route(userId, aircraftId, fromAirport, departureTime,departureDay, toAirport, arrivalTime,arrivalDay, sequence) values (#{userId},#{aircraftId},#{fromAirport},#{departureTime},#{departureDay},#{toAirport},#{arrivalTime},#{arrivalDay},#{sequence})
       </insert>
-      
+       <select id="getAllRoutes"  resultMap="RouteResult">
+       select * from route order by aircraftId,sequence
+      </select>
 
 </mapper>
