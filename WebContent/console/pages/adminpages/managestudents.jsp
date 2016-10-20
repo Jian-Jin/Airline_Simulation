@@ -24,25 +24,7 @@
 </head>
 
 <body>
-	<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="navbar-header">
-        <a class="navbar-brand" href="#">AirLine Simulation - <s:text name="Adminpage"/></a>
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-    </div>
-    <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-            <li class="active"><a href="<s:url action='manageUser' namespace="/login"/>">manageUser</a></li>
-         <!--    <li><a href="<s:url action='manageDemand' namespace="/login"/>">manageDemand</a></li> -->
-            <li><a href="<s:url action='downAircraftHome' namespace="/aircraft"/>">downAircraft</a></li>
-            <li><a href="<s:url action='simulateHome' namespace="/login"/>">simulation</a></li>
-            <li><a href="<s:url action='signout' namespace="/login"/>">Log Out</a></li>
-        </ul>
-    </div>
-</nav>
+<%@include file="adminheader.jsp"%>
 
 
 
@@ -52,11 +34,15 @@
         <h1>Below are all the users information :</h1>
  <table class="table table-striped">
  <tr>
-    <th>Name</th>
+    <th>UserName</th>
+    <th>OsuDotNum</th>
+    <th>Balance</th>
   </tr>
  <s:iterator value="allUsers" var="u">
  <tr>
    <td> <s:property value="#u.name" /></td>
+    <td> <s:property value="#u.osudotnum" /></td>
+    <td> <s:property value="#u.money" /></td>
     </tr>
  </s:iterator>
 </table>
