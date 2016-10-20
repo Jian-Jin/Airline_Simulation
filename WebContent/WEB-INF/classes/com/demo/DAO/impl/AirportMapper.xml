@@ -38,8 +38,13 @@
        select a.* from airport a join user_airport b on a.id = b.airportId where b.userId = #{userId}
       </select>
       
-       <select id="getAllAitport"  resultMap="AirportResult">
+       <select id="getAllAirport"  resultMap="AirportResult">
        select * from airport
       </select>
+      
+      <delete id="deleteUserAirport">
+      	delete from user_airport where userId = #{userId} and airportId = #{airportId}
+      </delete>
+      
 
 </mapper>

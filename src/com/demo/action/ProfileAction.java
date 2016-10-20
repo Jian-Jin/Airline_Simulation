@@ -8,6 +8,7 @@ import com.demo.model.Airport;
 import com.demo.model.User;
 import com.demo.service.AircraftService;
 import com.demo.service.AirportService;
+import com.demo.service.RouteService;
 import com.demo.service.UserService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -21,6 +22,9 @@ public class ProfileAction  extends ActionSupport {
 	private int millions;
 	private AircraftService aircraftService;
 	private AirportService airportService;
+	private RouteService routeService;
+	private String aircraftCustomizeNameToDelete;
+	private String airportToDelete;
 	
 	public String getUserProfile(){
 		Map session = ActionContext.getContext().getSession();
@@ -59,6 +63,38 @@ public class ProfileAction  extends ActionSupport {
 	    return SUCCESS;
 	}
 
+	public String deleteUserAircrafts(){
+		Map session = ActionContext.getContext().getSession();
+	    if(session.get("logined")==null){
+	    	setErrorMsg("Please sign in first");
+	    	return ERROR;
+	    }
+	    if(aircraftCustomizeNameToDelete==null || aircraftCustomizeNameToDelete.isEmpty() ){
+	    	setErrorMsg("Please choose an aircraft to delete");
+	    	return ERROR;
+	    }
+	    int userId = (Integer)session.get("userId");
+	    Aircraft deleteAirtcraft = null;
+	    List<Aircraft> userPlanes = aircraftService.getUserPlanes(userId);
+	    for(Aircraft aircraft : userPlanes){
+	    	if(aircraft.getCustomizedName().equals(aircraftCustomizeNameToDelete)){
+	    		deleteAirtcraft = aircraft;
+	    		userPlanes.remove(aircraft);
+	    		break;
+	    	}
+	    }
+	    setUserPlanes(userPlanes);
+	    int aircraftId = deleteAirtcraft.getId();
+	    double cost = deleteAirtcraft.getCost()*1000000;
+	    //increase the money
+	    double money = userService.getUserMoney(userId);
+	    money += cost;
+	    userService.updateUserMoney(userId, money);
+	    routeService.deleteUserRouteByAircraftId(userId, aircraftId);
+	    aircraftService.deleteUserAircraft(userId, aircraftCustomizeNameToDelete);
+	    return SUCCESS;
+	}
+	
 	public List<Airport> getUserAirports() {
 		return userAirports;
 	}
@@ -121,6 +157,31 @@ public class ProfileAction  extends ActionSupport {
 
 	public void setAirportService(AirportService airportService) {
 		this.airportService = airportService;
+	}
+
+	public RouteService getRouteService() {
+		return routeService;
+	}
+
+	public void setRouteService(RouteService routeService) {
+		this.routeService = routeService;
+	}
+
+
+	public String getAircraftCustomizeNameToDelete() {
+		return aircraftCustomizeNameToDelete;
+	}
+
+	public void setAircraftCustomizeNameToDelete(String aircraftCustomizeNameToDelete) {
+		this.aircraftCustomizeNameToDelete = aircraftCustomizeNameToDelete;
+	}
+
+	public String getAirportToDelete() {
+		return airportToDelete;
+	}
+
+	public void setAirportToDelete(String airportToDelete) {
+		this.airportToDelete = airportToDelete;
 	}
 	
 	

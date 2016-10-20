@@ -12,4 +12,5 @@ public interface AircraftService {
 	List<String> getDownPlanes();
 	public void downPlanes(List<String> names);
   
+	public void deleteUserAircraft(int userId, String customizedName);
 }

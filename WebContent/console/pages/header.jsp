@@ -11,12 +11,6 @@
             padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
         }
     </style>
-
-    <script type="text/javascript">
-            function confirmation(){
-                confirm("Comfirm your aircraft purchase!")
-            }
-    </script>
         
 </head>
 

@@ -19,6 +19,12 @@
 </head>
 <body>
 <%@include file="header.jsp"%>
+
+    <script type="text/javascript">
+            function confirmation(){
+                confirm("Comfirm your aircraft to be deleted!")
+            }
+    </script>
 <font face="Comic Sans MS" size="5" color="orange">
 <h1><center>My Profile</center></h1></font>
 <font size="5" color="black">
@@ -70,7 +76,18 @@
     </tr>
  </s:iterator>
 </table>
-
+		
+		<s:form action="deleteUserAircrafts" method="post" namespace="/profile" theme="bootstrap" cssClass="form-horizontal">
+  <h2>
+   <s:select label="Select the aircraft to delete" name="aircraftCustomizeNameToDelete" list="%{userPlanes.{customizedName}}" value="" />
+   </h2>
+   <div class="form-group">
+          <div class="col-sm-offset-3 col-md-9">
+                 <s:submit onclick = "confirmation()" value="Delete" name="Delete" cssClass="btn btn-primary"/>
+          </div>
+  </div>
+  
+  </s:form>  
         </div>    
     
     

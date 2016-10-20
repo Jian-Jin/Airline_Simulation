@@ -63,7 +63,7 @@ public String customizePlane(){
 			setErrorMsg("Not enough money to buy this aircraft.");
 			return ERROR;
 		}
-		money -= plane.getCost();
+		money -= plane.getCost()*1000000;
 		userService.updateUserMoney(userId, money);
 		session.put("money", money);
 		List<Aircraft> list = aircraftService.buyPlane(userId,plane.getId(),planeCustomizeName, d1, d2);

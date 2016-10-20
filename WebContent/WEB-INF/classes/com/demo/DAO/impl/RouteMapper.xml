@@ -24,5 +24,8 @@
       insert into route(userId, aircraftId, fromAirport, departureTime, toAirport, arrivalTime, sequence) values (#{userId},#{aircraftId},#{fromAirport},#{departureTime},#{toAirport},#{arrivalTime},#{sequence})
       </insert>
       
+      <delete id = "deleteUserRouteByAircraftId">
+      	delete from route where userId = #{userId} and aircraftId = #{aircraftId}
+      </delete>
 
 </mapper>

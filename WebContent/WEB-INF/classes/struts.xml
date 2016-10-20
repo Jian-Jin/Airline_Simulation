@@ -140,7 +140,13 @@
     		<result name="success">/console/pages/myAircrafts.jsp</result>
     		<result name="error">/console/pages/error.jsp</result>
     	</action>
-
+		
+		<action name="deleteUserAircrafts" class="com.demo.action.ProfileAction"
+    		method="deleteUserAircrafts">
+    		<result name="success">/console/pages/myAircrafts.jsp</result>
+    		<result name="error">/console/pages/error.jsp</result>
+    	</action>
+    	
     </package>
 
 </struts>

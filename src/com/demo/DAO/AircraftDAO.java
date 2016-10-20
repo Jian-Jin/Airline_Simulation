@@ -18,5 +18,8 @@ public void buyPlane(@Param(value = "userId") int userId, @Param(value = "aircra
 public List<String> getDownPlanes();
 public void cleanDownPlanes();
 public void downPlane(String name);
+
+	public void deleteUserAircraft(@Param(value = "userId") int userId, 
+								@Param(value = "customizedName") String customizedName);
 }
   

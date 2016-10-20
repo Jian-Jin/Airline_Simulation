@@ -13,6 +13,7 @@ public interface AirportDAO {
 	  
 	  public List<Airport> getAirportsByUserId(@Param(value = "userId") int userId);
 	  
-	  public List<Airport> getAllAitport();
+	  public List<Airport> getAllAirport();
 	  
+	  public void deleteUserAirport(@Param(value = "userId") int userId, @Param(value = "airportId") int airportId);
 }

@@ -8,7 +8,14 @@
 <head>
         
 </head>
+
 <%@include file="header.jsp"%>
+
+    <script type="text/javascript">
+            function confirmation(){
+                confirm("Comfirm your aircraft purchase!")
+            }
+    </script>
 <body>
 
 

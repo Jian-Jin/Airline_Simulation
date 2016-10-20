@@ -19,6 +19,7 @@
 </head>
 <body>
 <%@include file="header.jsp"%>
+
 <font face="Comic Sans MS" size="5" color="orange">
 <h1><center>My Profile</center></h1></font>
 <font size="5" color="black">

@@ -45,7 +45,7 @@ public class RouteServiceImpl implements RouteService{
 	
 	private void populateAirport(){
 		if(airports.isEmpty()){
-			List<Airport> list = airportDao.getAllAitport();
+			List<Airport> list = airportDao.getAllAirport();
 			for(Airport a :list){
 				airports.put(a.getId(), a);
 			}
@@ -116,6 +116,12 @@ public class RouteServiceImpl implements RouteService{
 
 	public void setAirportService(AirportService airportService) {
 		this.airportService = airportService;
+	}
+
+	@Override
+	public void deleteUserRouteByAircraftId(int userId, int aircraftId) {
+		this.routeDao.deleteUserRouteByAircraftId(userId, aircraftId);
+		
 	}
 
 
