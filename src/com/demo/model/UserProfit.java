@@ -5,6 +5,9 @@ public class UserProfit {
 	private double profit;
 	private String userName;
 	private int rank;
+	
+	private String profitString;
+	
 	public int getUserId() {
 		return userId;
 	}
@@ -28,6 +31,12 @@ public class UserProfit {
 	}
 	public void setRank(int rank) {
 		this.rank = rank;
+	}
+	public String getProfitString() {
+		return profitString;
+	}
+	public void setProfitString(String profitString) {
+		this.profitString = profitString;
 	}
 	
 	

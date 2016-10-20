@@ -8,6 +8,8 @@ public class User {
 	private String osudotnum;
 	private Double money;
 	
+	private String moneyString;
+	
 	//
 	
 	public int getId() {
@@ -64,6 +66,14 @@ public class User {
 
 	public void setMoney(Double money) {
 		this.money = money;
+	}
+
+	public String getMoneyString() {
+		return moneyString;
+	}
+
+	public void setMoneyString(String moneyString) {
+		this.moneyString = moneyString;
 	}
 	
 	

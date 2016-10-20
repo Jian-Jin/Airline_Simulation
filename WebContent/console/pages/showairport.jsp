@@ -65,7 +65,7 @@
 
 <br>
 <br>
-<h2>Distance Between above two airports is <s:property value="distance" /> miles<br>
+<h2>Distance Between above two airports is <font face="Comic Sans MS" size="5" color="red"><s:property value="distance" /></font> miles<br>
 </h2>
 
         </div>    

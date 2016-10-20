@@ -42,7 +42,7 @@
  <tr>
    <td> <s:property value="#u.name" /></td>
     <td> <s:property value="#u.osudotnum" /></td>
-    <td> <s:property value="#u.money" /></td>
+    <td> <s:property value="#u.moneyString" /></td>
     </tr>
  </s:iterator>
 </table>

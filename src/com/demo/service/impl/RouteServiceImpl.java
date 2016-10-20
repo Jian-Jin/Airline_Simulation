@@ -12,6 +12,7 @@ import com.demo.model.Airport;
 import com.demo.model.Route;
 import com.demo.service.AirportService;
 import com.demo.service.RouteService;
+import com.demo.service.Utils;
 
 public class RouteServiceImpl implements RouteService{
 	private AircraftDAO aircraftDao;
@@ -53,8 +54,9 @@ public class RouteServiceImpl implements RouteService{
 			}
 		}
 	}
+	// return false if input departure time is invalid
 	@Override
-	public void addRoute(int userId, String planeToSet, String planeCurrentLocation, String depatureTime,
+	public int addRoute(int userId, String planeToSet, String planeCurrentLocation, String depatureTime,
 			String airportToGo, boolean departureDayPlus) {
 		// the unique id of user_aircraft
 		int userAircraftId = aircraftDao.getPlaneUniqueId(userId, planeToSet);
@@ -63,6 +65,9 @@ public class RouteServiceImpl implements RouteService{
 		int speed = plane.getSpeed();
 		Airport fromAirport = airportDao.getAirportByName(planeCurrentLocation);
 		Airport toAirport = airportDao.getAirportByName(airportToGo);
+		if(toAirport==null || fromAirport.getId()==toAirport.getId()){
+			return Utils.AIRPORTERROR;
+		}
 		double miles = airportService.distance(fromAirport, toAirport);
 
 		int timeInMinutes = (int)(miles/(double)speed * 60);
@@ -94,12 +99,19 @@ public class RouteServiceImpl implements RouteService{
 			maxSeq = Math.max(r.getSequence(), maxSeq);
 			departDay = Math.max(departDay, r.getArrivalDay());
 		}
+		// if depart time is within 30 mins return error
+		for(Route r : routes){
+			if(r.getSequence()==maxSeq){
+				if(Utils.minuteDiff(r.getArrivalTime(), depatureTime, departureDayPlus)<30)
+					return Utils.TIMEERROR;
+			}
+		}
 		if(departureDayPlus) departDay += 1;
 		int arrivalDay = arrivalDayPlus? departDay+1 : departDay;
 		
 		int sequence = maxSeq + 1;
 		routeDao.addRoute(userId, userAircraftId, fromAirport.getId(), depatureTime,departDay, toAirport.getId(), result,arrivalDay, sequence);
-		
+		return Utils.SUCCESS;
 	}
 
 	public AircraftDAO getAircraftDao() {

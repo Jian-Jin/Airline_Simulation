@@ -45,7 +45,7 @@
    <!--<td><input type="radio" name="planeId" value="#p.id"></td>  -->
    <td> <s:property value="#p.rank" /></td>
    <td> <s:property value="#p.userName" /></td>
-   <td> <s:property value="#p.profit" /></td>
+   <td> <s:property value="#p.profitString" /></td>
     </tr>
  </s:iterator>
 </table>
