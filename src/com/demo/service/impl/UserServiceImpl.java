@@ -5,6 +5,7 @@ import java.util.List;
 import com.demo.DAO.UserDAO;
 import com.demo.model.User;
 import com.demo.service.UserService;
+import com.demo.service.Utils;
 
 public class UserServiceImpl implements UserService{
 	private static char[] chars="abcdefghihklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
@@ -12,7 +13,12 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public List<User> getAllUsers() {
-		return userDao.getAllUsers();
+		List<User> result = userDao.getAllUsers();
+		for(User u : result){
+			double money = u.getMoney();
+			u.setMoneyString(Utils.convertToMillion(money));
+		}
+		return result;
 	}
 	
 

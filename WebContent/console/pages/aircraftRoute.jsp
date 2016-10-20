@@ -55,6 +55,9 @@
 <s:fielderror theme="bootstrap"/>
             
 <h2>Add a new leg to its route:</h2>
+ <font face="Comic Sans MS" size="5" color="red">
+     <s:property value="errorMsg" />
+ </font>
 <s:form action="addRoute" namespace="/" theme="bootstrap" cssClass="form-horizontal">
 <h2>
 <s:select label="1.departure Hour"
@@ -74,15 +77,13 @@
 	name="airportToGo" />
 </h2>
 <br>
-<br>
-<div class="form-group">
+
+  <div class="form-group">
             <div class="col-sm-offset-3 col-md-9">
                    <s:submit value="ADD ROUTE" name="ADD ROUTE" cssClass="btn btn-primary"/>
               </div>
  </div>
- <font face="Comic Sans MS" size="3" color="red">
-     <s:property value="errorMsg" />
-  </font>
+
 </s:form>
 
         </div>    

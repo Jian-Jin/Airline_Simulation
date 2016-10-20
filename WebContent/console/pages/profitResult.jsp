@@ -24,9 +24,16 @@
 <div class="container">
     <div class="row">
         <div class="col-md-9">
-         <font face="Comic Sans MS" size="3" color="orange">
+            <font face="Verdana" size="5" color="#ccccff">
         
-        <h1>Simulate run time : <s:property value="simulateRunTime" /></h1>
+        Simulate run time : <s:property value="simulateRunTime" />
+        </font>
+        <br>
+        <br>
+                 <font face="Comic Sans MS" size="6" color="orange">
+        
+        Profit Ranking:
+        <br>
  <table class="table table-striped">
  <tr>
     <!-- <th>Purchase</th> -->
@@ -39,7 +46,7 @@
    <!--<td><input type="radio" name="planeId" value="#p.id"></td>  -->
    <td> <s:property value="#p.rank" /></td>
    <td> <s:property value="#p.userName" /></td>
-   <td> <s:property value="#p.profit" /></td>
+   <td> <s:property value="#p.profitString" /></td>
     </tr>
  </s:iterator>
 </table>

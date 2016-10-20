@@ -10,6 +10,7 @@ import com.demo.model.Route;
 import com.demo.service.AircraftService;
 import com.demo.service.AirportService;
 import com.demo.service.RouteService;
+import com.demo.service.Utils;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -148,10 +149,7 @@ public class RouteAction extends ActionSupport{
 	    String planeLocation = (String)session.get("planeCurLocation");
 	    setPlaneToSet(planeName);
 		
-		if(planeLocation.equals(airportToGo) || airportToGo.contains("arrival")){
-			setErrorMsg("invalid arrival aiport");
-	    	return ERROR;
-		}
+
 		boolean dayPlus = false;
 		if(hour.contains(dayPlusText)){
 			hour = hour.split(" ")[0];
@@ -160,7 +158,7 @@ public class RouteAction extends ActionSupport{
 			
 		String depatureTime = hour+":"+min;
 
-		routeService.addRoute(userId,planeName,planeLocation,depatureTime,airportToGo, dayPlus);
+		int ret = routeService.addRoute(userId,planeName,planeLocation,depatureTime,airportToGo, dayPlus);
 
 		routes = routeService.getAircraftRoutes(userId, planeName);
 		Route nextRoute = routes.get(routes.size()-1);
@@ -171,6 +169,14 @@ public class RouteAction extends ActionSupport{
 		populateTimeSlots(currentHour, currentMin);
 
 		routes.remove(routes.size()-1);
+		if(ret == Utils.TIMEERROR){
+			setErrorMsg("Next depart time should be more than 30 mins later than arrival time");
+	    	return ERROR;
+		}
+		if(ret == Utils.AIRPORTERROR){
+			setErrorMsg("Invalid departure airport, please select again");
+	    	return ERROR;
+		}
 
 		return SUCCESS;
 	}

@@ -1,5 +1,6 @@
 package com.demo.action;
 
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -44,7 +45,8 @@ public String getAirport(){
 		  setErrorMsg("invalid airport input");
 		  return ERROR;
 	  }
-	  distance = String.valueOf(airportService.distance(fromAirport, toAirport));
+		DecimalFormat df = new DecimalFormat("#.00");
+		distance = df.format(airportService.distance(fromAirport, toAirport));
 	  return SUCCESS;
 	  
   }

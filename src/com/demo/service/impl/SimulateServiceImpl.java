@@ -16,6 +16,7 @@ import com.demo.model.Route;
 import com.demo.model.UserProfit;
 import com.demo.service.AirportService;
 import com.demo.service.SimulateService;
+import com.demo.service.Utils;
 
 public class SimulateServiceImpl implements SimulateService, InitializingBean{
 	private AircraftDAO aircraftDao;
@@ -78,7 +79,7 @@ public class SimulateServiceImpl implements SimulateService, InitializingBean{
 			Route head = list.get(0);
 			Route tail = list.get(list.size()-1);
 			int dayDelta = 0;
-			if(isBefore(tail.getArrivalTime(), head.getDepartureTime())){
+			if(Utils.isBefore(tail.getArrivalTime(), head.getDepartureTime())){
 				dayDelta = (tail.getArrivalDay()-head.getDepartureDay());
 			}else{
 				dayDelta = tail.getArrivalDay()-head.getDepartureDay()+1;
@@ -167,7 +168,7 @@ public class SimulateServiceImpl implements SimulateService, InitializingBean{
 			Airport toAirport = airports.get(route.getToAirport());
 			double distanceInMile = airportService.distance(fromAirport, toAirport);
 			profit *= distanceInMile;
-			double cost = toAirport.getLandingFee() + getFlyTime(route.getDepartureTime(),route.getArrivalTime())*a.getFuelBurn()*fuelPrice;
+			double cost = toAirport.getLandingFee() + Utils.getFlyTime(route.getDepartureTime(),route.getArrivalTime())*a.getFuelBurn()*fuelPrice;
 			double netRevenue = profit/100 - cost;
 			Double userprofit = userProfitMap.get(userId);
 			if(userprofit == null){
@@ -225,29 +226,7 @@ public class SimulateServiceImpl implements SimulateService, InitializingBean{
 		}
 	}
 	
-	private boolean isBefore(String t1, String t2){
-		String[] time1 = t1.split(":");
-		String[] time2 = t2.split(":");
-		int hour1 = Integer.valueOf(time1[0]);
-		int hour2 = Integer.valueOf(time2[0]);
-		int min1 = Integer.valueOf(time1[1]);
-		int min2 = Integer.valueOf(time2[1]);
-		return hour1<hour2 || (hour1==hour2 && min1<min2);
-		
-	}
-	
-	private double getFlyTime(String departTime, String arrivalTime){
-		String[] time1 = departTime.split(":");
-		String[] time2 = arrivalTime.split(":");
-		int hour1 = Integer.valueOf(time1[0]);
-		int hour2 = Integer.valueOf(time2[0]);
-		int min1 = Integer.valueOf(time1[1]);
-		int min2 = Integer.valueOf(time2[1]);
-		if(hour2<hour1) hour2+= 24;
-		int minsDelta = (hour2-hour1)*60+min2-min1;
-		double result = (double)minsDelta/60d;
-		return result;
-	}
+
 	
 
 	@Override
@@ -256,6 +235,7 @@ public class SimulateServiceImpl implements SimulateService, InitializingBean{
 		int rank = 1;
 		for(UserProfit up : result){
 			up.setRank(rank++);
+			up.setProfitString(Utils.convertToComma(up.getProfit()));
 		}
 		return result;
 	}
