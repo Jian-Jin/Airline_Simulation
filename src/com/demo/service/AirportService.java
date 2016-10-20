@@ -14,6 +14,6 @@ public interface AirportService {
 
    public List<Airport> getMyAirport(int userId);
 
-   public void deleteUserAirport(int userId, int airportId);
+   public void updateUserAirport(int userId, int airportId);
 	
 }

@@ -15,4 +15,6 @@ public interface RouteDAO {
 	
 	public void deleteUserRouteByAircraftId(@Param(value = "userId") int userId,
 											@Param(value = "aircraftId")int aircraftId);
+	
+	public void deleteUserRoute(@Param(value = "userId") int userId);
 }

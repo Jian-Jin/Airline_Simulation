@@ -42,8 +42,8 @@
        select * from airport
       </select>
       
-      <delete id="deleteUserAirport">
-      	delete from user_airport where userId = #{userId} and airportId = #{airportId}
+      <delete id="updateUserAirport">
+      	update user_airport set airportId = #{airportId} where userId = #{userId}
       </delete>
       
 

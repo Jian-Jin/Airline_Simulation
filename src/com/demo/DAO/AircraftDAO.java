@@ -21,5 +21,6 @@ public void downPlane(String name);
 
 	public void deleteUserAircraft(@Param(value = "userId") int userId, 
 								@Param(value = "customizedName") String customizedName);
+
 }
   

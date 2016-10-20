@@ -11,4 +11,6 @@ public interface RouteService {
 	public void addRoute(int userId, String planeToSet, String planeCurrentLocation, String depatureTime, String airportToGo);
 	
 	public void deleteUserRouteByAircraftId(int userId, int aircraftId);
+	
+	public void deleteUserRoute(int userId);
 }

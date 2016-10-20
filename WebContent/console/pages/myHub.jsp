@@ -19,6 +19,14 @@
 </head>
 <body>
 <%@include file="header.jsp"%>
+
+
+    <script type="text/javascript">
+            function confirmation(){
+                return confirm("Change a hub will delete all your existing routes!")
+            }
+    </script>
+    
 <font face="Comic Sans MS" size="5" color="orange">
 <h1><center>My Profile</center></h1></font>
 <font size="5" color="black">
@@ -58,7 +66,18 @@
     </tr>
  </s:iterator>
 </table>
-			
+		
+		<s:form action="changeUserAirport" method="post" namespace="/profile" theme="bootstrap" cssClass="form-horizontal">
+  <h2>
+   <s:select label="Select the hub to change" name="airportToChange" list="%{airportList.{name}}" value="" />
+   </h2>
+   <div class="form-group">
+          <div class="col-sm-offset-3 col-md-9">
+                 <s:submit onclick = "return confirmation();" value="Change" name="Change" cssClass="btn btn-primary"/>
+          </div>
+  </div>
+  
+  </s:form>  	
          </div>
 
 </div>

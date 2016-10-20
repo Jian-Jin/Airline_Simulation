@@ -1,5 +1,6 @@
 package com.demo.action;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +18,7 @@ public class ProfileAction  extends ActionSupport {
 	private User user;
 	private List<Airport> userAirports;
 	private List<Aircraft> userPlanes;
+	private List<Airport> airportList;
 	private String errorMsg;
 	private UserService userService;
 	private int millions;
@@ -24,7 +26,7 @@ public class ProfileAction  extends ActionSupport {
 	private AirportService airportService;
 	private RouteService routeService;
 	private String aircraftCustomizeNameToDelete;
-	private String airportToDelete;
+	private String airportToChange;
 	
 	public String getUserProfile(){
 		Map session = ActionContext.getContext().getSession();
@@ -46,8 +48,13 @@ public class ProfileAction  extends ActionSupport {
 	    	return ERROR;
 	    }
 	    int userId = (Integer)session.get("userId");
-	    List<Airport> airports = airportService.getMyAirport(userId);
-	    setUserAirports(airports);
+	    List<Airport> userAirports = airportService.getMyAirport(userId);
+	    setUserAirports(userAirports);
+	    List<Airport> changeList = airportService.getAllAirport();
+	    for(Airport cur : changeList){
+	    	if(cur.getName().equals(userAirports.get(0).getName()));
+	    }
+	    setAirportList(changeList);
 	    return SUCCESS;
 	}
 	
@@ -84,14 +91,46 @@ public class ProfileAction  extends ActionSupport {
 	    	}
 	    }
 	    setUserPlanes(userPlanes);
-	    int aircraftId = deleteAirtcraft.getId();
+	    int user_aircraftId = aircraftService.getUserAircraftId(userId, aircraftCustomizeNameToDelete);
 	    double cost = deleteAirtcraft.getCost()*1000000;
 	    //increase the money
 	    double money = userService.getUserMoney(userId);
 	    money += cost;
 	    userService.updateUserMoney(userId, money);
-	    routeService.deleteUserRouteByAircraftId(userId, aircraftId);
+	    routeService.deleteUserRouteByAircraftId(userId, user_aircraftId);
 	    aircraftService.deleteUserAircraft(userId, aircraftCustomizeNameToDelete);
+	    return SUCCESS;
+	}
+	
+	public String changeUserAirport(){
+		Map session = ActionContext.getContext().getSession();
+	    if(session.get("logined")==null){
+	    	setErrorMsg("Please sign in first");
+	    	return ERROR;
+	    }
+	    if(airportToChange==null || airportToChange.isEmpty() ){
+	    	setErrorMsg("Please choose a hub to change");
+	    	return ERROR;
+	    }
+	    int userId = (Integer)session.get("userId");
+	    Airport newAirport = airportService.getAirport(airportToChange);
+	    Airport oldAirport = airportService.getMyAirport(userId).get(0);
+	    userAirports = new ArrayList<>();
+	    userAirports.add(newAirport);
+	    setUserAirports(userAirports);
+	    double newcost = newAirport.getCost()*1000000;
+	    double oldcost = oldAirport.getCost()*1000000;
+	    //change the money
+	    double money = userService.getUserMoney(userId);
+	    money = money+oldcost-newcost;
+	    userService.updateUserMoney(userId, money);
+	    routeService.deleteUserRoute(userId);
+	    airportService.updateUserAirport(userId, newAirport.getId());
+	    List<Airport> changeList = airportService.getAllAirport();
+	    for(Airport cur : changeList){
+	    	if(cur.getName().equals(newAirport.getName()));
+	    }
+	    setAirportList(changeList);
 	    return SUCCESS;
 	}
 	
@@ -176,12 +215,20 @@ public class ProfileAction  extends ActionSupport {
 		this.aircraftCustomizeNameToDelete = aircraftCustomizeNameToDelete;
 	}
 
-	public String getAirportToDelete() {
-		return airportToDelete;
+	public List<Airport> getAirportList() {
+		return airportList;
 	}
 
-	public void setAirportToDelete(String airportToDelete) {
-		this.airportToDelete = airportToDelete;
+	public void setAirportList(List<Airport> airportList) {
+		this.airportList = airportList;
+	}
+
+	public String getAirportToChange() {
+		return airportToChange;
+	}
+
+	public void setAirportToChange(String airportToChange) {
+		this.airportToChange = airportToChange;
 	}
 	
 	

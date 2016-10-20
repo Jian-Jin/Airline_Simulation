@@ -61,7 +61,7 @@ public String buyAirport(){
     }
     int userId = (Integer)session.get("userId");
     double cost = airportService.getAirport(airportToBuy).getCost();
-    double money = (double)session.get("money");
+    double money = userService.getUserMoney(userId);
     if(money<cost){
 		setErrorMsg("Not enough money to buy this aircraft.");
 		return ERROR;
