@@ -11,9 +11,11 @@
 
 <%@include file="header.jsp"%>
 
-    <script type="text/javascript">
+ <script type="text/javascript">
             function confirmation(){
-                confirm("Comfirm your aircraft purchase!")
+             if (!confirm("Confirm purchase?")) {
+        		return false;
+    }
             }
     </script>
 <body>
@@ -62,7 +64,7 @@
    </h2>
    <div class="form-group">
           <div class="col-sm-offset-3 col-md-9">
-                 <s:submit onclick = "confirmation()" value="NEXT" name="NEXT" cssClass="btn btn-primary"/>
+                 <s:submit onclick = "return confirmation();" value="NEXT" name="NEXT" cssClass="btn btn-primary"/>
           </div>
   </div>
   
