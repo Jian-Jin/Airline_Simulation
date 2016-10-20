@@ -57,15 +57,7 @@ public String customizePlane(){
 	try{
 	double d1 = Double.valueOf(firstClassRatio);
 	double d2 = Double.valueOf(businessClassRatio);
-	double money = userService.getUserMoney(userId);
 	if(d1>=0 && d2>=0 && d1+d2<=100){
-		if(money<plane.getCost()){
-			setErrorMsg("Not enough money to buy this aircraft.");
-			return ERROR;
-		}
-		money -= plane.getCost()*1000000;
-		userService.updateUserMoney(userId, money);
-		session.put("money", money);
 		List<Aircraft> list = aircraftService.buyPlane(userId,plane.getId(),planeCustomizeName, d1, d2);
 		setUserPlanes(list);
 		return SUCCESS;
@@ -92,6 +84,16 @@ public String buyPlane(){
     	setErrorMsg("Please choose an aircraft first");
     	return ERROR;
     }
+    Aircraft plane = aircraftService.getPlaneByName(aircraftToBuy).get(0);
+    int userId = (Integer)session.get("userId");
+    double money = userService.getUserMoney(userId);
+    if(money<plane.getCost()*1000000){
+		setErrorMsg("Not enough money to buy this aircraft.");
+		return ERROR;
+	}
+	money -= plane.getCost()*1000000;
+	userService.updateUserMoney(userId, money);
+	session.put("money", money);
     session.put("aircraftToBuy", aircraftToBuy);
 	setAircraftToBuy(aircraftToBuy);
 
