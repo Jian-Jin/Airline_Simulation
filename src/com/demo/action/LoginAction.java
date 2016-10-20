@@ -125,6 +125,20 @@ public class LoginAction extends ActionSupport {
 	 return SUCCESS;
 	}
 	
+	public String manageDemand(){
+		Map session = ActionContext.getContext().getSession();
+
+		if(session.get("logined")==null){
+	    	setErrorMsg("Please sign in first");
+	    	return ERROR;
+	  }
+	 if(session.get("superuser")==null){
+	    	setErrorMsg("Please sign in as admin");
+	    	return ERROR;
+	  }		
+		return SUCCESS;
+	}
+	
 
 
 	public String getUserName() {
