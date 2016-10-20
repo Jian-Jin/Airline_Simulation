@@ -22,7 +22,7 @@
 
     <script type="text/javascript">
             function confirmation(){
-                confirm("Comfirm your aircraft to be deleted!")
+                return confirm("Comfirm your aircraft to be deleted!")
             }
     </script>
 <font face="Comic Sans MS" size="5" color="orange">
@@ -83,7 +83,7 @@
    </h2>
    <div class="form-group">
           <div class="col-sm-offset-3 col-md-9">
-                 <s:submit onclick = "confirmation()" value="Delete" name="Delete" cssClass="btn btn-primary"/>
+                 <s:submit onclick = "return confirmation();" value="Delete" name="Delete" cssClass="btn btn-primary"/>
           </div>
   </div>
   
