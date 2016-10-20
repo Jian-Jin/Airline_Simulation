@@ -27,6 +27,7 @@ public class ProfileAction  extends ActionSupport {
 	private RouteService routeService;
 	private String aircraftCustomizeNameToDelete;
 	private String airportToChange;
+	private String osudotNumber;
 	
 	public String getUserProfile(){
 		Map session = ActionContext.getContext().getSession();
@@ -134,6 +135,37 @@ public class ProfileAction  extends ActionSupport {
 	    return SUCCESS;
 	}
 	
+	public String updateOsudotnumber(){
+		Map session = ActionContext.getContext().getSession();
+	    if(session.get("logined")==null){
+	    	setErrorMsg("Please sign in first");
+	    	return ERROR;
+	    }
+	    if(osudotNumber==null || osudotNumber.isEmpty() ){
+	    	setErrorMsg("Please enter you osu dot number");
+	    	return ERROR;
+	    }
+	    int userId = (Integer)session.get("userId");
+	    userService.updateUserOsudotnumber(userId, osudotNumber);
+	    User curUser = userService.getUserById(userId);
+	    setMillions((int)(curUser.getMoney()/1000000));
+	    setUser(curUser);
+	    return SUCCESS;
+	}
+	
+	public String setOsudotnumber(){
+		Map session = ActionContext.getContext().getSession();
+	    if(session.get("logined")==null){
+	    	setErrorMsg("Please sign in first");
+	    	return ERROR;
+	    }
+	    int userId = (Integer)session.get("userId");
+	    User curUser = userService.getUserById(userId);
+	    setMillions((int)(curUser.getMoney()/1000000));
+	    setUser(curUser);
+	    return SUCCESS;
+	}
+	
 	public List<Airport> getUserAirports() {
 		return userAirports;
 	}
@@ -229,6 +261,14 @@ public class ProfileAction  extends ActionSupport {
 
 	public void setAirportToChange(String airportToChange) {
 		this.airportToChange = airportToChange;
+	}
+
+	public String getOsudotNumber() {
+		return osudotNumber;
+	}
+
+	public void setOsudotNumber(String osudotNumber) {
+		this.osudotNumber = osudotNumber;
 	}
 	
 	

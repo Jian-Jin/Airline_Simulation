@@ -11,4 +11,5 @@ public interface UserService {
 	public double getUserMoney(int id);
 	public void updateUserMoney(int id, double money);
 	public User getUserById(int id);
+	public void updateUserOsudotnumber(int id, String osudotnumber);
 }

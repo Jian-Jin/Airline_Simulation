@@ -41,12 +41,13 @@
           		<h>Username: <s:property value="user.name" /></h>
           		<br/>
           		<br/>
-				<h>OSU Dot Number: <s:property value="user.osudotnum" />    </h>
-				<button><a href="<s:url action='setOsudotnumber' namespace="/profile"/>" >Change</a></button>
-				<br/>
+         <s:form action="updateOsudotnumber" method="post" namespace="/profile" >
+				 <h>Input your Osu dot Number :
+				 <input type="text" name="osudotNumber"  value="<s:property value="user.osudotnum" />">  </h>
+				<input type="submit" value="UPDATE" name="UPDATE" />
+     	</s:form>
 				<br/>
 				<h>Balance: <s:property value="millions" />Millions</h>
- 		
          </div>
 
 </div>

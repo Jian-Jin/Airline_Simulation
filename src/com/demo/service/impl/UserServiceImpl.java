@@ -90,4 +90,10 @@ public class UserServiceImpl implements UserService{
 		return userDao.getUserById(id);
 	}
 
+
+	@Override
+	public void updateUserOsudotnumber(int id, String osudotnumber) {
+		userDao.updateUserOsudotnum(id, osudotnumber);
+	}
+
 }

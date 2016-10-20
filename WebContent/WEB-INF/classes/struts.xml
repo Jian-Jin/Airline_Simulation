@@ -173,6 +173,17 @@
     		<result name="error">/console/pages/error.jsp</result>
     	</action>
     	
+    	<action name="updateOsudotnumber" class="com.demo.action.ProfileAction"
+    		method="updateOsudotnumber">
+    		<result name="success">/console/pages/myProfile.jsp</result>
+    		<result name="error">/console/pages/error.jsp</result>
+    	</action>
+    	
+    	<action name="setOsudotnumber" class="com.demo.action.ProfileAction"
+    		method="setOsudotnumber">
+    		<result name="success">/console/pages/setOSUDotNumber.jsp</result>
+    		<result name="error">/console/pages/error.jsp</result>
+    	</action>
     </package>
 
 </struts>

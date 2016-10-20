@@ -32,4 +32,7 @@ public interface UserDAO {
 	
 	public User getUserById(@Param(value = "id") int id);
 	
+	public void updateUserOsudotnum(
+			@Param(value = "id") int id,
+			@Param(value = "osudotnum") String osudotnum);
 }
