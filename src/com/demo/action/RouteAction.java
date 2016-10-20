@@ -23,7 +23,7 @@ public class RouteAction extends ActionSupport{
 	private List<Route> routes;
 	private RouteService routeService;
 	private String planeCurrentLocation;
-	//private String depatureTime;
+	
 	private String hour;
 	private String min;
 	private String airportToGo;
@@ -31,7 +31,8 @@ public class RouteAction extends ActionSupport{
 	private List<String> hours;
 	private List<String> mins;
 	private List<String> airports;
-
+	
+	private static String dayPlusText="(Day+1)";
 
 	/**
 	 * Route setup home page, show all the aircrafts of the user 
@@ -84,8 +85,10 @@ public class RouteAction extends ActionSupport{
 		Route nextRoute = routes.get(routes.size()-1);
 		setPlaneCurrentLocation(nextRoute.getDepartureAirportName());
 		routes.remove(routes.size()-1);
-	
-		populateTimeSlots();
+		String[] ss = nextRoute.getDepartureTime().split(":");
+		int currentHour = Integer.valueOf(ss[0]);
+		int currentMin = Integer.valueOf(ss[1]);
+		populateTimeSlots(currentHour, currentMin);
 		session.put("planeCurLocation", planeCurrentLocation);
 		return SUCCESS;
 	}
@@ -93,7 +96,7 @@ public class RouteAction extends ActionSupport{
 	/**
 	 *  populate variable airports and timeslots used to be shown in selector list
 	 */
-	private void populateTimeSlots(){
+	private void populateTimeSlots(int currentHour, int currentMin){
 		if(airports == null || airports.isEmpty()){
 			airports = new ArrayList<String>();
 			List<Airport> list = airportService.getAllAirport();
@@ -105,11 +108,15 @@ public class RouteAction extends ActionSupport{
 		if(hours == null || hours.isEmpty()){
 			hours = new ArrayList<String>();
 			for(int i=0;i<24;i++){
+				int h = (currentHour + i)%24;
 				String s ="";
-				if(i<10){
+				if(h<10){
 					s+="0";
 				}
-				s+=i;
+				s+=h;
+				if(h<currentHour){
+					s+=dayPlusText;
+				}
 				hours.add(s);
 			}
 		}
@@ -141,13 +148,27 @@ public class RouteAction extends ActionSupport{
 	    String planeLocation = (String)session.get("planeCurLocation");
 	    setPlaneToSet(planeName);
 		
-		populateTimeSlots();
+		if(planeLocation.equals(airportToGo) || airportToGo.contains("arrival")){
+			setErrorMsg("invalid arrival aiport");
+	    	return ERROR;
+		}
+		boolean dayPlus = false;
+		if(hour.contains(dayPlusText)){
+			hour = hour.split(" ")[0];
+			dayPlus = true;
+		}
+			
 		String depatureTime = hour+":"+min;
-		routeService.addRoute(userId,planeName,planeLocation,depatureTime,airportToGo);
+
+		routeService.addRoute(userId,planeName,planeLocation,depatureTime,airportToGo, dayPlus);
 
 		routes = routeService.getAircraftRoutes(userId, planeName);
 		Route nextRoute = routes.get(routes.size()-1);
 		session.put("planeCurLocation", nextRoute.getDepartureAirportName());
+		String[] ss = nextRoute.getDepartureTime().split(":");
+		int currentHour = Integer.valueOf(ss[0]);
+		int currentMin = Integer.valueOf(ss[1]);
+		populateTimeSlots(currentHour, currentMin);
 
 		routes.remove(routes.size()-1);
 

@@ -72,6 +72,7 @@
 	<bean id="loginAction" class="com.demo.action.LoginAction"
 		scope="prototype">
 		<property name="userService" ref="userService"></property>
+		<property name="simulateService" ref="simulateService"></property>
 	</bean>
 	<bean id="registerAction" class="com.demo.action.RegisterAction"
 		scope="prototype">
@@ -112,6 +113,14 @@
 		<property name="routeDao" ref="routeDAO"></property>
 		<property name="airportService" ref="airportService"></property>
 	</bean>
+	<bean id="simulateService" class="com.demo.service.impl.SimulateServiceImpl">
+		<property name="airportDao" ref="airportDAO"></property>
+		<property name="aircraftDao" ref="aircraftDAO"></property>
+		<property name="routeDao" ref="routeDAO"></property>
+		<property name="demandDao" ref="demandDAO"></property>
+		<property name="userProfitDao" ref="userProfitDAO"></property>
+		<property name="airportService" ref="airportService"></property>
+	</bean>
 	
     <!-- DAO Bean -->
    <bean id="userDAO" class="org.mybatis.spring.mapper.MapperFactoryBean" > 
@@ -130,4 +139,12 @@
 		<property name="mapperInterface" value="com.demo.DAO.RouteDAO" />
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
 	</bean> 
+	<bean id="demandDAO" class="org.mybatis.spring.mapper.MapperFactoryBean" > 
+		<property name="mapperInterface" value="com.demo.DAO.DemandDAO" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
+	</bean> 
+	<bean id="userProfitDAO" class="org.mybatis.spring.mapper.MapperFactoryBean" > 
+		<property name="mapperInterface" value="com.demo.DAO.UserProfitDAO" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
+	</bean>
 </beans>

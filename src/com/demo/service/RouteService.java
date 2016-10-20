@@ -8,6 +8,6 @@ public interface RouteService {
 
 	List<Route> getAircraftRoutes(int userId, String planeName);
 
-	void addRoute(int userId, String planeToSet, String planeCurrentLocation, String depatureTime, String airportToGo);
+	void addRoute(int userId, String planeToSet, String planeCurrentLocation, String depatureTime, String airportToGo, boolean dayPlus);
 	
 }

@@ -38,6 +38,7 @@
             <li class="active"><a href="<s:url action='manageUser' namespace="/login"/>">manageUser</a></li>
             <li><a href="<s:url action='manageDemand' namespace="/login"/>">manageDemand</a></li>
             <li><a href="<s:url action='downAircraftHome' namespace="/aircraft"/>">downAircraft</a></li>
+            <li><a href="<s:url action='simulateHome' namespace="/login"/>">simulation</a></li>
         </ul>
     </div>
 </nav>

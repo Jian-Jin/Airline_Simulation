@@ -9,8 +9,11 @@ import com.demo.model.Route;
 public interface RouteDAO {
 
 	List<Route> getRoutes(@Param(value = "userId") int userId, @Param(value = "aircraftId") int aircraftId);
-	void addRoute(@Param(value = "userId") int userId,@Param(value = "aircraftId") int aircraftId,@Param(value = "fromAirport") int fromAirport,  @Param(value = "departureTime") String departureTime,
-					@Param(value = "toAirport") int toAirport, @Param(value = "arrivalTime") String arrivalTime,
+	
+	void addRoute(@Param(value = "userId") int userId,@Param(value = "aircraftId") int aircraftId,@Param(value = "fromAirport") int fromAirport, 
+			@Param(value = "departureTime") String departureTime, @Param(value = "departureDay") int departureDay,
+					@Param(value = "toAirport") int toAirport, @Param(value = "arrivalTime") String arrivalTime,@Param(value = "arrivalDay") int arrivalDay,
 					@Param(value = "sequence") int sequence);
+	List<Route> getAllRoutes();
 
 }
