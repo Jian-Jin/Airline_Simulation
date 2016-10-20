@@ -62,6 +62,10 @@
        select a.*,b.* from aircraft a join user_aircraft b on a.id = b.aircraftId where b.userId = #{userId}
       </select>
       
+       <select id="getPlaneByUserAircraftId"  resultMap="UserAircraftResult">
+       select a.*,b.* from aircraft a join user_aircraft b on a.id = b.aircraftId where b.id = #{userAircraftId}
+      </select>
+      
       <select id="getDownPlanes"  resultType="string">
        select * from down_aircraft
       </select>

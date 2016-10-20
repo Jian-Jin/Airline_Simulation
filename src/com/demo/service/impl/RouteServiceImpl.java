@@ -35,8 +35,10 @@ public class RouteServiceImpl implements RouteService{
 		if(routes.isEmpty()){
 			String airport = airportDao.getAirportsByUserId(userId).get(0).getName();
 			nextRoute.setDepartureAirportName(airport);
+			nextRoute.setDepartureTime("00:00");
 		}else{
 			nextRoute.setDepartureAirportName(routes.get(routes.size()-1).getArrivalAirportName());
+			nextRoute.setDepartureTime(routes.get(routes.size()-1).getArrivalTime());
 		}
 		routes.add(nextRoute);
 		return routes;
@@ -53,7 +55,7 @@ public class RouteServiceImpl implements RouteService{
 	}
 	@Override
 	public void addRoute(int userId, String planeToSet, String planeCurrentLocation, String depatureTime,
-			String airportToGo) {
+			String airportToGo, boolean departureDayPlus) {
 		// the unique id of user_aircraft
 		int userAircraftId = aircraftDao.getPlaneUniqueId(userId, planeToSet);
 		
@@ -62,27 +64,41 @@ public class RouteServiceImpl implements RouteService{
 		Airport fromAirport = airportDao.getAirportByName(planeCurrentLocation);
 		Airport toAirport = airportDao.getAirportByName(airportToGo);
 		double miles = airportService.distance(fromAirport, toAirport);
-		//double miles =  distanceInMeter / 1609.344d;
+
 		int timeInMinutes = (int)(miles/(double)speed * 60);
 		int hour = timeInMinutes/60;
 		int minute = timeInMinutes%60;
 		String[] ss = depatureTime.split(":");
-		hour += Integer.valueOf(ss[0]);
-		minute += Integer.valueOf(ss[1]);
-		hour += hour + minute/60;
+		// add to current time
+		int departureHour = Integer.valueOf(ss[0]);
+		int departureMin = Integer.valueOf(ss[1]);
+		hour += departureHour ;
+		minute += departureMin;
+		
+		hour += minute/60;
 		hour = hour % 24;
 		minute = minute % 60;
+		// if arrival on the next day
+		boolean arrivalDayPlus = false;
+		if(hour<departureHour){
+			arrivalDayPlus = true;
+		}
 		String result = hour<10? "0"+hour :String.valueOf(hour) ;
 		result += ":";
 		result += minute<10?"0"+minute : String.valueOf(minute);
 		
 		List<Route> routes = routeDao.getRoutes(userId, userAircraftId);
 		int maxSeq = 0;
+		int departDay = 1;
 		for(Route r : routes){
 			maxSeq = Math.max(r.getSequence(), maxSeq);
+			departDay = Math.max(departDay, r.getArrivalDay());
 		}
+		if(departureDayPlus) departDay += 1;
+		int arrivalDay = arrivalDayPlus? departDay+1 : departDay;
+		
 		int sequence = maxSeq + 1;
-		routeDao.addRoute(userId, userAircraftId, fromAirport.getId(), depatureTime, toAirport.getId(), result, sequence);
+		routeDao.addRoute(userId, userAircraftId, fromAirport.getId(), depatureTime,departDay, toAirport.getId(), result,arrivalDay, sequence);
 		
 	}
 

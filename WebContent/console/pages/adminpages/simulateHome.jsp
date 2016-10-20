@@ -35,11 +35,12 @@
     </div>
     <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-            <li class="active"><a href="<s:url action='manageUser' namespace="/login"/>">manageUser</a></li>            
-            <li><a href="<s:url action='manageDemand' namespace="/login"/>">manageDemand</a></li>
+            <li><a href="<s:url action='manageUser' namespace="/login"/>">manageUser</a></li>
+			<li><a href="<s:url action='manageDemand' namespace="/login"/>">manageDemand</a></li>
             <li><a href="<s:url action='downAircraftHome' namespace="/aircraft"/>">downAircraft</a></li>
-            <li><a href="<s:url action='simulateHome' namespace="/login"/>">simulation</a></li>
+             <li class="active"><a href="<s:url action='simulateHome' namespace="/login"/>">simulation</a></li>
             <li><a href="<s:url action='signout' namespace="/login"/>">Log Out</a></li>
+
         </ul>
     </div>
 </nav>
@@ -49,32 +50,54 @@
 <div class="container">
     <div class="row">
         <div class="col-md-9">
-        <h1>Below are all the users information :</h1>
+        <font face="Comic Sans MS" size="5" color="orange">
+        
+        Latest simulate run time : <s:property value="simulateRunTime" />
  <table class="table table-striped">
  <tr>
-    <th>Name</th>
+    <!-- <th>Purchase</th> -->
+    <th>Rank</th>
+    <th>User</th>
+    <th>Profit</th>
   </tr>
- <s:iterator value="allUsers" var="u">
+ <s:iterator value="profits" var="p">
  <tr>
-   <td> <s:property value="#u.name" /></td>
+   <!--<td><input type="radio" name="planeId" value="#p.id"></td>  -->
+   <td> <s:property value="#p.rank" /></td>
+   <td> <s:property value="#p.userName" /></td>
+   <td> <s:property value="#p.profit" /></td>
     </tr>
  </s:iterator>
 </table>
-
+       </font>
+       
 <s:actionerror theme="bootstrap"/>
 <s:actionmessage theme="bootstrap"/>
 <s:fielderror theme="bootstrap"/>
- <s:form action="generateUser" method="post" namespace="/login" theme="bootstrap" cssClass="form-horizontal">
-  <s:textfield
-                        label="Enter the count of new users to generate here"
-                        name="newUserCount"
-                        cssClass="input-sm"
-                        elementCssClass="col-sm-3"
-                        value="0"
-                        tooltip="Enter the count of users to generate here"/>
+ 
+ <s:form action="runSimulate" method="post" namespace="/login" theme="bootstrap" cssClass="form-horizontal">
+    <font face="Verdana" size="4" color="#ccccff">
+ <br>
+ <br>
+ <br>
+ 
+  Run a new simulation:
+  <br>
+  1. input fuel price(dollar/gallon) <input type="text" name="fuelPrice" value="0"/>
+  <br>
+  <br>
+  2. input basic profit of economy class(cent/seat,mile) <input type="text" name="seatPrice" value="0"/>
+  
+  <br>
+      <br>
+       (business class price will be 1.25 * base profit; <br>
+       first class price will be 1.5 * base profit)</font>
+  <br>
+  <br>
+                        
    <div class="form-group">
           <div class="col-sm-offset-3 col-md-9">
-                 <s:submit value="GENERATE" name="GENERATE" cssClass="btn btn-primary"/>
+                 <s:submit value="RUN SIMULATION NOW" name="RUN" cssClass="btn btn-primary"/>
           </div>
   </div>
   

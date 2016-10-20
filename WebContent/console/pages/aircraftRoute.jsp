@@ -18,48 +18,37 @@
 
 
 
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="navbar-header">
-        <a class="navbar-brand" href="#">AirLine Simulation - <s:text name="test.version"/></a>
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-    </div>
-    <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-            <li><s:a href="/Demo/console/pages/home.jsp">Home</s:a></li>
-            <li><a href="<s:url action='showAircraft' namespace="/aircraft"/>">Aircraft</a></li>
-            <li><a href="<s:url action='showAirport' namespace="/airport"/>">Airport</a></li>
-            <li class="active"><a href="<s:url action='getRoute' namespace="/route"/>">Route Setup</a></li>
-           <li><a href="<s:url action='signout' namespace="/login"/>">Log Out</a></li>
-        </ul>
-    </div>
-</nav>
+<%@include file="header.jsp"%>
 
 <div class="container">
     <div class="row">
         <div class="col-md-9">
-        <h1>Aircraft Name  : <s:property value="planeToSet" /><h1>
+        <h1>Aircraft Name  : <s:property value="planeToSet" />
+       <br> Current location : <s:property value="#session.planeCurLocation"/><h1>
   <table class="table table-striped">
  <tr>
     <th>departure Airport</th>
+    <th>departure Day</th>
     <th>departure Time</th>
     <th>arrival Airport</th>
+    <th>arrival Day</th>
     <th>arrival Time</th>
   </tr>
  <s:iterator value="routes" var="r">
  <tr>
    <!--<td><input type="radio" name="planeId" value="#p.id"></td>  -->
    <td> <s:property value="#r.departureAirportName" /></td>
+   <td> <s:property value="#r.departureDay" /></td>
    <td> <s:property value="#r.departureTime" /></td>
    <td> <s:property value="#r.arrivalAirportName" /></td>
+   <td> <s:property value="#r.arrivalDay" /></td>
    <td> <s:property value="#r.arrivalTime" /></td>
-
     </tr>
  </s:iterator>
 </table>
+<font face="Comic Sans MS" size="3" color="orange">
+     Please make sure the final arrival airport of the last route is your initial departure airport(your hub)
+  </font>
 <br>
 <s:actionerror theme="bootstrap"/>
 <s:actionmessage theme="bootstrap"/>
@@ -69,18 +58,18 @@
 <s:form action="addRoute" namespace="/" theme="bootstrap" cssClass="form-horizontal">
 <h2>
 <s:select label="1.departure Hour"
-	headerKey="-1" headerValue="00"
+	headerValue="00"
 	list="hours"
 	name="hour" />
 	
 	<s:select label="departure Min"
-	headerKey="-1" headerValue="00"
+	headerValue="00"
 	list="mins"
 	name="min" />
 	<br>
 <br>
 <s:select label="2. Select the aircraft arrival airport"
-	headerKey="-1" headerValue="Select the aircraft arrival airpor"
+	headerKey="-1" headerValue="Select the aircraft arrival airport"
 	list="airports"
 	name="airportToGo" />
 </h2>
@@ -91,6 +80,9 @@
                    <s:submit value="ADD ROUTE" name="ADD ROUTE" cssClass="btn btn-primary"/>
               </div>
  </div>
+ <font face="Comic Sans MS" size="3" color="red">
+     <s:property value="errorMsg" />
+  </font>
 </s:form>
 
         </div>    

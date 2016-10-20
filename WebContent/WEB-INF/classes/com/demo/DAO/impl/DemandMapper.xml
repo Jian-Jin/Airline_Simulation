@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.DAO.DemandDAO">
+	 
+	 <resultMap type="com.demo.model.Demand" id="DemandResult">
+		<result column="timeZone" property="timeZone"/>
+		<result column="zulu" property="zulu"/>
+		<result column="busRatio" property="busRatio"/>
+		<result column="econRatio" property="econRatio"/>
+		<result column="firstRatio" property="firstRatio"/>
+		<result column="amount" property="amount"/>
+		<result column="cluster" property="cluster"/>
+	 </resultMap>
+	 
+      <select id="getDemands"  resultMap="DemandResult">
+       select * from demand
+      </select>
+      
+
+
+</mapper>

@@ -80,6 +80,7 @@ public class AirportServiceImpl implements AirportService{
 	@Override
 	public List<Airport> getAllAirport() {
 		return airportDao.getAllAirport();
+
 	}
 
 

@@ -5,6 +5,8 @@ import java.util.Map;
 import com.demo.model.Aircraft;
 import com.demo.model.Airport;
 import com.demo.model.User;
+import com.demo.model.UserProfit;
+import com.demo.service.SimulateService;
 import com.demo.service.UserService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -20,6 +22,12 @@ public class LoginAction extends ActionSupport {
 	private List<User> allUsers;
 	private List<User> newAddedUsers;
 	private int newUserCount;
+	//Below are simulation variable
+	private double fuelPrice;
+	private double seatPrice;
+	private SimulateService simulateService;
+	List<UserProfit> profits;
+	private String simulateRunTime;
 
 	public String userLogin() throws Exception {
 		User user = userService.getUser(userName, passWord);
@@ -83,6 +91,54 @@ public class LoginAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	public String simulateHome(){
+		Map session = ActionContext.getContext().getSession();
+
+		if(session.get("logined")==null){
+	    	setErrorMsg("Please sign in first");
+	    	return ERROR;
+		}
+		
+		 setProfits(simulateService.getProfits());
+		 setSimulateRunTime(simulateService.getSimulateRunTime());
+		 if(session.get("superuser")==null){
+		    	return SUCCESS;
+			}
+		return "adminsuccess";
+	}
+	
+	public String runSimulate(){
+		Map session = ActionContext.getContext().getSession();
+
+		if(session.get("logined")==null){
+	    	setErrorMsg("Please sign in first");
+	    	return ERROR;
+	  }
+	 if(session.get("superuser")==null){
+	    	setErrorMsg("Please sign in as admin");
+	    	return ERROR;
+	  }
+
+	 simulateService.runSimulate(getFuelPrice(), getSeatPrice());
+	 setProfits(simulateService.getProfits());
+	 setSimulateRunTime(simulateService.getSimulateRunTime());
+	 return SUCCESS;
+	}
+	
+	public String manageDemand(){
+		Map session = ActionContext.getContext().getSession();
+
+		if(session.get("logined")==null){
+	    	setErrorMsg("Please sign in first");
+	    	return ERROR;
+	  }
+	 if(session.get("superuser")==null){
+	    	setErrorMsg("Please sign in as admin");
+	    	return ERROR;
+	  }		
+		return SUCCESS;
+	}
+	
 
 
 	public String getUserName() {
@@ -141,6 +197,47 @@ public class LoginAction extends ActionSupport {
 		this.newUserCount = newUserCount;
 	}
 
+	public double getFuelPrice() {
+		return fuelPrice;
+	}
+
+	public void setFuelPrice(double fuelPrice) {
+		this.fuelPrice = fuelPrice;
+	}
+
+	public double getSeatPrice() {
+		return seatPrice;
+	}
+
+	public void setSeatPrice(double seatPrice) {
+		this.seatPrice = seatPrice;
+	}
+
+	public SimulateService getSimulateService() {
+		return simulateService;
+	}
+
+	public void setSimulateService(SimulateService simulateService) {
+		this.simulateService = simulateService;
+	}
+
+	public List<UserProfit> getProfits() {
+		return profits;
+	}
+
+	public void setProfits(List<UserProfit> profits) {
+		this.profits = profits;
+	}
+
+	public String getSimulateRunTime() {
+		return simulateRunTime;
+	}
+
+	public void setSimulateRunTime(String simulateRunTime) {
+		this.simulateRunTime = simulateRunTime;
+	}
+ 
+	
 	
 
 }

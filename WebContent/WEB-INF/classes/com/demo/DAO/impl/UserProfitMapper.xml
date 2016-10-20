@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.DAO.UserProfitDAO">
+	 
+	 <resultMap type="com.demo.model.UserProfit" id="UserProfitResult">
+		<result column="userId" property="userId"/>
+		<result column="profit" property="profit"/>
+		<result column="name" property="userName"/>
+	 </resultMap>
+	 
+      <select id="getAllProfit"  resultMap="UserProfitResult">
+       select up.*,us.name from user_profit up join user us on up.userId = us.id order by up.profit desc
+    </select>
+    <delete id="clearUserProfit">
+    	delete from user_profit 
+    </delete>
+     <insert id="storeUserProfit" >
+       insert into user_profit (userId, profit) values (#{userId},#{profit})
+    </insert>
+     <select id="getSimulateTime"  resultType="string">
+       select * from simulateTime
+    </select>
+    <delete id="clearSimulateTime">
+    	delete from simulateTime
+    </delete>
+<insert id="storeSimulateTime" >
+       insert into simulateTime (runtime) values (#{time})
+    </insert>
+</mapper>

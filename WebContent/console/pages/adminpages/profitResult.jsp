@@ -1,32 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@taglib prefix="s" uri="/struts-tags" %>
-	<%@ taglib prefix="sb" uri="/struts-bootstrap-tags" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib prefix="sb" uri="/struts-bootstrap-tags" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
-    <sb:head includeScripts="true" includeStyles="false"/>
+<sb:head includeScripts="true" includeStyles="false"/>
     <link rel="stylesheet" href="<s:url value="/styles/bootstrap-superhero.css" />" type="text/css"/>
     <style type="text/css">
         body {
             padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
         }
     </style>
-
-    <script type="text/javascript">
-            function greeting(){
-                alert("Comfirm your aircraft purchase!")
-            }
-    </script>
-        
 </head>
-
 <body>
-	<nav class="navbar navbar-default navbar-fixed-top">
+
+
+<nav class="navbar navbar-default navbar-fixed-top">
     <div class="navbar-header">
-        <a class="navbar-brand" href="#">AirLine Simulation - <s:text name="Adminpage"/></a>
+        <a class="navbar-brand" href="#">AirLine Simulation - <s:text name="test.version"/></a>
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -35,53 +28,40 @@
     </div>
     <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-            <li class="active"><a href="<s:url action='manageUser' namespace="/login"/>">manageUser</a></li>            
+            <li class="active"><a href="<s:url action='manageUser' namespace="/login"/>">manageUser</a></li>
             <li><a href="<s:url action='manageDemand' namespace="/login"/>">manageDemand</a></li>
             <li><a href="<s:url action='downAircraftHome' namespace="/aircraft"/>">downAircraft</a></li>
             <li><a href="<s:url action='simulateHome' namespace="/login"/>">simulation</a></li>
             <li><a href="<s:url action='signout' namespace="/login"/>">Log Out</a></li>
+            
         </ul>
     </div>
 </nav>
 
 
-
 <div class="container">
     <div class="row">
         <div class="col-md-9">
-        <h1>Below are all the users information :</h1>
+         <font face="Comic Sans MS" size="3" color="orange">
+        
+        <h1>Simulate run time : <s:property value="simulateRunTime" /></h1>
  <table class="table table-striped">
  <tr>
-    <th>Name</th>
+    <!-- <th>Purchase</th> -->
+    <th>Rank</th>
+    <th>User</th>
+    <th>Profit</th>
   </tr>
- <s:iterator value="allUsers" var="u">
+ <s:iterator value="profits" var="p">
  <tr>
-   <td> <s:property value="#u.name" /></td>
+   <!--<td><input type="radio" name="planeId" value="#p.id"></td>  -->
+   <td> <s:property value="#p.rank" /></td>
+   <td> <s:property value="#p.userName" /></td>
+   <td> <s:property value="#p.profit" /></td>
     </tr>
  </s:iterator>
 </table>
-
-<s:actionerror theme="bootstrap"/>
-<s:actionmessage theme="bootstrap"/>
-<s:fielderror theme="bootstrap"/>
- <s:form action="generateUser" method="post" namespace="/login" theme="bootstrap" cssClass="form-horizontal">
-  <s:textfield
-                        label="Enter the count of new users to generate here"
-                        name="newUserCount"
-                        cssClass="input-sm"
-                        elementCssClass="col-sm-3"
-                        value="0"
-                        tooltip="Enter the count of users to generate here"/>
-   <div class="form-group">
-          <div class="col-sm-offset-3 col-md-9">
-                 <s:submit value="GENERATE" name="GENERATE" cssClass="btn btn-primary"/>
-          </div>
-  </div>
-  
-  </s:form>  
-     
-
-
+       
         </div>    
     </div>
     
@@ -90,5 +70,6 @@
         <p class="pull-right"><a href="#">Back to top</a></p>
     </footer>
 </div>
+
 </body>
 </html>
