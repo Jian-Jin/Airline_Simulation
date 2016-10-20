@@ -14,9 +14,11 @@
     </style>
     
 
-    <script type="text/javascript">
-            function greeting(){
-                alert("Comfirm your aircraft purchase!")
+     <script type="text/javascript">
+            function confirmation(){
+             if (!confirm("Confirm purchase?")) {
+        		return false;
+    }
             }
     </script>
 </head>

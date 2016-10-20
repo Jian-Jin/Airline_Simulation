@@ -11,6 +11,13 @@
 
 <body>
 <%@include file="header.jsp"%>
+ <script type="text/javascript">
+            function confirmation(){
+             if (!confirm("Confirm purchase?")) {
+        		return false;
+    }
+            }
+    </script>
 
 <div class="container">
     <div class="row">
@@ -138,11 +145,11 @@ destination airport:   <input type="search" name="toAirportName" id="toAirportNa
 <br>
 <br>
 <h2> Buy a hub : </h2>
-<s:form action="buyAirport" theme="bootstrap" cssClass="form-horizontal" onsubmit="greeting()">
+<s:form action="buyAirport" theme="bootstrap" cssClass="form-horizontal">
 Choose your hub: <input type="search" name="airportToBuy" id="airportToBuy" size="40" list="airports" placeholder="Pick a hub to buy">
 <br>
 <br>
-<s:submit value="PURCHASE" name="PURCHASE" cssClass="btn btn-primary"/>
+<s:submit onclick ="return confirmation();" value="PURCHASE" name="PURCHASE" cssClass="btn btn-primary"/>
 
 </s:form>
 <br>

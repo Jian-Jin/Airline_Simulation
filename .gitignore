@@ -1,3 +1,9 @@
 .DS_Store
 .class
 .classpath
+
+WebContent/WEB-INF/classes/jdbc.properties
+
+*.class
+
+*.class

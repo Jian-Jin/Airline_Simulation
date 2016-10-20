@@ -167,12 +167,6 @@
     		<result name="error">/console/pages/error.jsp</result>
     	</action>
     	
-    	<action name="changeUserAirport" class="com.demo.action.ProfileAction"
-    		method="changeUserAirport">
-    		<result name="success">/console/pages/myHub.jsp</result>
-    		<result name="error">/console/pages/error.jsp</result>
-    	</action>
-    	
     </package>
 
 </struts>

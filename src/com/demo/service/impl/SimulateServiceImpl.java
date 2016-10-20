@@ -154,7 +154,7 @@ public class SimulateServiceImpl implements SimulateService, InitializingBean{
 				userCraftMap.put(userPlaneId, a);
 			}
 			int userId = route.getUserId();
-			int peopleOnBoard = route.getPeopleOnboard();
+			int peopleOnBoard = Math.min(a.getMaxSeat(), route.getPeopleOnboard());
 			double firstClassRatio = a.getFirstClassRatio()/100d;
 			double busClassRatio = a.getBusinessClassRatio()/100d;
 			double econClassRatio = (100d - firstClassRatio -busClassRatio)/100d;
