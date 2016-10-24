@@ -69,8 +69,8 @@ public class RouteServiceImpl implements RouteService{
 			return Utils.AIRPORTERROR;
 		}
 		double miles = airportService.distance(fromAirport, toAirport);
-
 		int timeInMinutes = (int)(miles/(double)speed * 60);
+		
 		int hour = timeInMinutes/60;
 		int minute = timeInMinutes%60;
 		String[] ss = depatureTime.split(":");
@@ -79,7 +79,10 @@ public class RouteServiceImpl implements RouteService{
 		int departureMin = Integer.valueOf(ss[1]);
 		hour += departureHour ;
 		minute += departureMin;
-		
+		// minute should be round up to quarters
+		while(minute % 15 !=0){
+			minute++;
+		}
 		hour += minute/60;
 		hour = hour % 24;
 		minute = minute % 60;
