@@ -46,6 +46,7 @@
     </tr>
  </s:iterator>
 </table>
+<br>
 <font face="Comic Sans MS" size="3" color="orange">
      Please make sure the final arrival airport of the last route is your initial departure airport(your hub)
   </font>
