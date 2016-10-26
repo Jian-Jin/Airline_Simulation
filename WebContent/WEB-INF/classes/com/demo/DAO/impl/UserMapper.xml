@@ -16,6 +16,10 @@
        select * from user where name = #{username} and password = #{password}
     </select>
     
+     <select id="selectUserByOsudotnumber"  resultMap="UserResult">
+       select * from user where osudotnum = #{osudotnum} and password = #{password}
+    </select>
+    
      <select id="getAllUsers"  resultMap="UserResult">
        select * from user where superuser = 0
     </select>

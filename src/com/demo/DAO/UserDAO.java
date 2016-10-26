@@ -10,6 +10,10 @@ public interface UserDAO {
 			@Param(value = "username") String username,
 			@Param(value = "password") String password);
 	
+	public List<User> selectUserByOsudotnumber(
+			@Param(value = "osudotnum") String osudotnum,
+			@Param(value = "password") String password);
+	
 	public List<User> selectUserByUsername(
 			@Param(value = "username") String username);
 	

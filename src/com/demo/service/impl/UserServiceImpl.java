@@ -35,6 +35,8 @@ public class UserServiceImpl implements UserService{
 	public User getUser(String userName, String passWord) {
 		List<User> result = new ArrayList<User>();
 		result = userDao.selectUser(userName,passWord);
+		if(result.size()==0)
+			result = userDao.selectUserByOsudotnumber(userName, passWord);
 		if (result.size()==1) {
 			return result.get(0);
 		} else {
