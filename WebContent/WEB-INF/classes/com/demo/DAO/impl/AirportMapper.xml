@@ -20,6 +20,7 @@
 		<result column="timeZone" property="timeZone"/>
 		<result column="longitude" property="longitude"/>
 		<result column="latitude" property="latitude"/>
+		<result column="multiplier" property="multiplier"/>
 		
 	 </resultMap>
 	 
@@ -45,6 +46,10 @@
       <delete id="updateUserAirport">
       	update user_airport set airportId = #{airportId} where userId = #{userId}
       </delete>
+      
+     <update id="changeDemand">
+     	update airport set multiplier= #{demandMult} where id = #{demandAirport}
+     </update>
       
 
 </mapper>

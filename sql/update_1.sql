@@ -31,6 +31,8 @@ INSERT INTO aircraft(id,name,cost,maxSeat,rangeVal,speed,fuelCapacity,fuelBurn,t
 INSERT INTO aircraft(id,name,cost,maxSeat,rangeVal,speed,fuelCapacity,fuelBurn,takeOffDis,landingDis) VALUES(20,'Embraer 145(-LR)',19.6,50,1785,515,1690,313,7448,4593);
 INSERT INTO aircraft(id,name,cost,maxSeat,rangeVal,speed,fuelCapacity,fuelBurn,takeOffDis,landingDis) VALUES(21,'MD-83',45,155,2900,504,7000,999,8000,4500);
 
+ALTER TABLE `test`.`airport` ADD COLUMN `multiplier` DOUBLE NOT NULL DEFAULT '1' AFTER `latitude`;
+
 CREATE TABLE route(userId INT, aircraftId INT, fromAirport INT, departureTime varchar(20), departureDay INT, toAirport INT, arrivalTime varchar(20),arrivalDay INT, sequence INT);
 CREATE TABLE user(id INT NOT NULL AUTO_INCREMENT, name VARCHAR(30), password VARCHAR(30), superuser BOOLEAN, osudotnum VARCHAR(30), money double,PRIMARY KEY(id));
 CREATE TABLE user_aircraft(id INT NOT NULL AUTO_INCREMENT, userId INT, aircraftId INT, customizedName varchar(100), firstClassRatio double, businessClassRatio double, PRIMARY KEY(id));

@@ -21,7 +21,9 @@ public class AirportAction extends ActionSupport{
   private Airport toAirport;
   private String errorMsg;
   private String airportToBuy;
-  private List<Airport> userAirport;
+  private List<Airport> userAirport;  
+  private double demandMult;
+  private Airport demandAirport;
 
   
   public String airportHome(){
@@ -47,9 +49,39 @@ public String getAirport(){
 	  }
 		DecimalFormat df = new DecimalFormat("#.00");
 		distance = df.format(airportService.distance(fromAirport, toAirport));
-	  return SUCCESS;
-	  
+	  return SUCCESS;	  
   }
+
+public String manageDemand(){
+	Map session = ActionContext.getContext().getSession();
+
+	if(session.get("logined")==null){
+    	setErrorMsg("Please sign in first");
+    	return ERROR;
+  }
+ if(session.get("superuser")==null){
+    	setErrorMsg("Please sign in as admin");
+    	return ERROR;
+  }		
+	return SUCCESS;
+}
+
+public String adjustMultiplier(){
+	demandAirport = airportService.getAirport(fromAirportName);
+	//needed to parse next line because passing a double was causing problems
+	demandMult=Double.parseDouble(toAirportName);	
+	
+	if(demandAirport == null || demandMult==0){
+		setErrorMsg("invalid airport input or demand value");
+		return ERROR;
+	}
+	// if here, airport is valid and demand value is valid
+	// change demand value in table for airport
+	//changes the multiplier that alters the demand population for each airport
+	airportService.changeDemand(demandAirport.getId(), demandMult);
+	
+	return SUCCESS;		
+}
 
 public String buyAirport(){
 	Map session = ActionContext.getContext().getSession();

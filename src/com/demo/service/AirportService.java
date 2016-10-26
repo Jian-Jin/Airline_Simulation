@@ -15,5 +15,7 @@ public interface AirportService {
    public List<Airport> getMyAirport(int userId);
 
    public void updateUserAirport(int userId, int airportId);
+   
+   public void changeDemand(int demandAirport, double demandMult);
 	
 }

@@ -48,13 +48,7 @@
      		<!-- action result and page mapping -->
      		<result name="success">/console/pages/adminpages/simulateHome.jsp</result>
      		 <result name="error">/console/pages/error.jsp</result>
-     	</action>
-     	<action name="manageDemand" class="com.demo.action.LoginAction" method="manageDemand">
-     		<!-- action result and page mapping -->
-     		<result name="success">/console/pages/adminpages/managedemand.jsp</result>
-     		<result name="error">/console/pages/error.jsp</result>     		
-     	</action>
-     	
+     	</action>     	
      	
   </package>
     
@@ -107,6 +101,16 @@
        <result name="success">/console/pages/airport.jsp</result>
         <result name="error">/console/pages/error.jsp</result>
      </action>
+     <action name="adjustMultiplier" class="com.demo.action.AirportAction" method ="adjustMultiplier">
+       <result name="success">/console/pages/adminpages/managedemand.jsp</result>
+        <result name="error">/console/pages/error.jsp</result>
+	</action>
+	<action name="manageDemand" class="com.demo.action.AirportAction" method="manageDemand">
+     		<!-- action result and page mapping -->
+     		<result name="success">/console/pages/adminpages/managedemand.jsp</result>
+     		<result name="error">/console/pages/error.jsp</result>     		
+     </action>
+     
   </package>
      
       <package name="routeAction" namespace="/route" extends="struts-default">  

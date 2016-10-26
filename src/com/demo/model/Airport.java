@@ -16,6 +16,7 @@ public class Airport {
 	private int timeZone;
 	private double longitude;
 	private double latitude;
+	private double multiplier;
 	public int getId() {
 		return id;
 	}
@@ -105,6 +106,9 @@ public class Airport {
 	}
 	public void setLatitude(double latitude) {
 		this.latitude = latitude;
+	}
+	public void setMultiplier(double multiplier){
+		this.multiplier = multiplier;
 	}
 
 }

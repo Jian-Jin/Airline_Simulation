@@ -16,4 +16,6 @@ public interface AirportDAO {
 	  public List<Airport> getAllAirport();
 	  
 	  public void updateUserAirport(@Param(value = "userId") int userId, @Param(value = "airportId") int airportId);
+	  
+	  public void changeDemand(@Param(value = "demandAirport")int demandAirport, @Param(value = "demandMult") double demandMult);
 }
