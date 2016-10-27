@@ -47,14 +47,21 @@
  </s:iterator>
 </table>
 <br>
+<s:actionerror theme="bootstrap"/>
+<s:actionmessage theme="bootstrap"/>
+<s:fielderror theme="bootstrap"/>
+ <s:form action="undoRoute" namespace="/" theme="bootstrap" cssClass="form-horizontal">
+   <div class="form-group">
+            <div class="col-sm-offset-11 col-md-9">
+                   <s:submit value="UNDO" name="UNDO" cssClass="btn btn-primary"/>
+              </div>
+ </div>
+ </s:form> 
 <font face="Comic Sans MS" size="3" color="orange">
      Please make sure the final arrival airport of the last route is your initial departure airport(your hub)
   </font>
 <br>
-<s:actionerror theme="bootstrap"/>
-<s:actionmessage theme="bootstrap"/>
-<s:fielderror theme="bootstrap"/>
-            
+          
 <h2>Add a new leg to its route:</h2>
  <font face="Comic Sans MS" size="5" color="red">
      <s:property value="errorMsg" />

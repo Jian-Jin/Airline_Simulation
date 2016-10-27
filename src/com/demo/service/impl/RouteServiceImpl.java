@@ -116,6 +116,19 @@ public class RouteServiceImpl implements RouteService{
 		routeDao.addRoute(userId, userAircraftId, fromAirport.getId(), depatureTime,departDay, toAirport.getId(), result,arrivalDay, sequence);
 		return Utils.SUCCESS;
 	}
+	
+	@Override
+	public void undoUserRoute(int userId, String planeName) {
+		int userAircraftId = aircraftDao.getPlaneUniqueId(userId, planeName);
+		List<Route> routes = routeDao.getRoutes(userId, userAircraftId);
+		int maxSeq = 0;
+
+		for(Route r : routes){
+			maxSeq = Math.max(r.getSequence(), maxSeq);
+		}
+		routeDao.undoUserRoute(userAircraftId, maxSeq);
+		
+	}
 
 	public AircraftDAO getAircraftDao() {
 		return aircraftDao;
@@ -160,6 +173,8 @@ public class RouteServiceImpl implements RouteService{
 		this.routeDao.deleteUserRoute(userId);
 		
 	}
+
+
 
 
 }

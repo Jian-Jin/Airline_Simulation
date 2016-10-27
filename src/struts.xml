@@ -127,6 +127,10 @@
      		<result name="success">/console/pages/aircraftRoute.jsp</result>
      		<result name="error">/console/pages/aircraftRoute.jsp</result>
      </action>
+      <action name="undoRoute" class="com.demo.action.RouteAction" method="undoRoute">
+     		<result name="success">/console/pages/aircraftRoute.jsp</result>
+     		<result name="error">/console/pages/aircraftRoute.jsp</result>
+     </action>
      	
     </package>
     <package name="UserAction" namespace="/user"

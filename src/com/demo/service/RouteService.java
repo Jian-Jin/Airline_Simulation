@@ -14,4 +14,6 @@ public interface RouteService {
 	public void deleteUserRouteByAircraftId(int userId, int aircraftId);
 	
 	public void deleteUserRoute(int userId);
+	
+	public void undoUserRoute(int userId, String planeName);
 }

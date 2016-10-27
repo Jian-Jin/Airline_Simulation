@@ -181,6 +181,32 @@ public class RouteAction extends ActionSupport{
 		return SUCCESS;
 	}
 
+	
+	public String undoRoute(){
+
+		Map session = ActionContext.getContext().getSession();
+	    if(session.get("logined")==null){
+	    	setErrorMsg("Please sign in first");
+	    	return ERROR;
+	    }
+	    int userId = (Integer)session.get("userId");
+	    String planeName = (String)session.get("routePlane");
+
+	    routeService.undoUserRoute(userId, planeName);
+		
+		
+		routes = routeService.getAircraftRoutes(userId, planeName);
+		Route nextRoute = routes.get(routes.size()-1);
+		setPlaneCurrentLocation(nextRoute.getDepartureAirportName());
+		routes.remove(routes.size()-1);
+		String[] ss = nextRoute.getDepartureTime().split(":");
+		int currentHour = Integer.valueOf(ss[0]);
+		int currentMin = Integer.valueOf(ss[1]);
+		populateTimeSlots(currentHour, currentMin);
+		session.put("planeCurLocation", planeCurrentLocation);
+		return SUCCESS;
+	
+	}
 
 	public AircraftService getAircraftService() {
 		return aircraftService;

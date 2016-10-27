@@ -36,4 +36,9 @@
 		<delete id = "deleteUserRoute">
       	delete from route where userId = #{userId}
       </delete>
+      
+      <delete id = "undoUserRoute">
+      	delete from route where aircraftId = #{userAircraftId} and sequence = #{sequence}
+      </delete>
+      
 </mapper>
