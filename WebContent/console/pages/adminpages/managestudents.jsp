@@ -66,7 +66,29 @@
   
   </s:form>  
      
-
+  <s:form action="deleteUser" method="post" namespace="/user" theme="bootstrap" cssClass="form-horizontal">
+  <h2>
+   <s:select label="Select the user to delete" name="usernameToDelete" list="%{allUsers.{name}}" value="" />
+   </h2>
+   <div class="form-group">
+          <div class="col-sm-offset-3 col-md-9">
+                 <s:submit onclick = "return confirmation();" value="NEXT" name="NEXT" cssClass="btn btn-primary"/>
+          </div>
+  </div>
+  
+  </s:form>    
+    
+<s:form action="viewUser" method="post" namespace="/user" theme="bootstrap" cssClass="form-horizontal">
+  <h2>
+   <s:select label="Select the user to update" name="usernameToUpdate" list="%{allUsers.{name}}" value="" />
+   </h2>
+   <div class="form-group">
+          <div class="col-sm-offset-3 col-md-9">
+                 <s:submit onclick = "return confirmation();" value="NEXT" name="NEXT" cssClass="btn btn-primary"/>
+          </div>
+  </div>
+  
+  </s:form>      
 
         </div>    
     </div>

@@ -29,8 +29,8 @@ public class UserServiceImpl implements UserService{
 	public void setUserDao(UserDAO userDao) {
 		this.userDao = userDao;
 	}
-
-
+	
+	
 	@Override
 	public User getUser(String userName, String passWord) {
 		List<User> result = new ArrayList<User>();
@@ -97,11 +97,24 @@ public class UserServiceImpl implements UserService{
 	public User getUserById(int id){
 		return userDao.getUserById(id);
 	}
-
+	
+	@Override
+	public void deleteUser(int id){
+		this.userDao.deleteUser(id);
+	}
 
 	@Override
 	public void updateUserOsudotnumber(int id, String osudotnumber) {
 		userDao.updateUserOsudotnum(id, osudotnumber);
 	}
+	@Override
+	public void updateUsername(int id, String username) {
+		userDao.updateUsername(id, username);
+	}
+	@Override
+	public void updatePassword(int id, String password) {
+		userDao.updatePassword(id, password);
+	}
+	
 
 }

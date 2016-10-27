@@ -39,4 +39,12 @@ public interface UserDAO {
 	public void updateUserOsudotnum(
 			@Param(value = "id") int id,
 			@Param(value = "osudotnum") String osudotnum);
+	public void updateUsername(
+					@Param(value = "id") int id,
+					@Param(value = "username") String username);
+	public void updatePassword(
+			@Param(value = "id") int id,
+			@Param(value = "password") String password);
+	
+	public void deleteUser(@Param(value = "id") int id);
 }

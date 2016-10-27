@@ -143,6 +143,22 @@
     	</action>
     	<action name="showAdmin">
     		<result>/console/pages/adminpages/admin.jsp</result></action>
+    	<action name="deleteUser" class="com.demo.action.UserAction"
+    		method="deleteUser">
+    		<result name="success">
+    			/console/pages/adminpages/managestudents.jsp
+    		</result>
+    		<result name="error">/console/pages/error.jsp</result>
+    	</action>
+    	<action name="viewUser">
+    		<result name="success">/console/pages/adminpages/viewUser.jsp</result>
+    		<result name="error">/console/pages/error.jsp</result></action>
+    	<action name="updateUser" class="com.demo.action.UserAction"
+    		method="updateUser">
+    		<result name="success">
+    			result
+    			</result>
+    	</action>
     </package>
     
      <package name="ProfileAction" namespace="/profile"
