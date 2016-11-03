@@ -31,17 +31,19 @@
 <div class="container">
     <div class="row">
         <div class="col-md-9">
-        <h1>Below are all the users information :</h1>
+        <h1>Users information :</h1>
  <table class="table table-striped">
  <tr>
     <th>UserName</th>
     <th>OsuDotNum</th>
+    <th>Password</th>
     <th>Balance</th>
   </tr>
  <s:iterator value="allUsers" var="u">
  <tr>
    <td> <s:property value="#u.name" /></td>
     <td> <s:property value="#u.osudotnum" /></td>
+    <td> <s:property value='#u.password' /></td>
     <td> <s:property value="#u.moneyString" /></td>
     </tr>
  </s:iterator>

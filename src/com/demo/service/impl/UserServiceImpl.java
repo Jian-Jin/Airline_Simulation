@@ -30,7 +30,15 @@ public class UserServiceImpl implements UserService{
 		this.userDao = userDao;
 	}
 	
-	
+	@Override
+	public User getUserFromUsername(String username){
+		List<User> result = new ArrayList<User>();
+		result = userDao.selectUserByUsername(username);
+		if(result.size() == 1){
+			return result.get(0);
+		}
+		else return null;
+	}
 	@Override
 	public User getUser(String userName, String passWord) {
 		List<User> result = new ArrayList<User>();

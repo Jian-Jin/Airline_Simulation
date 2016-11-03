@@ -8,6 +8,7 @@ public interface UserService {
 	public List<User> getAllUsers();
 	public void deleteUser(int id);
 	public User getUser(String userName,String passWord);
+	public User getUserFromUsername(String userName);
 	public List<User> generateUser(int userNumber);
 	public double getUserMoney(int id);
 	public void updateUserMoney(int id, double money);

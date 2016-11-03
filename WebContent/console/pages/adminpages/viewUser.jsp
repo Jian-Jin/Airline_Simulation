@@ -37,16 +37,25 @@
 <s:actionmessage theme="bootstrap"/>
 <s:fielderror theme="bootstrap"/>
 
-<s:form action="updateUser" method="post" namespace="/user" >
-				<h>Editing Student</h>
+<s:form action="updateUser" method="post" namespace="/" >
+				<h>Editing Student: <s:property value="userToUpdate.name"/></h>
 				<br>
 				<br>
-				 <h>Osu dot Number :  
-				 <input type="text" name="newODN"  value="<s:property value="user.osudotnum" />">
+				<br>Username:    
+				 <input type="text" name="userName" value="<s:property value="userToUpdate.name" />">
+				<br>
+				<br>
+				 <h>Osu dot Number :  </h>
+				 <input type="text" name="osuDotnum"  value="<s:property value="userToUpdate.Osudotnum" />">
 				 <br>
-				 <br>Username:  
-				 <input type="text" name="newUN" value="<s:property value="user.name" />">
-				<br>
+				 <br>
+				 <h>Password:  </h>
+				 <input type="text" name="passWord"  value="<s:property value="userToUpdate.password" />">
+				 <br>
+				 <br>
+				 <h>Money:  </h>
+				 <input type="text" name="moneyInput"  value="<s:property value="userToUpdate.money" />">
+				 <br>
 				<br>
 				<input type="submit" value="UPDATE" name="UPDATE" />
      	</s:form>

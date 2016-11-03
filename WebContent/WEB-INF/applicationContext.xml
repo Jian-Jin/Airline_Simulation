@@ -100,8 +100,11 @@
 		<property name="airportService" ref="airportService"></property>
 		<property name="aircraftService" ref="aircraftService"></property>
 	</bean>
+	<bean id="UserAction" class="com.demo.action.UserAction" scope="prototype">
+		<property name="userService" ref="userService"></property>
+		<property name="registerService" ref="registerService"></property></bean>
 
-    <!-- Service Bean -->
+	<!-- Service Bean -->
    
 	<bean id="registerService" class="com.demo.service.impl.RegisterServiceImpl">
 		<property name="userDAO" ref="userDAO"></property>

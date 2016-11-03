@@ -36,7 +36,32 @@ public class UserAction extends ActionSupport  {
 			return ERROR;
 		}
 	}
-
+	
+	public String viewUser(){
+		Map session = ActionContext.getContext().getSession();
+		
+		if(session.get("logined")==null){
+	    	setErrorMsg("Please sign in first");
+	    	return ERROR;
+	    }
+	    if(usernameToUpdate==null || usernameToUpdate.isEmpty() ){
+	    	setErrorMsg("Please choose an user to update");
+	    	return ERROR;
+	    }
+	    List<User> allUsers = userService.getAllUsers();
+	    for(User u : allUsers){
+	    	if(u.getName().equals(usernameToUpdate)){
+	    		userToUpdate = u;
+	    		break;
+	    	}
+	    }
+	    setUserToUpdate(userToUpdate);
+		
+		return SUCCESS;
+		
+		
+		
+	}
 	
 	public String deleteUser(){
 		Map session = ActionContext.getContext().getSession();
@@ -45,7 +70,7 @@ public class UserAction extends ActionSupport  {
 	    	return ERROR;
 	    }
 	    if(usernameToDelete==null || usernameToDelete.isEmpty() ){
-	    	setErrorMsg("Please choose an aircraft to delete");
+	    	setErrorMsg("Please choose an user to delete");
 	    	return ERROR;
 	    }
 		List<User> allUsers = userService.getAllUsers();
@@ -56,10 +81,10 @@ public class UserAction extends ActionSupport  {
 	    		break;
 	    	}
 	    }
-	    setAllUsers(allUsers);
 	    
-		userService.deleteUser(id);
-		
+	    setAllUsers(allUsers);
+	    userService.deleteUser(id);
+	    
 		return SUCCESS;
 	}
 	
@@ -67,16 +92,18 @@ public class UserAction extends ActionSupport  {
 		
 		//check login and name to update are not null
 		Map session = ActionContext.getContext().getSession();
+		userToUpdate = getUserToUpdate();
 		if(session.get("logined")==null){
 		    	setErrorMsg("Please sign in first");
 		    	return ERROR;
 		   }
-		if(usernameToUpdate==null || usernameToUpdate.isEmpty() ){
-	    	setErrorMsg("Please choose an aircraft to delete");
+		if(userToUpdate==null){
+	    	setErrorMsg("User to update not found.");
 	    	return ERROR;
 	    }
 		//check that username and dot number arent in use
 		List<User> allUsers = userService.getAllUsers();
+		allUsers.remove(userToUpdate);
 		for(User u: allUsers){
 			if(u.getName().equals(userName)) setErrorMsg("Please choose a name not in use."); return ERROR;
 		}
@@ -84,23 +111,25 @@ public class UserAction extends ActionSupport  {
 			if(u.getOsudotnum().equals(osuDotnum)) setErrorMsg("Please choose an OSU dot number not in use."); return ERROR;
 		}
 		//update appropriate user information
-		for(User u: allUsers){
-	    	if(u.getName().equals(usernameToUpdate)){
-	    		userToUpdate = u;
-	    		u.setName(userName);
-	    		u.setPassword(passWord);
-	    		u.setOsudotnum(osuDotnum);
-	    		break;
-	    	}
-	    }
-		setAllUsers(allUsers);
-		setUserName(usernameToUpdate);
-		setPassWord(passWord);
-		setOsuDotnum(osuDotnum);
 		
-		userService.updateUsername(userToUpdate.getId(),usernameToUpdate);
-		userService.updatePassword(userToUpdate.getId(),passWord);
-		userService.updateUserOsudotnumber(userToUpdate.getId(),osuDotnum);
+		if(!userToUpdate.getName().equals(userName)){
+			userToUpdate.setName(userName);
+			userService.updateUsername(userToUpdate.getId(),userName);
+		}
+		if(!userToUpdate.getPassword().equals(passWord)){
+			userToUpdate.setPassword(passWord);
+			userService.updatePassword(userToUpdate.getId(),passWord);
+		}
+		if(!userToUpdate.getOsudotnum().equals(osuDotnum)){
+			userToUpdate.setOsudotnum(osuDotnum);
+			userService.updateUserOsudotnumber(userToUpdate.getId(),osuDotnum);
+		}		
+		if(!userToUpdate.getMoney().equals(moneyInput)){
+			userToUpdate.setMoney(Double.parseDouble(moneyInput));
+			userService.updateUserMoney(userToUpdate.getId(), Double.parseDouble(moneyInput));
+		}
+		
+		allUsers.add(userToUpdate);
 		
 		
 		
@@ -131,13 +160,36 @@ public class UserAction extends ActionSupport  {
 		this.usernameToDelete = usernameToDelete;
 	}
 	//
+	public String getUsernameToUpdate(){
+		return usernameToUpdate;
+	}
 	
+	public void setUsernameToUpdate(String usernameToUpdate){
+		this.usernameToUpdate = usernameToUpdate;
+	}
+	//
+	public User getUserToUpdate(){
+		return userToUpdate;
+	}
+	
+	public void setUserToUpdate(User userToUpdate){
+		this.userToUpdate = userToUpdate;
+	}
+	//
 	public String getPassWord() {
 		return passWord;
 	}
 
 	public void setPassWord(String passWord) {
 		this.passWord = passWord;
+	}
+	//
+	public String getMoneyInput() {
+		return moneyInput;
+	}
+
+	public void setMoneyInput(String moneyInput) {
+		this.passWord = moneyInput;
 	}
 	
 	//
@@ -161,6 +213,15 @@ public class UserAction extends ActionSupport  {
 		this.registerService = registerService;
 	}
 
+//
+	
+	public UserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
 	//
 	
 	public String getErrorMsg() {
