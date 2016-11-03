@@ -44,7 +44,7 @@ insert into user (name, password, osudotnum,superuser) values ('admin',md5('admi
 CREATE TABLE user_aircraft(id INT NOT NULL AUTO_INCREMENT, userId INT, aircraftId INT, customizedName varchar(100), firstClassRatio double, businessClassRatio double, PRIMARY KEY(id));
 CREATE TABLE user_airport(id INT NOT NULL AUTO_INCREMENT, userId INT, airportId INT, PRIMARY KEY(id));
 CREATE TABLE initial_money(id INT, money double, PRIMARY KEY(id));
-INSERT INTO initial_money(id,money) VALUES ('1','60000000')
+INSERT INTO initial_money(id,money) VALUES ('1','60000000');
 CREATE TABLE down_aircraft(name VARCHAR(30));
 CREATE TABLE user_profit(userId INT,profit double);
 CREATE TABLE simulateTime(runtime varchar(100));
