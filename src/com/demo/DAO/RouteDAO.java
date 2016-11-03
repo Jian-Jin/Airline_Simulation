@@ -8,19 +8,24 @@ import com.demo.model.Route;
 
 public interface RouteDAO {
 
-	List<Route> getRoutes(@Param(value = "userId") int userId, @Param(value = "aircraftId") int aircraftId);
+	List<Route> getRoutes(@Param(value = "userId") int userId, @Param(value = "userAircraftId") int userAircraftId);
+	List<Route> getUserProfitRoutes(@Param(value = "userId") int userId);
 	
-	void addRoute(@Param(value = "userId") int userId,@Param(value = "aircraftId") int aircraftId,@Param(value = "fromAirport") int fromAirport, 
+	void addRoute(@Param(value = "userId") int userId,@Param(value = "userAircraftId") int userAircraftId,@Param(value = "fromAirport") int fromAirport, 
 			@Param(value = "departureTime") String departureTime, @Param(value = "departureDay") int departureDay,
 					@Param(value = "toAirport") int toAirport, @Param(value = "arrivalTime") String arrivalTime,@Param(value = "arrivalDay") int arrivalDay,
 					@Param(value = "sequence") int sequence);
 	List<Route> getAllRoutes();
-
+	
 	
 	public void deleteUserRouteByAircraftId(@Param(value = "userId") int userId,
-											@Param(value = "aircraftId")int aircraftId);
+											@Param(value = "userAircraftId")int userAircraftId);
 	
 	public void deleteUserRoute(@Param(value = "userId") int userId);
 	
 	public void undoUserRoute(@Param(value = "userAircraftId") int userAircraftId, @Param(value = "sequence") int sequence);
+
+	public void updateProfit(@Param(value = "userAircraftId") int userAircraftId,@Param(value = "sequence") int sequence, 
+			@Param(value = "cost") double cost,@Param(value = "revenue") double revenue,
+			@Param(value = "profit") double profit);
 }

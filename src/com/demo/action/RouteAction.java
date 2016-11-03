@@ -32,6 +32,7 @@ public class RouteAction extends ActionSupport{
 	private List<String> hours;
 	private List<String> mins;
 	private List<String> airports;
+	private List<Route> routeProfits;
 	
 	private static String dayPlusText=" (Day+1)";
 
@@ -57,6 +58,24 @@ public class RouteAction extends ActionSupport{
 			myPlanes.add(a.getCustomizedName());
 		}
 		return SUCCESS;
+	}
+	
+	public String profitDetails(){
+	  Map session = ActionContext.getContext().getSession();
+	  if(session.get("logined")==null){
+	    	setErrorMsg("Please sign in first");
+	    	return ERROR;
+	  }
+	
+	  int userId = (Integer)session.get("userId");
+	  if(session.get("superuser")!=null){
+	  	userId = -1;
+	  }
+	  
+	  routeProfits = routeService.getProfitDetails(userId);
+
+	  return SUCCESS;
+
 	}
 	
 	
@@ -380,6 +399,14 @@ public class RouteAction extends ActionSupport{
 
 	public void setMins(List<String> mins) {
 		this.mins = mins;
+	}
+
+	public List<Route> getRouteProfits() {
+		return routeProfits;
+	}
+
+	public void setRouteProfits(List<Route> routeProfits) {
+		this.routeProfits = routeProfits;
 	}
 	
 	

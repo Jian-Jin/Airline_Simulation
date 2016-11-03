@@ -58,9 +58,14 @@ public class SimulateServiceImpl implements SimulateService, InitializingBean{
 	
 	@Override
 	public void runSimulate(double fuelPrice, double basicProfit) {
-		this.basicProfit = basicProfit;
-		this.fuelPrice = fuelPrice;
+		List<String> downPlaneList = aircraftDao.getDownPlanes();
+		Set<String> downPlanes = new HashSet<String>();
+		downPlanes.addAll(downPlaneList);
+		if(fuelPrice!=0)this.basicProfit = basicProfit;
+		if(basicProfit!=0)this.fuelPrice = fuelPrice;
 		List<Route> allRoutes = routeDao.getAllRoutes();
+		assignAircraft(allRoutes);
+		
 		// key: userAircraftId
 		Map<Integer,List<Route>> map = new HashMap<Integer,List<Route>>();
 		for(Route r : allRoutes){
@@ -133,27 +138,38 @@ public class SimulateServiceImpl implements SimulateService, InitializingBean{
 			Map<Integer,List<Route>> dayMap = airportMap.get(airportId);
 			for(int day: dayMap.keySet()){
 				List<Route> routesOfDay = dayMap.get(day);
-				assignSeat(routesOfDay,airport);
+				assignSeat(routesOfDay,airport,downPlanes);
 			}
 		}
 		calculateProfit(wholeRoutes);
 	}
 	
+	private void assignAircraft(List<Route> routes){
+		for(Route route : routes){
+			int userPlaneId = route.getUserAircraftId();
+				Aircraft a = aircraftDao.getPlaneByUserAircraftId(userPlaneId).get(0);
+				route.setAircraft(a);
+			}
+	}
+	
+	class RouteProfit{
+		public double cost = 0;
+		public double revenue = 0;
+		public double profit = 0;
+		public RouteProfit(){}
+	}
 	private void calculateProfit(List<Route> routes){
+		// key:userAircraftId"#"sequence  value:final profit
+		Map<String,RouteProfit> routeProfitMap = new HashMap<String,RouteProfit>();
 		Calendar calendar = Calendar.getInstance();
 		String time = calendar.getTime().toString();
 		userProfitDao.clearSimulateTime();
 		userProfitDao.storeSimulateTime(time);
 		Map<Integer,Double> userProfitMap = new HashMap<Integer,Double>();
-		Map<Integer,Aircraft> userCraftMap = new HashMap<Integer,Aircraft>();
+		//Map<Integer,Aircraft> userCraftMap = new HashMap<Integer,Aircraft>();
 		for(Route route : routes){
 			
-			int userPlaneId = route.getUserAircraftId();
-			Aircraft a = userCraftMap.get(userPlaneId);
-			if(a == null){
-				a = aircraftDao.getPlaneByUserAircraftId(userPlaneId).get(0);
-				userCraftMap.put(userPlaneId, a);
-			}
+			Aircraft a = route.getAircraft();
 			int userId = route.getUserId();
 			int peopleOnBoard = Math.min(a.getMaxSeat(), route.getPeopleOnboard());
 			double firstClassRatio = a.getFirstClassRatio()/100d;
@@ -169,27 +185,50 @@ public class SimulateServiceImpl implements SimulateService, InitializingBean{
 			double distanceInMile = airportService.distance(fromAirport, toAirport);
 			profit *= distanceInMile;
 			double cost = toAirport.getLandingFee() + Utils.getFlyTime(route.getDepartureTime(),route.getArrivalTime())*a.getFuelBurn()*fuelPrice;
-			double netRevenue = profit/100 - cost;
+			double netProfit = profit/100 - cost;
 			Double userprofit = userProfitMap.get(userId);
 			if(userprofit == null){
-				userprofit = netRevenue;
+				userprofit = netProfit;
 			}else{
-				userprofit += netRevenue;
+				userprofit += netProfit;
 			}
 			userProfitMap.put(userId, userprofit);
+			String key = route.getUserAircraftId()+"#"+route.getSequence();
+			RouteProfit routeProfit = routeProfitMap.get(key);
+			if(routeProfit == null){
+				routeProfit = new RouteProfit();
+				routeProfitMap.put(key, routeProfit);
+			}
+			routeProfit.cost += cost;
+			routeProfit.revenue += profit/100;
+			routeProfit.profit += netProfit;
 		}
 		userProfitDao.clearUserProfit();
-		// store to db
+		// store to db the overall rank
 		for(int userId : userProfitMap.keySet()){
 			userProfitDao.storeUserProfit(userId, userProfitMap.get(userId));
 		}
+		// update each route profit 
+		updateRouteProfit(routeProfitMap);
 	}
 	
-	private void assignSeat(List<Route> routesOfDay, Airport airport){
+	private void updateRouteProfit(Map<String,RouteProfit> routeProfitMap){
+		for(String key : routeProfitMap.keySet()){
+			RouteProfit rp = routeProfitMap.get(key);
+			String[] ss = key.split("#");
+			int userAircraftId = Integer.valueOf(ss[0]);
+			int sequence = Integer.valueOf(ss[1]);
+			routeDao.updateProfit(userAircraftId,sequence,rp.cost,rp.revenue,rp.profit);
+		}
+	}
+	
+	private void assignSeat(List<Route> routesOfDay, Airport airport, Set<String> downPlanes){
 		int timezone = airport.getTimeZone();
 		Map<Integer,List<Demand>> clustermap = demands.get(timezone);
 		Map<Integer,List<Route>> clusterRoutes = new HashMap<Integer,List<Route>>();
 		for(Route r :routesOfDay){
+			// skip down planes when assign seats
+			if(downPlanes.contains(r.getAircraft().getName()))continue;
 			boolean found = false;
 			for(int cluster : clustermap.keySet()){
 				List<Demand> dlist = clustermap.get(cluster);
@@ -211,7 +250,7 @@ public class SimulateServiceImpl implements SimulateService, InitializingBean{
 		
 		for(int cluster : clusterRoutes.keySet()){
 			double ratio = clustermap.get(cluster).get(0).getAmount();
-			double totalnum = (double)airport.getScaled()*ratio/100;
+			double totalnum = (double)airport.getScaled()*airport.getMultiplier()*ratio/100;
 			List<Route> routes = clusterRoutes.get(cluster);
 			int totalweight = 0;
 			for(Route r : routes){

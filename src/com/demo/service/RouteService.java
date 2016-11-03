@@ -16,4 +16,6 @@ public interface RouteService {
 	public void deleteUserRoute(int userId);
 	
 	public void undoUserRoute(int userId, String planeName);
+
+	public List<Route> getProfitDetails(int userId);
 }

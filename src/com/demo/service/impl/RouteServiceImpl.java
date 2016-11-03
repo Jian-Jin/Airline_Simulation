@@ -1,5 +1,6 @@
 package com.demo.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,9 +8,11 @@ import java.util.Map;
 import com.demo.DAO.AircraftDAO;
 import com.demo.DAO.AirportDAO;
 import com.demo.DAO.RouteDAO;
+import com.demo.DAO.UserDAO;
 import com.demo.model.Aircraft;
 import com.demo.model.Airport;
 import com.demo.model.Route;
+import com.demo.model.User;
 import com.demo.service.AirportService;
 import com.demo.service.RouteService;
 import com.demo.service.Utils;
@@ -18,8 +21,10 @@ public class RouteServiceImpl implements RouteService{
 	private AircraftDAO aircraftDao;
 	private AirportDAO airportDao;
 	private RouteDAO routeDao;
+	private UserDAO userDao;
 	private AirportService airportService;
 	private Map<Integer, Airport> airports = new HashMap<Integer, Airport>();
+
 
 	@Override
 	public List<Route> getAircraftRoutes(int userId, String planeName) {
@@ -45,6 +50,58 @@ public class RouteServiceImpl implements RouteService{
 		return routes;
 		
 	}
+	
+	
+
+
+	@Override
+	public List<Route> getProfitDetails(int userId) {
+		populateAirport();
+		// admin-- get all user's routes
+		if(userId < 0){
+			List<Route> routes = routeDao.getAllRoutes();
+			Map<Integer,List<Route>> userRouteMap = new HashMap<Integer,List<Route>>();
+			// key userAircraftId
+			Map<Integer,Aircraft> userAircraftMap = new HashMap<Integer,Aircraft>();
+			
+			for(Route r : routes){
+				Aircraft plane = userAircraftMap.get(r.getUserAircraftId());
+				if(plane == null){
+					plane = aircraftDao.getPlaneByUserAircraftId(r.getUserAircraftId()).get(0);
+					userAircraftMap.put(r.getUserAircraftId(), plane);
+				}
+				r.setAircraft(plane);
+				r.setAirplaneName(plane.getCustomizedName());
+				List<Route> list = userRouteMap.get(r.getUserId());
+				if(list == null){
+					list = new ArrayList<Route>();
+					userRouteMap.put(r.getUserId(), list);
+				}
+				list.add(r);
+
+			}
+			for(int uid : userRouteMap.keySet()){
+				User user = userDao.getUserById(uid);
+				for(Route r : userRouteMap.get(uid)){
+					r.setDepartureAirportName(airports.get(r.getFromAirport()).getName());
+					r.setArrivalAirportName(airports.get(r.getToAirport()).getName());
+					r.setUser(user);
+				}
+			}
+			return routes;
+			
+		}else{
+			User user = userDao.getUserById(userId);
+			List<Route> routes = routeDao.getUserProfitRoutes(userId);
+			for(Route r : routes){
+				r.setDepartureAirportName(airports.get(r.getFromAirport()).getName());
+				r.setArrivalAirportName(airports.get(r.getToAirport()).getName());
+				r.setUser(user);
+			}
+			return routes;
+		}
+	}
+	
 	
 	private void populateAirport(){
 		if(airports.isEmpty()){
@@ -176,5 +233,17 @@ public class RouteServiceImpl implements RouteService{
 
 
 
+
+	public UserDAO getUserDao() {
+		return userDao;
+	}
+
+
+
+
+	public void setUserDao(UserDAO userDao) {
+		this.userDao = userDao;
+	}
+	
 
 }

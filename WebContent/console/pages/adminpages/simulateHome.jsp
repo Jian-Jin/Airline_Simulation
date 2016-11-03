@@ -54,7 +54,13 @@
 <s:actionerror theme="bootstrap"/>
 <s:actionmessage theme="bootstrap"/>
 <s:fielderror theme="bootstrap"/>
- 
+  <s:form action="profitDetails" namespace="/route" theme="bootstrap" cssClass="form-horizontal">
+   <div class="form-group">
+            <div class="col-sm-offset-11 col-md-9">
+                   <s:submit value="Profit Details" name="Profit Details" cssClass="btn btn-primary"/>
+              </div>
+ </div>
+ </s:form>
  <s:form action="runSimulate" method="post" namespace="/login" theme="bootstrap" cssClass="form-horizontal">
     <font face="Verdana" size="4" color="#ccccff">
  <br>

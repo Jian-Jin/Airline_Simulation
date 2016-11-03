@@ -110,5 +110,10 @@ public class Airport {
 	public void setMultiplier(double multiplier){
 		this.multiplier = multiplier;
 	}
+	public double getMultiplier() {
+		return multiplier;
+	}
+	
+	
 
 }

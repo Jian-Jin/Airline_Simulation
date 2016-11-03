@@ -1,4 +1,7 @@
 package com.demo.model;
+
+import com.demo.service.Utils;
+
 // to match with db table route
 public class Route {
 	private int userId;
@@ -15,7 +18,16 @@ public class Route {
 	private String arrivalAirportName;
 	// for simulation
 	private int peopleOnboard;
+	private Aircraft aircraft;
 	
+	private double cost;
+	private double revenue;
+	private double profit;
+	
+	
+	// user and airplaneName only populated for profit page
+	private User user;
+	private String airplaneName;
 	
 	public Route getCopy(){
 		Route r = new Route();
@@ -26,6 +38,7 @@ public class Route {
 		r.setDepartureTime(departureTime);
 		r.setArrivalTime(arrivalTime);
 		r.setSequence(sequence);
+		r.setAircraft(aircraft);
 		return r;
 	}
 	public int getUserId() {
@@ -100,7 +113,51 @@ public class Route {
 	public void setPeopleOnboard(int peopleOnboard) {
 		this.peopleOnboard = peopleOnboard;
 	}
-
+	public Aircraft getAircraft() {
+		return aircraft;
+	}
+	public void setAircraft(Aircraft aircraft) {
+		this.aircraft = aircraft;
+	}
+	public double getCost() {
+		return cost;
+	}
+	public void setCost(double cost) {
+		this.cost = cost;
+	}
+	public double getRevenue() {
+		return revenue;
+	}
+	public void setRevenue(double revenue) {
+		this.revenue = revenue;
+	}
+	public double getProfit() {
+		return profit;
+	}
+	public void setProfit(double profit) {
+		this.profit = profit;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public String getAirplaneName() {
+		return airplaneName;
+	}
+	public void setAirplaneName(String airplaneName) {
+		this.airplaneName = airplaneName;
+	}
+	public String getCostString(){
+		return Utils.convertToComma(getCost());
+	}
+	public String getProfitString(){
+		return Utils.convertToComma(getProfit());
+	}
+	public String getRevenueString(){
+		return Utils.convertToComma(getRevenue());
+	}
 	
 
 }

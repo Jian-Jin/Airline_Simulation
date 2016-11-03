@@ -30,6 +30,8 @@ public class AircraftServiceImpl implements AircraftService{
 	public List<String> getDownPlanes() {
 		return aircraftDao.getDownPlanes();
 	}
+	
+	
 
 	public AircraftDAO getAircraftDao() {
 		return aircraftDao;

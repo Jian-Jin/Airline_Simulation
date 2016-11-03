@@ -120,6 +120,7 @@
 		<property name="aircraftDao" ref="aircraftDAO"></property>
 		<property name="routeDao" ref="routeDAO"></property>
 		<property name="airportService" ref="airportService"></property>
+		<property name="userDao" ref="userDAO"></property>
 	</bean>
 	<bean id="simulateService" class="com.demo.service.impl.SimulateServiceImpl">
 		<property name="airportDao" ref="airportDAO"></property>

@@ -131,6 +131,11 @@
      		<result name="success">/console/pages/aircraftRoute.jsp</result>
      		<result name="error">/console/pages/aircraftRoute.jsp</result>
      </action>
+     
+      <action name="profitDetails" class="com.demo.action.RouteAction" method="profitDetails">
+     		<result name="success">/console/pages/profitDetail.jsp</result>
+     		<result name="error">/console/pages/error.jsp</result>
+     </action>
      	
     </package>
     <package name="UserAction" namespace="/user"

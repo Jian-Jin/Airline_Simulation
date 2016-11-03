@@ -7,7 +7,7 @@
 	 <resultMap type="com.demo.model.Route" id="RouteResult">
 
 		<result column="userId" property="userId"/>
-		<result column="aircraftId" property="userAircraftId"/>
+		<result column="userAircraftId" property="userAircraftId"/>
 		<result column="fromAirport" property="fromAirport"/>
 		<result column="departureTime" property="departureTime"/>
 		<result column="toAirport" property="toAirport"/>
@@ -15,22 +15,45 @@
 		<result column="sequence" property="sequence"/>
 		<result column="departureDay" property="departureDay"/>
 		<result column="arrivalDay" property="arrivalDay"/>
-		
-		
+		<result column="cost" property="cost"/>
+		<result column="revenue" property="revenue"/>
+		<result column="profit" property="profit"/>
+	 </resultMap>
+	 
+	<resultMap type="com.demo.model.Route" id="RouteProfitResult">
+
+		<result column="userId" property="userId"/>
+		<result column="userAircraftId" property="userAircraftId"/>
+		<result column="fromAirport" property="fromAirport"/>
+		<result column="departureTime" property="departureTime"/>
+		<result column="toAirport" property="toAirport"/>
+		<result column="arrivalTime" property="arrivalTime"/>
+		<result column="sequence" property="sequence"/>
+		<result column="departureDay" property="departureDay"/>
+		<result column="arrivalDay" property="arrivalDay"/>
+		<result column="cost" property="cost"/>
+		<result column="revenue" property="revenue"/>
+		<result column="profit" property="profit"/>
+		<result column="customizedName" property="airplaneName"/>
 	 </resultMap>
 	 
       <select id="getRoutes"  resultMap="RouteResult">
-       select * from route where userId = #{userId} and aircraftId = #{aircraftId} order by sequence
+       select * from route where userId = #{userId} and userAircraftId = #{userAircraftId} order by sequence
       </select>
+      
+      <select id="getUserProfitRoutes"  resultMap="RouteProfitResult">
+      select r.*,u.customizedName from route r join user_aircraft u on r.userAircraftId = u.id where r.userId = #{userId} order by r.userAircraftId, r.sequence 
+      </select>
+      
       <insert id="addRoute">
-      insert into route(userId, aircraftId, fromAirport, departureTime,departureDay, toAirport, arrivalTime,arrivalDay, sequence) values (#{userId},#{aircraftId},#{fromAirport},#{departureTime},#{departureDay},#{toAirport},#{arrivalTime},#{arrivalDay},#{sequence})
+      insert into route(userId, userAircraftId, fromAirport, departureTime,departureDay, toAirport, arrivalTime,arrivalDay, sequence) values (#{userId},#{userAircraftId},#{fromAirport},#{departureTime},#{departureDay},#{toAirport},#{arrivalTime},#{arrivalDay},#{sequence})
       </insert>
        <select id="getAllRoutes"  resultMap="RouteResult">
-       select * from route order by aircraftId,sequence
+       select * from route order by userAircraftId,sequence
       </select>
       
       <delete id = "deleteUserRouteByAircraftId">
-      	delete from route where userId = #{userId} and aircraftId = #{aircraftId}
+      	delete from route where userId = #{userId} and userAircraftId = #{userAircraftId}
       </delete>
 	
 		<delete id = "deleteUserRoute">
@@ -38,7 +61,11 @@
       </delete>
       
       <delete id = "undoUserRoute">
-      	delete from route where aircraftId = #{userAircraftId} and sequence = #{sequence}
+      	delete from route where userAircraftId = #{userAircraftId} and sequence = #{sequence}
       </delete>
+      
+      <update id ="updateProfit">
+      	update route set cost=#{cost}, revenue = #{revenue}, profit = #{profit} where userAircraftId=#{userAircraftId} and sequence=#{sequence}
+      </update>
       
 </mapper>

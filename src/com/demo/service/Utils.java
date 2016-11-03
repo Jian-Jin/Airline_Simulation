@@ -10,6 +10,8 @@ public class Utils {
 	// convert money method
 	public static String convertToComma(double money){
 		int n = (int)money;
+		boolean negative = n<0;
+		n = Math.abs(n);
 		String s = String.valueOf(n);
 		char[] cc = s.toCharArray();
 		StringBuilder sb = new StringBuilder();
@@ -17,11 +19,11 @@ public class Utils {
 		for(int i=cc.length-1;i>=0;i--){
 			sb.append(cc[i]);
 			count++;
-			if(count%3==0){
+			if(count%3==0&&i!=0){
 				sb.append(",");
 			}
 		}
-		return "$"+sb.reverse().toString();
+		return "$"+(negative?"-":"")+sb.reverse().toString();
 		
 	}
 	// return "$3.34 Million" for example

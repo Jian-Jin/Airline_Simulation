@@ -26,41 +26,38 @@
         <div class="col-md-9">
             <font face="Verdana" size="5" color="#ccccff">
         
-        Simulate run time : <s:property value="simulateRunTime" />
-        </font>
         <br>
         <br>
-                 <font face="Comic Sans MS" size="6" color="orange">
         
-        Profit Ranking:
+        Profit Details:
         <br>
  <table class="table table-striped">
  <tr>
-    <!-- <th>Purchase</th> -->
-    <th>Rank</th>
     <th>User</th>
+    <th>AircraftName</th>
+    <th>departure Airport</th>
+    <th>departure Time</th>
+    <th>arrival Airport</th>
+    <th>arrival Time</th>
+    <th>Cost</th>
+    <th>Revenue</th>
     <th>Profit</th>
   </tr>
- <s:iterator value="profits" var="p">
+ <s:iterator value="routeProfits" var="p">
  <tr>
-   <!--<td><input type="radio" name="planeId" value="#p.id"></td>  -->
-   <td> <s:property value="#p.rank" /></td>
-   <td> <s:property value="#p.userName" /></td>
+   <td> <s:property value="#p.user.name" /></td>
+   <td> <s:property value="#p.airplaneName" /></td>
+   <td> <s:property value="#p.departureAirportName" /></td>
+   <td> <s:property value="#p.departureTime" /></td>
+
+   <td> <s:property value="#p.arrivalAirportName" /></td>
+   <td> <s:property value="#p.arrivalTime" /></td>
+   <td> <s:property value="#p.costString" /></td>
+   <td> <s:property value="#p.revenueString" /></td>
    <td> <s:property value="#p.profitString" /></td>
     </tr>
  </s:iterator>
 </table>
-
-<s:actionerror theme="bootstrap"/>
-<s:actionmessage theme="bootstrap"/>
-<s:fielderror theme="bootstrap"/>
- <s:form action="profitDetails" namespace="/route" theme="bootstrap" cssClass="form-horizontal">
-   <div class="form-group">
-            <div class="col-sm-offset-11 col-md-9">
-                   <s:submit value="Profit Details" name="Profit Details" cssClass="btn btn-primary"/>
-              </div>
- </div>
- </s:form> 
 
        
         </div>    
