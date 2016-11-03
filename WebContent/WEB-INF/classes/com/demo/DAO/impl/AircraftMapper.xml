@@ -69,6 +69,8 @@
       <select id="getDownPlanes"  resultType="string">
        select * from down_aircraft
       </select>
+      
+      
       <delete id="cleanDownPlanes" >
        delete from down_aircraft
       </delete>

@@ -131,6 +131,11 @@
      		<result name="success">/console/pages/aircraftRoute.jsp</result>
      		<result name="error">/console/pages/aircraftRoute.jsp</result>
      </action>
+     
+      <action name="profitDetails" class="com.demo.action.RouteAction" method="profitDetails">
+     		<result name="success">/console/pages/profitDetail.jsp</result>
+     		<result name="error">/console/pages/error.jsp</result>
+     </action>
      	
     </package>
     <package name="UserAction" namespace="/user"
@@ -206,6 +211,18 @@
     	<action name="setOsudotnumber" class="com.demo.action.ProfileAction"
     		method="setOsudotnumber">
     		<result name="success">/console/pages/setOSUDotNumber.jsp</result>
+    		<result name="error">/console/pages/error.jsp</result>
+    	</action>
+    	
+    	<action name="updatePassword" class="com.demo.action.ProfileAction"
+    		method="updatePassword">
+    		<result name="success">/console/pages/myProfile.jsp</result>
+    		<result name="error">/console/pages/error.jsp</result>
+    	</action>
+    	
+    	<action name="setPassword" class="com.demo.action.ProfileAction"
+    		method="setPassword">
+    		<result name="success">/console/pages/setPassword.jsp</result>
     		<result name="error">/console/pages/error.jsp</result>
     	</action>
     </package>

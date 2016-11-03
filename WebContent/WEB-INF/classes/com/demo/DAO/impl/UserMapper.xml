@@ -13,11 +13,11 @@
 	 </resultMap>
 	 
       <select id="selectUser"  resultMap="UserResult">
-       select * from user where name = #{username} and password = #{password}
+       select * from user where name = #{username} and password = md5(#{password})
     </select>
     
      <select id="selectUserByOsudotnumber"  resultMap="UserResult">
-       select * from user where osudotnum = #{osudotnum} and password = #{password}
+       select * from user where osudotnum = #{osudotnum} and password = md5(#{password})
     </select>
     
      <select id="getAllUsers"  resultMap="UserResult">
@@ -29,7 +29,7 @@
     </select>
     
      <insert id="addUser"  useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-       insert into user (name, password,osudotnum,superuser,money) values (#{username},#{password},#{osudotnum},#{superuser},#{money})
+       insert into user (name, password,osudotnum,superuser,money) values (#{username},md5(#{password}),#{osudotnum},#{superuser},#{money})
        <selectKey keyProperty="id" resultType="int" order="AFTER">
             SELECT LAST_INSERT_ID();
         </selectKey>
@@ -56,5 +56,5 @@
       </update>
       <delete id="deleteUser">delete from user where id={id}</delete>
       <update id="updateUsername">update user set name = #{username} where id = #{id}</update>
-      <update id="updatePassword">update user set password = #{password} where id = #{id}</update>
+      <update id="updatePassword">update user set password = md5(#{password}) where id = #{id}</update>
 </mapper>

@@ -15,7 +15,14 @@
             padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
         }
     </style>
-
+    
+    <script type="text/javascript">
+            function confirmation(){
+             if (!confirm("Confirm updating your password?")) {
+        		return false;
+    }
+            }
+    </script>
 </head>
 <body>
 <%@include file="header.jsp"%>
@@ -41,14 +48,13 @@
           		<h>Username: <s:property value="user.name" /></h>
           		<br/>
           		<br/>
-				<h>OSU Dot Number: <s:property value="user.osudotnum" />    </h>
-				<button><a href="<s:url action='setOsudotnumber' namespace="/profile"/>" >Change</a></button>
-				<br/>
+         <s:form action="updatePassword" method="post" namespace="/profile" >
+				 <h>Input your new password:
+				 <input type="password" name="password"  value="">  </h>
+				<input onclick ="return confirmation();" type="submit" value="UPDATE" name="UPDATE" />
+     	</s:form>
 				<br/>
 				<h>Balance: <s:property value="millions" />Millions</h>
-				<br/>
-				<br/>
- 				<button><a href="<s:url action='setPassword' namespace="/profile"/>" >Change Password</a></button>
          </div>
 
 </div>

@@ -28,6 +28,7 @@ public class ProfileAction  extends ActionSupport {
 	private String aircraftCustomizeNameToDelete;
 	private String airportToChange;
 	private String osudotNumber;
+	private String password;
 	
 	public String getUserProfile(){
 		Map session = ActionContext.getContext().getSession();
@@ -52,8 +53,11 @@ public class ProfileAction  extends ActionSupport {
 	    List<Airport> userAirports = airportService.getMyAirport(userId);
 	    setUserAirports(userAirports);
 	    List<Airport> changeList = airportService.getAllAirport();
-	    for(Airport cur : changeList){
-	    	if(cur.getName().equals(userAirports.get(0).getName()));
+	    if(userAirports!=null && userAirports.size()!=0){
+	    	for(Airport cur : changeList){
+	    		if(cur.getName().equals(userAirports.get(0).getName()))
+	    			changeList.remove(cur);
+	    	}
 	    }
 	    setAirportList(changeList);
 	    return SUCCESS;
@@ -142,7 +146,7 @@ public class ProfileAction  extends ActionSupport {
 	    	return ERROR;
 	    }
 	    if(osudotNumber==null || osudotNumber.isEmpty() ){
-	    	setErrorMsg("Please enter you osu dot number");
+	    	setErrorMsg("Please enter your osu dot number");
 	    	return ERROR;
 	    }
 	    int userId = (Integer)session.get("userId");
@@ -154,6 +158,37 @@ public class ProfileAction  extends ActionSupport {
 	}
 	
 	public String setOsudotnumber(){
+		Map session = ActionContext.getContext().getSession();
+	    if(session.get("logined")==null){
+	    	setErrorMsg("Please sign in first");
+	    	return ERROR;
+	    }
+	    int userId = (Integer)session.get("userId");
+	    User curUser = userService.getUserById(userId);
+	    setMillions((int)(curUser.getMoney()/1000000));
+	    setUser(curUser);
+	    return SUCCESS;
+	}
+	
+	public String updatePassword(){
+		Map session = ActionContext.getContext().getSession();
+	    if(session.get("logined")==null){
+	    	setErrorMsg("Please sign in first");
+	    	return ERROR;
+	    }
+	    if(password==null || password.isEmpty() ){
+	    	setErrorMsg("Please enter your new passwordr");
+	    	return ERROR;
+	    }
+	    int userId = (Integer)session.get("userId");
+	    userService.updatePassword(userId, password);
+	    User curUser = userService.getUserById(userId);
+	    setMillions((int)(curUser.getMoney()/1000000));
+	    setUser(curUser);
+	    return SUCCESS;
+	}
+	
+	public String setPassword(){
 		Map session = ActionContext.getContext().getSession();
 	    if(session.get("logined")==null){
 	    	setErrorMsg("Please sign in first");
@@ -269,6 +304,14 @@ public class ProfileAction  extends ActionSupport {
 
 	public void setOsudotNumber(String osudotNumber) {
 		this.osudotNumber = osudotNumber;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 	

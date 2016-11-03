@@ -213,6 +213,18 @@
     		<result name="success">/console/pages/setOSUDotNumber.jsp</result>
     		<result name="error">/console/pages/error.jsp</result>
     	</action>
+    	
+    	<action name="updatePassword" class="com.demo.action.ProfileAction"
+    		method="updatePassword">
+    		<result name="success">/console/pages/myProfile.jsp</result>
+    		<result name="error">/console/pages/error.jsp</result>
+    	</action>
+    	
+    	<action name="setPassword" class="com.demo.action.ProfileAction"
+    		method="setPassword">
+    		<result name="success">/console/pages/setPassword.jsp</result>
+    		<result name="error">/console/pages/error.jsp</result>
+    	</action>
     </package>
 
 </struts>

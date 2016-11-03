@@ -1,10 +1,12 @@
-
 DROP TABLE if exists user;
 DROP TABLE if exists aircraft;
 DROP TABLE if exists user_aircraft;
 DROP TABLE if exists user_airport;
 DROP TABLE if exists route;
 DROP TABLE if exists initial_money;
+DROP TABLE if exists down_aircraft;
+DROP TABLE if exists user_profit;
+DROP TABLE if exists simulateTime;
 
 CREATE TABLE aircraft(id INT, name VARCHAR(30),cost DOUBLE, maxSeat INT, rangeVal INT, speed INT, fuelCapacity DOUBLE,fuelBurn INT, takeOffDis INT, landingDis INT, PRIMARY KEY(id));
 
@@ -34,10 +36,15 @@ INSERT INTO aircraft(id,name,cost,maxSeat,rangeVal,speed,fuelCapacity,fuelBurn,t
 ALTER TABLE `test`.`airport` ADD COLUMN `multiplier` DOUBLE NOT NULL DEFAULT '1' AFTER `latitude`;
 
 CREATE TABLE route(userId INT, userAircraftId INT, fromAirport INT, departureTime varchar(20), departureDay INT, toAirport INT, arrivalTime varchar(20),arrivalDay INT, sequence INT, cost double, revenue double, profit double);
-CREATE TABLE user(id INT NOT NULL AUTO_INCREMENT, name VARCHAR(30), password VARCHAR(30), superuser BOOLEAN, osudotnum VARCHAR(30), money double,PRIMARY KEY(id));
+CREATE TABLE user(id INT NOT NULL AUTO_INCREMENT, name VARCHAR(30), password VARCHAR(32), superuser BOOLEAN, osudotnum VARCHAR(30), money double,PRIMARY KEY(id));
+#two accounts for test
+insert into user (name, password, osudotnum,superuser,money) values ('test',md5('test'),'test.1','0','60000000');
+insert into user (name, password, osudotnum,superuser) values ('admin',md5('admin'),'admin.1','1');
+
 CREATE TABLE user_aircraft(id INT NOT NULL AUTO_INCREMENT, userId INT, aircraftId INT, customizedName varchar(100), firstClassRatio double, businessClassRatio double, PRIMARY KEY(id));
 CREATE TABLE user_airport(id INT NOT NULL AUTO_INCREMENT, userId INT, airportId INT, PRIMARY KEY(id));
 CREATE TABLE initial_money(id INT, money double, PRIMARY KEY(id));
+INSERT INTO initial_money(id,money) VALUES ('1','60000000')
 CREATE TABLE down_aircraft(name VARCHAR(30));
 CREATE TABLE user_profit(userId INT,profit double);
 CREATE TABLE simulateTime(runtime varchar(100));
