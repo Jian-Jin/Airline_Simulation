@@ -54,7 +54,7 @@
       <update id="updateUserOsudotnum">
       update user set osudotnum = #{osudotnum} where id = #{id}
       </update>
-      <delete id="deleteUser">delete from user where id={id}</delete>
+      <delete id="deleteUser">delete from user where id = #{id}</delete>
       <update id="updateUsername">update user set name = #{username} where id = #{id}</update>
       <update id="updatePassword">update user set password = md5(#{password}) where id = #{id}</update>
 </mapper>

@@ -48,7 +48,7 @@ public class LoginAction extends ActionSupport {
 			session.put("money", money);
 			return "studentsuccess";
 		}else{
-			setErrorMsg("Log in failed, please try again");
+			setErrorMsg("Invalid Username and Password, please try again.");
 			return ERROR;
 		}
 	}

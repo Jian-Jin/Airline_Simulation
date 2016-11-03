@@ -10,7 +10,7 @@
      		<!-- action result and page mapping -->
      		<result name="studentsuccess">/console/pages/home.jsp</result>
      		<result name="adminsuccess">/console/pages/adminpages/managestudents.jsp</result>
-     		<result name="error">/console/pages/error.jsp</result>
+     		<result name="error">/console/pages/login.jsp</result>
      	</action>
      	
      	<action name="signout" class="com.demo.action.LoginAction" method="signout">
@@ -159,14 +159,17 @@
     		</result>
     		<result name="error">/console/pages/error.jsp</result>
     	</action>
-    	<action name="viewUser">
-    		<result name="success">/console/pages/adminpages/viewUser.jsp</result>
-    		<result name="error">/console/pages/error.jsp</result></action>
+    	<action name="viewUser" class="com.demo.action.UserAction"
+    		method="viewUser">
+    		<result name="success">
+    			/console/pages/adminpages/viewUser.jsp
+    		</result>
+    		<result name="error">/console/pages/error.jsp</result>
+    	</action>
     	<action name="updateUser" class="com.demo.action.UserAction"
     		method="updateUser">
-    		<result name="success">
-    			result
-    			</result>
+    		<result name="success">/console/pages/adminpages/managestudents.jsp</result>
+    		<result name="error">/console/pages/error.jsp</result>
     	</action>
     </package>
     
