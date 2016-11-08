@@ -55,8 +55,10 @@ public class ProfileAction  extends ActionSupport {
 	    List<Airport> changeList = airportService.getAllAirport();
 	    if(userAirports!=null && userAirports.size()!=0){
 	    	for(Airport cur : changeList){
-	    		if(cur.getName().equals(userAirports.get(0).getName()))
+	    		if(cur.getName().equals(userAirports.get(0).getName())){
 	    			changeList.remove(cur);
+	    			break;
+	    		}
 	    	}
 	    }
 	    setAirportList(changeList);
