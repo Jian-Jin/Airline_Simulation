@@ -57,13 +57,13 @@
               </div>
  </div>
  </s:form> 
-<font face="Comic Sans MS" size="3" color="orange">
+<font face="Arial" size="3" color="orange">
      Please make sure the final arrival airport of the last route is your initial departure airport(your hub)
   </font>
 <br>
           
 <h2>Add a new leg to its route:</h2>
- <font face="Comic Sans MS" size="5" color="red">
+ <font face="Arial" size="5" color="red">
      <s:property value="errorMsg" />
  </font>
 <s:form action="addRoute" namespace="/" theme="bootstrap" cssClass="form-horizontal">

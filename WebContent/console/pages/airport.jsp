@@ -22,7 +22,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-9">
-        <font face="Comic Sans MS" size="3" color="orange">
+        <font face="Arial" size="3" color="orange">
         
         <h2>Query airport information :</h2>
  

@@ -18,7 +18,7 @@
 
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="navbar-header">
-        <a class="navbar-brand" href="#">AirLine Simulation - <s:text name="test.version"/></a>
+        <a class="navbar-brand" href="#">Airline Simulation - <s:text name="test.version"/></a>
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -31,7 +31,7 @@
             <li><a href="<s:url action='showAircraft' namespace="/aircraft"/>">Aircraft</a></li>
             <li><a href="<s:url action='showAirport' namespace="/airport"/>">Airport</a></li>
             <li><a href="<s:url action='getRoute' namespace="/route"/>">Route Setup</a></li>
-            <li><a href="<s:url action='simulateHome' namespace="/login"/>">Simulation Result</a></li>
+            <li><a href="<s:url action='simulateHome' namespace="/login"/>">Standings</a></li>
             <li><a href="<s:url action='getUserProfile' namespace="/profile"/>">My Profile</a></li>
             <li><a href="<s:url action='signout' namespace="/login"/>">Log Out</a></li>
         </ul>

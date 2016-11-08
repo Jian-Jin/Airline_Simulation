@@ -18,7 +18,7 @@
 
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="navbar-header">
-        <a class="navbar-brand" href="#">AirLine Simulation - <s:text name="test.version"/></a>
+        <a class="navbar-brand" href="#">Airline Simulation - <s:text name="test.version"/></a>
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -27,10 +27,10 @@
     </div>
     <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-            <li class="active"><a href="<s:url action='manageUser' namespace="/login"/>">manageUser</a></li>            
-            <li><a href="<s:url action='manageDemand' namespace="/airport"/>">manageDemand</a></li>
-            <li><a href="<s:url action='downAircraftHome' namespace="/aircraft"/>">downAircraft</a></li>
-            <li><a href="<s:url action='simulateHome' namespace="/login"/>">simulation</a></li>
+            <li class="active"><a href="<s:url action='manageUser' namespace="/login"/>">Manage Users</a></li>            
+            <li><a href="<s:url action='manageDemand' namespace="/airport"/>">Adjust Demand Values</a></li>
+            <li><a href="<s:url action='downAircraftHome' namespace="/aircraft"/>">Down Aircrafts</a></li>
+            <li><a href="<s:url action='simulateHome' namespace="/login"/>">Run Simulation</a></li>
             <li><a href="<s:url action='signout' namespace="/login"/>">Log Out</a></li>
         </ul>
     </div>

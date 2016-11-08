@@ -27,7 +27,7 @@
             }
     </script>
     
-<font face="Comic Sans MS" size="5" color="orange">
+<font face="Arial" size="5" color="orange">
 <h1><center>My Profile</center></h1></font>
 <font size="5" color="black">
 <b>
@@ -43,7 +43,7 @@
         	</div>
     	</div>
 		<div class="col-md-9">
-		<font face="Comic Sans MS" size="3" color="orange">
+		<font face="Arial" size="3" color="orange">
 			<h1>Below is the information of your hub:</h1>
   <table class="table table-striped">
  <tr>

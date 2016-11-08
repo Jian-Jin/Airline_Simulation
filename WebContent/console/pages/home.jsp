@@ -18,25 +18,9 @@
 
 <body>
 
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="navbar-header">
-        <a class="navbar-brand" href="#">AirLine Simulation - <s:text name="test.version"/></a>
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-    </div>
-    <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-            <li><s:a href="/Demo/console/pages/home.jsp">Home</s:a></li>
-            <li><a href="https://github.com/Jian-Jin/Airline_Simulation">Project</a></li>
-           <li><a href="<s:url action='signout' namespace="/login"/>">Log Out</a></li>
-          
-        </ul>
-    </div>
-</nav>
-<font face="Comic Sans MS" size="5" color="orange">
+<%@include file="header.jsp"%>
+
+<font face="Arial" size="5" color="orange">
 <h1><center>AIRLINE SIMULATION beta</center></h1></font>
 <font size="5" color="black">
 <b>

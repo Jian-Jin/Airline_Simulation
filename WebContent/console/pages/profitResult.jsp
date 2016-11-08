@@ -30,7 +30,7 @@
         </font>
         <br>
         <br>
-                 <font face="Comic Sans MS" size="6" color="orange">
+                 <font face="Arial" size="6" color="orange">
         
         Profit Ranking:
         <br>

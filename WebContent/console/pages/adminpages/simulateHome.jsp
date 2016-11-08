@@ -30,7 +30,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-9">
-        <font face="Comic Sans MS" size="5" color="orange">
+        <font face="Arial" size="5" color="orange">
         
         Latest simulate run time : <s:property value="simulateRunTime" />
  <table class="table table-striped">

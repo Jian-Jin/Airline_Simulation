@@ -35,7 +35,7 @@
 <s:fielderror theme="bootstrap"/>
        
   <s:form action="customizePlane" method="post" namespace="/" theme="bootstrap" cssClass="form-horizontal" onsubmit="greeting()">
- <font face="Comic Sans MS" size="4" color="orange">
+ <font face="Arial" size="4" color="orange">
                         <h3>1. the percentage of first class seat here (0-100%)</h3>
                         <br>
                         <input type="range" name="firstClassRatio" min="0" max="100" value="0" step="5" class="slider-width100" onchange="showValue(this.value,this.name)" />
@@ -68,7 +68,7 @@ function showValue(newValue,id)
           </div>
   </div>
   <br>
-  <font face="Comic Sans MS" size="3" color="red">
+  <font face="Arial" size="3" color="red">
      <s:property value="errorMsg" />
   </font>
   </s:form>     

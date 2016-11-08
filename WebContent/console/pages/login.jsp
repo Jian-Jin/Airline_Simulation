@@ -26,7 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 </head>
 <img src='${pageContext.request.contextPath}/console/images/airline2.jpg' style='position:fixed;top:0px;left:0px;width:100%;height:100%;z-index:-1;'><body>
-<font face="Comic Sans MS" size="6" color="black">
+<font face="Arial" size="6" color="black">
 <h1><center>AIRLINE SIMULATION</center></h1></font>
 <br>
 <div class="container">
@@ -58,7 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											</div>
 										</div>
 									</div>
-										 <font face="Comic Sans MS" size="3" color="red">
+										 <font face="Arial" size="3" color="red">
     									 <s:property value="errorMsg" />
   										</font>
 								</s:form>
