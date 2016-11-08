@@ -133,6 +133,7 @@
      </action>
      
       <action name="profitDetails" class="com.demo.action.RouteAction" method="profitDetails">
+           	<result name="adminsuccess">/console/pages/adminpages/profitDetail.jsp</result>
      		<result name="success">/console/pages/profitDetail.jsp</result>
      		<result name="error">/console/pages/error.jsp</result>
      </action>

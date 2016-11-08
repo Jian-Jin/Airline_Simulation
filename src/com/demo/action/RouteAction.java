@@ -73,7 +73,7 @@ public class RouteAction extends ActionSupport{
 	  }
 	  
 	  routeProfits = routeService.getProfitDetails(userId);
-
+	  if(userId == -1) return "adminsuccess";
 	  return SUCCESS;
 
 	}

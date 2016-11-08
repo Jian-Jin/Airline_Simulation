@@ -62,8 +62,11 @@ public class UserServiceImpl implements UserService{
 		if(!checkNewUserNames(names)){
 			return result;
 		}
+		names = names.trim().replace("\n", "").replace("\r", "");
+
 		String[] userNames = names.split(",");
 		for(String name : userNames){
+			name = name.trim();
 			String passwd = getRandomString(6);
 			
 			//get the initialize money, id = 1 ,first row
