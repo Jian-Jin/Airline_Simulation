@@ -159,5 +159,31 @@ public class Route {
 		return Utils.convertToComma(getRevenue());
 	}
 	
+	@Override
+	public String toString(){
+		StringBuilder sb = new StringBuilder();
+		sb.append("userId:").append(userId);
+		sb.append(",userAircraftId:").append(userAircraftId);
+		sb.append(",fromAirport:").append(fromAirport);
+		sb.append(",toAirport:").append(toAirport);
+		sb.append(",departureTime:").append(departureTime);
+		sb.append(",arrivalTime:").append(arrivalTime);
+		sb.append(",sequence:").append(sequence);
+		sb.append(",departureDay:").append(departureDay);
+		sb.append(",arrivalDay:").append(arrivalDay);
+		sb.append(",departureAirportName:").append(departureAirportName);
+		sb.append(",arrivalAirportName:").append(arrivalAirportName);
+		sb.append(",arrivalDay:").append(arrivalDay);
+		sb.append(",peopleOnboard:").append(peopleOnboard);
+		sb.append(",aricraft:").append(aircraft==null?"":aircraft.getName());
+		sb.append(",airplaneName:").append(airplaneName);
+
+		sb.append(",cost:").append(cost);
+		sb.append(",revenue:").append(revenue);
+		sb.append(",profit:").append(profit);
+
+		return sb.toString();
+	}
+	
 
 }

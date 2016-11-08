@@ -9,7 +9,7 @@ public interface UserService {
 	public void deleteUser(int id);
 	public User getUser(String userName,String passWord);
 	public User getUserFromUsername(String userName);
-	public List<User> generateUser(int userNumber);
+	public List<User> generateUser(String userNames);
 	public double getUserMoney(int id);
 	public void updateUserMoney(int id, double money);
 	public User getUserById(int id);

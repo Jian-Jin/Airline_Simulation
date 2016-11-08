@@ -53,31 +53,52 @@ public class UserServiceImpl implements UserService{
 	}
 
 
+	/* 
+	 * an empty list will be returned if names is not valid
+	 */
 	@Override
-	public List<User> generateUser(int userNumber) {
+	public List<User> generateUser(String names) {
 		List<User> result = new ArrayList<User>();
-		Set<String> names = new HashSet<String>();
-		List<User> users = getAllUsers();
-		for(User u : users){
-			names.add(u.getName());
+		if(!checkNewUserNames(names)){
+			return result;
 		}
-		int count = 0;
-		while(count<userNumber){
-			String userName = getRandomString(5);
+		String[] userNames = names.split(",");
+		for(String name : userNames){
 			String passwd = getRandomString(6);
-			if(names.contains(userName))
-				continue;
+			
 			//get the initialize money, id = 1 ,first row
 			double money = userDao.getInitializeMoney(1);
-			userDao.addUser(userName, passwd, "", false,money);
+			userDao.addUser(name, passwd, "", false,money);
 			User user = new User();
-			user.setName(userName);
+			user.setName(name);
 			user.setPassword(passwd);
 			result.add(user);
-			count++;
 		}
 		return result;
 		
+	}
+	
+	private boolean checkNewUserNames(String names){
+		if(names.isEmpty()){
+			return false;
+		}
+		String s = names.trim().replace("\n", "").replace("\r", "");
+		String[] usernames = s.split(",");
+		List<String> currentNames = userDao.getAllUserNames();
+		Set<String> set = new HashSet<String>();
+		set.addAll(currentNames);
+		for(String name : usernames){
+			if(name==null || name.isEmpty()){
+				return false;
+			}
+			if(set.contains(name)){
+				return false;
+			}else{
+				set.add(name);
+			}
+		}
+		
+		return true;
 	}
 	private String getRandomString(int length){
 		StringBuilder sb = new StringBuilder();

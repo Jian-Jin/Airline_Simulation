@@ -42,7 +42,11 @@ public String customizePlane(){
 	Aircraft plane = aircraftService.getPlaneByName(aircraftToBuy).get(0);
 	
     int userId = (Integer)session.get("userId");
-
+    // TODO hard code below
+    if(planeCustomizeName.isEmpty() ||(planeCustomizeName.contains("customized")&&planeCustomizeName.contains("input"))){
+    	setErrorMsg("invalid customized name,pls try again");
+		return ERROR;
+    }
 	List<Aircraft> ownedAircrafts = aircraftService.getUserPlanes(userId);
 	for(Aircraft a : ownedAircrafts){
 		if(a.getCustomizedName().equals(planeCustomizeName)){

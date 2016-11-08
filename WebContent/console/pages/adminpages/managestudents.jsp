@@ -36,14 +36,12 @@
  <tr>
     <th>UserName</th>
     <th>OsuDotNum</th>
-    <th>Password</th>
     <th>Balance</th>
   </tr>
  <s:iterator value="allUsers" var="u">
  <tr>
    <td> <s:property value="#u.name" /></td>
     <td> <s:property value="#u.osudotnum" /></td>
-    <td> <s:property value='#u.password' /></td>
     <td> <s:property value="#u.moneyString" /></td>
     </tr>
  </s:iterator>
@@ -53,20 +51,25 @@
 <s:actionmessage theme="bootstrap"/>
 <s:fielderror theme="bootstrap"/>
  <s:form action="generateUser" method="post" namespace="/login" theme="bootstrap" cssClass="form-horizontal">
-  <s:textfield
-                        label="Enter the count of new users to generate here"
-                        name="newUserCount"
-                        cssClass="input-sm"
-                        elementCssClass="col-sm-3"
-                        value="0"
-                        tooltip="Enter the count of users to generate here"/>
+  
+   <s:textarea
+                        tooltip="new user names split with comma e.g.Alex,Ben,...,Joe"
+                        label="New accounts to create"
+                        name="newUserNames"
+                        cols="20"
+                        rows="3"/>
+                        
+   <font face="Arial" size="3" color="orange">
+     Please input all the new account names you want to create in comma-separated format e.g. Alex,Ben,Chen.123,...,Joe 
+  </font>
    <div class="form-group">
           <div class="col-sm-offset-3 col-md-9">
                  <s:submit value="GENERATE" name="GENERATE" cssClass="btn btn-primary"/>
           </div>
   </div>
   
-  </s:form>  
+  </s:form>
+ 
      
   <s:form action="deleteUser" method="post" namespace="/user" theme="bootstrap" cssClass="form-horizontal">
   <h2>

@@ -47,4 +47,5 @@ public interface UserDAO {
 			@Param(value = "password") String password);
 	
 	public void deleteUser(@Param(value = "id") int id);
+	public List<String> getAllUserNames();
 }

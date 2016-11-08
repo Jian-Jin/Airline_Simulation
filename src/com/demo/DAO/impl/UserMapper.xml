@@ -57,4 +57,9 @@
       <delete id="deleteUser">delete from user where id = #{id}</delete>
       <update id="updateUsername">update user set name = #{username} where id = #{id}</update>
       <update id="updatePassword">update user set password = md5(#{password}) where id = #{id}</update>
+      
+      <select id="getAllUserNames"  resultType="string">
+       select name from user
+      </select>
+      
 </mapper>

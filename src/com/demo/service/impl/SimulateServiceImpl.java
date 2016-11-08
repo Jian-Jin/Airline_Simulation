@@ -58,9 +58,11 @@ public class SimulateServiceImpl implements SimulateService, InitializingBean{
 	
 	@Override
 	public void runSimulate(double fuelPrice, double basicProfit) {
+		System.out.println("Started run simulation at "+ new Date());
 		List<String> downPlaneList = aircraftDao.getDownPlanes();
 		Set<String> downPlanes = new HashSet<String>();
 		downPlanes.addAll(downPlaneList);
+		// user previous price if zero
 		if(fuelPrice!=0)this.basicProfit = basicProfit;
 		if(basicProfit!=0)this.fuelPrice = fuelPrice;
 		List<Route> allRoutes = routeDao.getAllRoutes();
@@ -134,9 +136,11 @@ public class SimulateServiceImpl implements SimulateService, InitializingBean{
 		}
 		for(int airportId : airportMap.keySet()){
 			Airport airport = airports.get(airportId);
-			
+			System.out.println("Simualtion airport:"+airport.getName());
 			Map<Integer,List<Route>> dayMap = airportMap.get(airportId);
 			for(int day: dayMap.keySet()){
+				System.out.println("Day:"+day);
+
 				List<Route> routesOfDay = dayMap.get(day);
 				assignSeat(routesOfDay,airport,downPlanes);
 			}
@@ -149,6 +153,7 @@ public class SimulateServiceImpl implements SimulateService, InitializingBean{
 			int userPlaneId = route.getUserAircraftId();
 				Aircraft a = aircraftDao.getPlaneByUserAircraftId(userPlaneId).get(0);
 				route.setAircraft(a);
+			
 			}
 	}
 	
@@ -249,6 +254,7 @@ public class SimulateServiceImpl implements SimulateService, InitializingBean{
 		}
 		
 		for(int cluster : clusterRoutes.keySet()){
+			System.out.println("cluster:"+cluster);
 			double ratio = clustermap.get(cluster).get(0).getAmount();
 			double totalnum = (double)airport.getScaled()*airport.getMultiplier()*ratio/100;
 			List<Route> routes = clusterRoutes.get(cluster);
@@ -260,6 +266,7 @@ public class SimulateServiceImpl implements SimulateService, InitializingBean{
 				double percent = (double)airports.get(r.getToAirport()).getScaled()/(double)totalweight;
 				int seat = (int)(totalnum * percent);
 				r.setPeopleOnboard(seat);
+				System.out.println(r.toString());
 			}
 			
 		}
