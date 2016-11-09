@@ -93,8 +93,7 @@ public class UserAction extends ActionSupport  {
 	    
 	    routeService.deleteUserRoute(userId);
 	    aircraftService.deleteAllUserAircraft(userId);
-	    //cannot figure out SQL error with AirportMapper SQL syntax so i omitted this
-	    //airportService.deleteUserAirport(userId);
+	    airportService.deleteUserAirport(userId);
 	    userService.deleteUser(userId);
 	    
 	    setAllUsers(allUsers);
