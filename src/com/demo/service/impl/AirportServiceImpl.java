@@ -88,6 +88,11 @@ public class AirportServiceImpl implements AirportService{
 	public void updateUserAirport(int userId, int airportId) {
 		 airportDao.updateUserAirport(userId, airportId);
 	}
+	
+	@Override
+	public void deleteUserAirport(int userId){
+		airportDao.deleteUserAirport(userId);
+	}
 
 
 	@Override

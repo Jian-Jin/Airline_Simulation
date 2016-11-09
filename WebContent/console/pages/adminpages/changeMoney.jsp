@@ -39,23 +39,20 @@
 
 <div class="col-md-9">
 			<font face="Arial" size="3" color="orange">
-			<h1>User Information: <s:property value="userToUpdate.name"/></h1>
-			
 				<br/>
           		<h>Username: <s:property value="userToUpdate.name" /></h>
-          		<button><a href="<s:url action='updateUsername' namespace="/user"/>" >Change</a></button>
           		<br/>
           		<br/>
 				<h>OSU Dot Number: <s:property value="userToUpdate.osudotnum" />    </h>
-				<button><a href="<s:url action='updateOsudotnum' namespace="/user"/>" >Change</a></button>
 				<br/>
 				<br/>
-				<h>Balance: <s:property value="userToUpdate.moneyString" />   </h>
-				<button><a href="<s:url action='updateMoney' namespace="/user"/>" >Change</a></button>
+				<s:form action="setMoney" method="post" namespace="/user" >
+				 <h>Input the new balance (no commas) :
+				 <input type="text" name="moneyInput"  value="<s:property value="" />">  </h>
+				<input type="submit" value="UPDATE" name="UPDATE" />
+     	</s:form><br/>
 				<br/>
-				<br/>
- 				<button><a href="<s:url action='updatePassword' namespace="/user"/>" >Change Users Password</a></button>
-         </div>
+				</div>
     
     
     <footer class="footer">

@@ -50,6 +50,7 @@
      <update id="changeDemand">
      	update airport set multiplier= #{demandMult} where id = #{demandAirport}
      </update>
-      
+     <delete id="deleteUserAirport">delete user_airport where userId = #{userId}</delete>
+
 
 </mapper>

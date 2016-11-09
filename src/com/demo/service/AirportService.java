@@ -16,6 +16,8 @@ public interface AirportService {
 
    public void updateUserAirport(int userId, int airportId);
    
+   public void deleteUserAirport(int userId);
+   
    public void changeDemand(int demandAirport, double demandMult);
 	
 }

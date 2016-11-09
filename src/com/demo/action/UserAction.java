@@ -7,6 +7,9 @@ import java.util.Map;
 
 import com.demo.model.User;
 import com.demo.service.RegisterService;
+import com.demo.service.AircraftService;
+import com.demo.service.AirportService;
+import com.demo.service.RouteService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -26,6 +29,9 @@ public class UserAction extends ActionSupport  {
 	private String usernameToUpdate;
 	private RegisterService registerService;
 	private UserService userService;
+	private AircraftService aircraftService;
+	private AirportService airportService;
+	private RouteService routeService;
 	private String errorMsg;
 	
 	public String register(){
@@ -56,6 +62,7 @@ public class UserAction extends ActionSupport  {
 	    	}
 	    }
 	    setUserToUpdate(userToUpdate);
+	    session.put("userToUpdateId", userToUpdate.getId());
 		
 		return SUCCESS;
 		
@@ -74,6 +81,7 @@ public class UserAction extends ActionSupport  {
 	    	return ERROR;
 	    }
 		List<User> allUsers = userService.getAllUsers();
+		allUsers.remove(userToDelete);
 	    for(User u : allUsers){
 	    	if(u.getName().equals(usernameToDelete)){
 	    		userToDelete = u;
@@ -81,61 +89,136 @@ public class UserAction extends ActionSupport  {
 	    		break;
 	    	}
 	    }
+	    int userId = userToDelete.getId();
+	    
+	    routeService.deleteUserRoute(userId);
+	    aircraftService.deleteAllUserAircraft(userId);
+	    //cannot figure out SQL error with AirportMapper SQL syntax so i omitted this
+	    //airportService.deleteUserAirport(userId);
+	    userService.deleteUser(userId);
 	    
 	    setAllUsers(allUsers);
-	    userService.deleteUser(id);
-	    
 		return SUCCESS;
 	}
 	
-	public String updateUser(){
-		
-		//check login and name to update are not null
+	public String setPassword() {
 		Map session = ActionContext.getContext().getSession();
-		userToUpdate = getUserToUpdate();
-		if(session.get("logined")==null){
-		    	setErrorMsg("Please sign in first");
-		    	return ERROR;
-		   }
-		if(userToUpdate==null){
-	    	setErrorMsg("User to update not found.");
+	    if(session.get("logined")==null){
+	    	setErrorMsg("Please sign in first");
 	    	return ERROR;
 	    }
-		//check that username and dot number arent in use
-		List<User> allUsers = userService.getAllUsers();
-		allUsers.remove(userToUpdate);
-		for(User u: allUsers){
-			if(u.getName().equals(userName)) setErrorMsg("Please choose a name not in use."); return ERROR;
-		}
-		for(User u: allUsers){
-			if(u.getOsudotnum().equals(osuDotnum)) setErrorMsg("Please choose an OSU dot number not in use."); return ERROR;
-		}
-		//update appropriate user information
-		
-		if(!userToUpdate.getName().equals(userName)){
-			userToUpdate.setName(userName);
-			userService.updateUsername(userToUpdate.getId(),userName);
-		}
-		if(!userToUpdate.getPassword().equals(passWord)){
-			userToUpdate.setPassword(passWord);
-			userService.updatePassword(userToUpdate.getId(),passWord);
-		}
-		if(!userToUpdate.getOsudotnum().equals(osuDotnum)){
-			userToUpdate.setOsudotnum(osuDotnum);
-			userService.updateUserOsudotnumber(userToUpdate.getId(),osuDotnum);
-		}		
-		if(!userToUpdate.getMoney().equals(moneyInput)){
-			userToUpdate.setMoney(Double.parseDouble(moneyInput));
-			userService.updateUserMoney(userToUpdate.getId(), Double.parseDouble(moneyInput));
-		}
-		
-		allUsers.add(userToUpdate);
-		
-		
-		
-		return SUCCESS;
-		
+	    if(passWord==null || passWord.isEmpty() ){
+	    	setErrorMsg("Please enter your osu dot number");
+	    	return ERROR;
+	    }
+	    int userId = (Integer) session.get("userToUpdateId");
+	    userService.updatePassword(userId, passWord);
+	    User userToUpdate = userService.getUserById(userId);
+	    setUserToUpdate(userToUpdate);
+	    return SUCCESS;
 	}
+	
+	
+	public String setUsername(){
+		Map session = ActionContext.getContext().getSession();
+	    if(session.get("logined")==null){
+	    	setErrorMsg("Please sign in first");
+	    	return ERROR;
+	    }
+	    if(userName==null || userName.isEmpty() ){
+	    	setErrorMsg("Please enter your osu dot number");
+	    	return ERROR;
+	    }
+	    int userId = (Integer) session.get("userToUpdateId");
+	    userService.updateUsername(userId, userName);
+	    User userToUpdate = userService.getUserById(userId);
+	    setUserToUpdate(userToUpdate);
+	    return SUCCESS;
+	}
+	
+	
+	public String setOsudotnum(){
+		Map session = ActionContext.getContext().getSession();
+	    if(session.get("logined")==null){
+	    	setErrorMsg("Please sign in first");
+	    	return ERROR;
+	    }
+	    if(osuDotnum==null || osuDotnum.isEmpty() ){
+	    	setErrorMsg("Please enter your osu dot number");
+	    	return ERROR;
+	    }
+	    int userId = (Integer) session.get("userToUpdateId");
+	    userService.updateUserOsudotnumber(userId, osuDotnum);
+	    User userToUpdate = userService.getUserById(userId);
+	    setUserToUpdate(userToUpdate);
+	    return SUCCESS;
+	    
+	}
+	
+	
+	public String setMoney(){
+		Map session = ActionContext.getContext().getSession();
+	    if(session.get("logined")==null){
+	    	setErrorMsg("Please sign in first");
+	    	return ERROR;
+	    }
+	    if(moneyInput==null || moneyInput.isEmpty() ){
+	    	setErrorMsg("Please enter your osu dot number");
+	    	return ERROR;
+	    }
+	    int userId = (Integer) session.get("userToUpdateId");
+	    double money = Double.parseDouble(moneyInput);
+	    userService.updateUserMoney(userId, money);
+	    User userToUpdate = userService.getUserById(userId);
+	    setUserToUpdate(userToUpdate);
+	    return SUCCESS;
+	}
+	
+	public String updateUsername(){
+		Map session = ActionContext.getContext().getSession();
+	    if(session.get("logined")==null){
+	    	setErrorMsg("Please sign in first");
+	    	return ERROR;
+	    }
+	    int userId = (Integer)session.get("userToUpdateId");
+	    User userToUpdate = userService.getUserById(userId);
+	    setUserToUpdate(userToUpdate);
+	    return SUCCESS;
+	}
+	public String updatePassword(){
+		Map session = ActionContext.getContext().getSession();
+	    if(session.get("logined")==null){
+	    	setErrorMsg("Please sign in first");
+	    	return ERROR;
+	    }
+	    int userId = (Integer)session.get("userToUpdateId");
+	    User userToUpdate = userService.getUserById(userId);
+	    setUserToUpdate(userToUpdate);
+	    return SUCCESS;
+	}
+	public String updateOsudotnum(){
+		Map session = ActionContext.getContext().getSession();
+	    if(session.get("logined")==null){
+	    	setErrorMsg("Please sign in first");
+	    	return ERROR;
+	    }
+	    int userId = (Integer)session.get("userToUpdateId");
+	    User userToUpdate = userService.getUserById(userId);
+	    setUserToUpdate(userToUpdate);
+	    return SUCCESS;
+	}
+	public String updateMoney(){
+		Map session = ActionContext.getContext().getSession();
+	    if(session.get("logined")==null){
+	    	setErrorMsg("Please sign in first");
+	    	return ERROR;
+	    }
+	    int userId = (Integer)session.get("userToUpdateId");
+	    User userToUpdate = userService.getUserById(userId);
+	    setUserToUpdate(userToUpdate);
+	    return SUCCESS;
+	}
+	
 	
 	public List<User> getAllUsers() {
 		return allUsers;
@@ -189,7 +272,7 @@ public class UserAction extends ActionSupport  {
 	}
 
 	public void setMoneyInput(String moneyInput) {
-		this.passWord = moneyInput;
+		this.moneyInput = moneyInput;
 	}
 	
 	//
@@ -221,6 +304,31 @@ public class UserAction extends ActionSupport  {
 
 	public void setUserService(UserService userService) {
 		this.userService = userService;
+	}
+	
+	public RouteService getRouteService() {
+		return routeService;
+	}
+
+	public void setRouteService(RouteService routeService) {
+		this.routeService = routeService;
+	}
+	
+	public AircraftService getAircraftService() {
+		return aircraftService;
+	}
+
+	public void setAircraftService(AircraftService aircraftService) {
+		this.aircraftService = aircraftService;
+	}
+	
+	public AirportService getAirportService() {
+		return airportService;
+	}	
+	
+
+	public void setAirportService(AirportService airportService) {
+		this.airportService = airportService;
 	}
 	//
 	

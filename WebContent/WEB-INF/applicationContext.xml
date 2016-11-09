@@ -102,7 +102,10 @@
 	</bean>
 	<bean id="UserAction" class="com.demo.action.UserAction" scope="prototype">
 		<property name="userService" ref="userService"></property>
-		<property name="registerService" ref="registerService"></property></bean>
+		<property name="registerService" ref="registerService"></property>
+		<property name="airportService" ref="airportService"></property>
+		<property name="aircraftService" ref="aircraftService"></property>
+		<property name="routeService" ref="routeService"></property></bean>
 
 	<!-- Service Bean -->
    

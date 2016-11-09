@@ -57,6 +57,11 @@ public class AircraftServiceImpl implements AircraftService{
 	public void deleteUserAircraft(int userId, String customizedName) {
 		this.aircraftDao.deleteUserAircraft(userId, customizedName);
 	}
+	
+	@Override
+	public void deleteAllUserAircraft(int userId){
+		this.aircraftDao.deleteAllUserAircraft(userId);
+	}
 	@Override
 	public int getUserAircraftId(int userId, String customizedName) {
 		return aircraftDao.getPlaneUniqueId(userId, customizedName);

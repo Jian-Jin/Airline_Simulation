@@ -167,11 +167,38 @@
     		</result>
     		<result name="error">/console/pages/error.jsp</result>
     	</action>
-    	<action name="updateUser" class="com.demo.action.UserAction"
-    		method="updateUser">
-    		<result name="success">/console/pages/adminpages/managestudents.jsp</result>
+    	<action name="setPassword" class="com.demo.action.UserAction"
+    		method="setPassword">
+    		<result name="success">/console/pages/adminpages/viewUser.jsp</result>
     		<result name="error">/console/pages/error.jsp</result>
     	</action>
+    	<action name="setUsername" class="com.demo.action.UserAction"
+    		method="setUsername">
+    		<result name="success">/console/pages/adminpages/viewUser.jsp</result>
+    		<result name="error">/console/pages/error.jsp</result>
+    	</action>
+    	<action name="setOsudotnum" class="com.demo.action.UserAction"
+    		method="setOsudotnum">
+    		<result name="success">/console/pages/adminpages/viewUser.jsp</result>
+    		<result name="error">/console/pages/error.jsp</result>
+    	</action>
+    	<action name="setMoney" class="com.demo.action.UserAction"
+    		method="setMoney">
+    		<result name="success">/console/pages/adminpages/viewUser.jsp</result>
+    		<result name="error">/console/pages/error.jsp</result>
+    	</action>
+    	<action name="updatePassword" class="com.demo.action.UserAction" method="updatePassword">
+    		<result name="success">/console/pages/adminpages/changePassword.jsp</result>
+    		<result name="error">/console/pages/error.jsp</result></action>
+    	<action name="updateUsername" class="com.demo.action.UserAction" method="updateUsername">
+    		<result name="success">/console/pages/adminpages/changeUsername.jsp</result>
+    		<result name="error">/console/pages/error.jsp</result></action>
+    	<action name="updateOsudotnum" class="com.demo.action.UserAction" method="updateOsudotnum">
+    		<result name="success">/console/pages/adminpages/changeOsudotnum.jsp</result>
+    		<result name="error">/console/pages/error.jsp</result></action>
+    	<action name="updateMoney" class="com.demo.action.UserAction" method="updateMoney">
+    		<result name="success">/console/pages/adminpages/changeMoney.jsp</result>
+    		<result name="error">/console/pages/error.jsp</result></action>
     </package>
     
      <package name="ProfileAction" namespace="/profile"

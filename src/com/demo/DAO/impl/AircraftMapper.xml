@@ -81,5 +81,6 @@
 		<delete id="deleteUserAircraft">
       	delete from user_aircraft where userId = #{userId} and customizedName = #{customizedName}
       </delete>
-      
+		<delete id="deleteAllUserAircraft">delete from user_aircraft where userId = #{userId}</delete>
+
 </mapper>
