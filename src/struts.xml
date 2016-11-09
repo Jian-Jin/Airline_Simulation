@@ -22,32 +22,32 @@
      	<action name="loginAsAdmin" class="com.demo.action.LoginAction" method="loginAsAdmin">
      		<!-- action result and page mapping -->
      		<result name="success">/console/pages/adminpages/managestudents.jsp</result>
-     		<result name="error">/console/pages/error.jsp</result>
+     		<result name="error">/console/pages/adminpages/error.jsp</result>
      	</action>
      	
      <action name="manageUser" class="com.demo.action.LoginAction" method="manageUser">
      		<!-- action result and page mapping -->
      		<result name="adminsuccess">/console/pages/adminpages/managestudents.jsp</result>
-     		<result name="error">/console/pages/error.jsp</result>
+     		<result name="error">/console/pages/adminpages/error.jsp</result>
      	</action>
      	
      	 <action name="generateUser" class="com.demo.action.LoginAction" method="generateUser">
      		<!-- action result and page mapping -->
      		<result name="success">/console/pages/adminpages/newusers.jsp</result>
-     		 <result name="error">/console/pages/error.jsp</result>
+     		 <result name="error">/console/pages/adminpages/error.jsp</result>
      	</action>
      	
      	<action name="simulateHome" class="com.demo.action.LoginAction" method="simulateHome">
      		<!-- action result and page mapping -->
      		  <result name="success">/console/pages/profitResult.jsp</result>
      		<result name="adminsuccess">/console/pages/adminpages/simulateHome.jsp</result>
-     		 <result name="error">/console/pages/error.jsp</result>
+     		 <result name="error">/console/pages/adminpages/error.jsp</result>
      	</action>
      	
      	<action name="runSimulate" class="com.demo.action.LoginAction" method="runSimulate">
      		<!-- action result and page mapping -->
      		<result name="success">/console/pages/adminpages/simulateHome.jsp</result>
-     		 <result name="error">/console/pages/error.jsp</result>
+     		 <result name="error">/console/pages/adminpages/error.jsp</result>
      	</action>     	
      	
   </package>
@@ -133,6 +133,7 @@
      </action>
      
       <action name="profitDetails" class="com.demo.action.RouteAction" method="profitDetails">
+           	<result name="adminsuccess">/console/pages/adminpages/profitDetail.jsp</result>
      		<result name="success">/console/pages/profitDetail.jsp</result>
      		<result name="error">/console/pages/error.jsp</result>
      </action>

@@ -21,7 +21,7 @@ public class LoginAction extends ActionSupport {
 	private String errorMsg;
 	private List<User> allUsers;
 	private List<User> newAddedUsers;
-	private int newUserCount;
+	private String newUserNames;
 	//Below are simulation variable
 	private double fuelPrice;
 	private double seatPrice;
@@ -34,6 +34,7 @@ public class LoginAction extends ActionSupport {
 		//admin
 		if(user != null && user.getSuperuser()){
 			Map session = ActionContext.getContext().getSession();
+			session.clear();
 			session.put("logined","true");
 			session.put("superuser","true");
 			session.put("userId", user.getId());
@@ -42,6 +43,7 @@ public class LoginAction extends ActionSupport {
 		//student
 		else if(user != null){
 			Map session = ActionContext.getContext().getSession();
+			session.clear();
 			session.put("logined","true");
 			session.put("userId", user.getId());
 			double money = userService.getUserMoney(user.getId());
@@ -86,11 +88,20 @@ public class LoginAction extends ActionSupport {
 	    	setErrorMsg("Please sign in as admin");
 	    	return ERROR;
 	  }
-		List<User> newUsers = userService.generateUser(getNewUserCount());
-		setNewAddedUsers(newUsers);
-		return SUCCESS;
+	 String names = getNewUserNames();
+	 
+	List<User> newUsers = userService.generateUser(names);
+	if(newUsers.isEmpty()){
+		 setErrorMsg("User names input is not valid, please check and input again");
+	    	return ERROR;
+	}
+	setNewAddedUsers(newUsers);
+	return SUCCESS;
 	}
 	
+
+	// admin return adminsuccess
+	// normal users return success
 	public String simulateHome(){
 		Map session = ActionContext.getContext().getSession();
 
@@ -103,7 +114,7 @@ public class LoginAction extends ActionSupport {
 		 setSimulateRunTime(simulateService.getSimulateRunTime());
 		 if(session.get("superuser")==null){
 		    	return SUCCESS;
-			}
+		}
 		return "adminsuccess";
 	}
 	
@@ -173,12 +184,14 @@ public class LoginAction extends ActionSupport {
 		this.newAddedUsers = newAddedUsers;
 	}
 
-	public int getNewUserCount() {
-		return newUserCount;
+	
+
+	public String getNewUserNames() {
+		return newUserNames;
 	}
 
-	public void setNewUserCount(int newUserCount) {
-		this.newUserCount = newUserCount;
+	public void setNewUserNames(String newUserNames) {
+		this.newUserNames = newUserNames;
 	}
 
 	public double getFuelPrice() {
