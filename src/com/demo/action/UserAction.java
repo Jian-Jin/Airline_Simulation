@@ -5,11 +5,13 @@ import com.demo.service.UserService;
 import java.util.List;
 import java.util.Map;
 
+import com.demo.DAO.UserProfitDAO;
 import com.demo.model.User;
 import com.demo.service.RegisterService;
 import com.demo.service.AircraftService;
 import com.demo.service.AirportService;
 import com.demo.service.RouteService;
+import com.demo.service.SimulateService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -33,6 +35,8 @@ public class UserAction extends ActionSupport  {
 	private AirportService airportService;
 	private RouteService routeService;
 	private String errorMsg;
+	private SimulateService simulateService;
+
 	
 	public String register(){
 		if(registerService.register(userName, passWord, osuDotnum, superUser))
@@ -95,6 +99,7 @@ public class UserAction extends ActionSupport  {
 	    aircraftService.deleteAllUserAircraft(userId);
 	    airportService.deleteUserAirport(userId);
 	    userService.deleteUser(userId);
+	    simulateService.deleteUserProfit(userId);
 	    
 	    setAllUsers(allUsers);
 		return SUCCESS;
@@ -343,5 +348,13 @@ public class UserAction extends ActionSupport  {
 	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	
+	public SimulateService getSimulateService() {
+		return simulateService;
+	}
+
+	public void setSimulateService(SimulateService simulateService) {
+		this.simulateService = simulateService;
 	}
 }

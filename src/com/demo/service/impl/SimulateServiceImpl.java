@@ -339,6 +339,12 @@ public class SimulateServiceImpl implements SimulateService, InitializingBean{
 		this.airportService = airportService;
 	}
 
+	@Override
+	public void deleteUserProfit(int userId) {
+		userProfitDao.deleteUserProfit(userId);
+		
+	}
+
 
 	
 	

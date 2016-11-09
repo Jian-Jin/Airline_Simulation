@@ -11,4 +11,6 @@ public interface SimulateService {
 	public List<UserProfit> getProfits();
 	
 	public String getSimulateRunTime();
+	
+	public void deleteUserProfit(int userId);
 }

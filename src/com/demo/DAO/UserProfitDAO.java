@@ -14,4 +14,5 @@ public interface UserProfitDAO {
 	public void clearSimulateTime();
 	public String getSimulateTime();
 	public void storeSimulateTime(@Param(value = "time") String time);
+	public void deleteUserProfit(@Param(value = "userId") int userId);
 }
