@@ -17,35 +17,36 @@
 <body>
 <%@include file="adminheader.jsp"%>
 
-
+<font face="Arial" size="4" color="orange">
+<h1>Pick an Airport and adjust the demand value</h1>
 <br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+
+<s:actionerror theme="bootstrap"/>
+<s:actionmessage theme="bootstrap"/>
+<s:fielderror theme="bootstrap"/>
+
+
+
 
 <s:form action="adjustMultiplier" namespace="/" theme="bootstrap" cssClass="form-horizontal" >
-Airport to Adjust:   <input type="search"  name="fromAirportName" id="fromAirportName" size="40" list="airports" placeholder="Pick the airport to adjust">
+<h2>Airport:</h2>
+<input type="search"  name="fromAirportName" id="fromAirportName" size="40" list="airports" placeholder="Pick the airport to adjust">
 <br>
-Demand Value:   <input type="search" name="toAirportName" id="toAirportName" size="40" list="multiplier" placeholder="Multiplier">
-<datalist id="multiplier">
-<option value="0.1">
-<option value="0.2">
-<option value="0.3">
-<option value="0.4">
-<option value="0.5">
-<option value="0.6">
-<option value="0.7">
-<option value="0.8">
-<option value="0.9">
-<option value="1.0">
-<option value="1.1">
-<option value="1.2">
-<option value="1.3">
-<option value="1.4">
-<option value="1.5">
-<option value="1.6">
-<option value="1.7">
-<option value="1.8">
-<option value="1.9">
-<option value="2.0">
-</datalist>    
+	<h3>Demand Value: </h3>
+	<input type="range" name="toAirportName" min="0.1" max="5.0" step="0.1" onchange="showValue(this.value,this.name)"/>
+<span id="toAirportName">1.0</span>
+
+
+  <script type="text/javascript">
+function showValue(newValue,id)
+{
+	document.getElementById(id).innerHTML=newValue;
+}
+</script> 
+   
   
 <datalist id="airports">
 <option value="Akron-Canton Regional">

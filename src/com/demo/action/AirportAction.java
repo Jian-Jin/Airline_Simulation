@@ -24,7 +24,6 @@ public class AirportAction extends ActionSupport{
   private List<Airport> userAirport;  
   private double demandMult;
   private Airport demandAirport;
-
   
   public String airportHome(){
 		Map session = ActionContext.getContext().getSession();
