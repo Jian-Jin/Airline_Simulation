@@ -22,7 +22,7 @@
 
     <script type="text/javascript">
             function confirmation(){
-                return confirm("Comfirm your aircraft to be deleted!")
+                return confirm("Comfirm your aircraft to be sold!")
             }
     </script>
 <font face="Arial" size="5" color="orange">
@@ -79,7 +79,7 @@
 		
 		<s:form action="deleteUserAircrafts" method="post" namespace="/profile" theme="bootstrap" cssClass="form-horizontal">
   <h2>
-   <s:select label="Select the aircraft to delete" name="aircraftCustomizeNameToDelete" list="%{userPlanes.{customizedName}}" value="" />
+   <s:select label="Select the aircraft to sell (Get 50% of original price)" name="aircraftCustomizeNameToDelete" list="%{userPlanes.{customizedName}}" value="" />
    </h2>
    <div class="form-group">
           <div class="col-sm-offset-3 col-md-9">

@@ -82,7 +82,7 @@
 <s:select label="2. Select the aircraft arrival airport"
 	headerKey="-1" headerValue="Select the aircraft arrival airport"
 	list="airports"
-	name="airportToGo" />
+	name="airportToGo" listKey="name" listValue="identifier + ' - ' + name" />
 </h2>
 <br>
 

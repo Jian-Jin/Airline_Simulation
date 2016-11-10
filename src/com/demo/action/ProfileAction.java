@@ -102,7 +102,7 @@ public class ProfileAction  extends ActionSupport {
 	    double cost = deleteAirtcraft.getCost()*1000000;
 	    //increase the money
 	    double money = userService.getUserMoney(userId);
-	    money += cost;
+	    money += cost*0.5;
 	    userService.updateUserMoney(userId, money);
 	    routeService.deleteUserRouteByAircraftId(userId, user_aircraftId);
 	    aircraftService.deleteUserAircraft(userId, aircraftCustomizeNameToDelete);

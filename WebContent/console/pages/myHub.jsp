@@ -23,7 +23,7 @@
 
     <script type="text/javascript">
             function confirmation(){
-                return confirm("Change a hub will delete all your existing routes!")
+                return confirm("Change a hub will delete all your existing routes! \nAnd you need to pay the difference of their price.")
             }
     </script>
     
@@ -53,6 +53,8 @@
     <th>City</th>
     <th>Landing Fee</th>
     <th>Runway Length</th>
+    <th>Size</th>
+    <th>Cost(Million USD)</th>
   </tr>
  <s:iterator value="userAirports" var="p">
  <tr>
@@ -63,13 +65,15 @@
    <td> <s:property value="#p.city" /></td>
    <td> <s:property value="#p.landingFee" /></td>
    <td> <s:property value="#p.runwayLength" /></td>
+   <td> <s:property value="#p.size" /></td>
+   <td> <s:property value="#p.cost/1000000" /></td>
     </tr>
  </s:iterator>
 </table>
 		
 		<s:form action="changeUserAirport" method="post" namespace="/profile" theme="bootstrap" cssClass="form-horizontal">
   <h2>
-   <s:select label="Select the hub to change" name="airportToChange" list="%{airportList.{name}}" value="" />
+   <s:select label="Select the hub to change" name="airportToChange" headerKey="" headerValue="Select Hub to Buy" list="airportList" listKey="name" listValue="identifier + ' - ' + name + ' - '+ cost/1000000 + ' Million USD'" />
    </h2>
    <div class="form-group">
           <div class="col-sm-offset-3 col-md-9">

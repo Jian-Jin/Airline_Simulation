@@ -31,7 +31,7 @@ public class RouteAction extends ActionSupport{
 	//private List<String> timeslots;
 	private List<String> hours;
 	private List<String> mins;
-	private List<String> airports;
+	private List<Airport> airports;
 	private List<Route> routeProfits;
 	
 	private static String dayPlusText=" (Day+1)";
@@ -118,11 +118,7 @@ public class RouteAction extends ActionSupport{
 	 */
 	private void populateTimeSlots(int currentHour, int currentMin){
 		if(airports == null || airports.isEmpty()){
-			airports = new ArrayList<String>();
-			List<Airport> list = airportService.getAllAirport();
-			for(Airport a : list){
-				airports.add(a.getName());
-			}
+			setAirports(airportService.getAllAirport());
 		}
 		
 		if(hours == null || hours.isEmpty()){
@@ -342,20 +338,28 @@ public class RouteAction extends ActionSupport{
 //	}
 
 
-	public List<String> getAirports() {
-		return airports;
-	}
-
-
-	public void setAirports(List<String> airports) {
-		this.airports = airports;
-	}
 
 
 	public AirportService getAirportService() {
 		return airportService;
 	}
 
+
+	public List<Airport> getAirports() {
+		return airports;
+	}
+
+	public void setAirports(List<Airport> airports) {
+		this.airports = airports;
+	}
+
+	public static String getDayPlusText() {
+		return dayPlusText;
+	}
+
+	public static void setDayPlusText(String dayPlusText) {
+		RouteAction.dayPlusText = dayPlusText;
+	}
 
 	public void setAirportService(AirportService airportService) {
 		this.airportService = airportService;

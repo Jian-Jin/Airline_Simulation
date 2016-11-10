@@ -22,32 +22,32 @@
      	<action name="loginAsAdmin" class="com.demo.action.LoginAction" method="loginAsAdmin">
      		<!-- action result and page mapping -->
      		<result name="success">/console/pages/adminpages/managestudents.jsp</result>
-     		<result name="error">/console/pages/error.jsp</result>
+     		<result name="error">/console/pages/adminpages/error.jsp</result>
      	</action>
      	
      <action name="manageUser" class="com.demo.action.LoginAction" method="manageUser">
      		<!-- action result and page mapping -->
      		<result name="adminsuccess">/console/pages/adminpages/managestudents.jsp</result>
-     		<result name="error">/console/pages/error.jsp</result>
+     		<result name="error">/console/pages/adminpages/error.jsp</result>
      	</action>
      	
      	 <action name="generateUser" class="com.demo.action.LoginAction" method="generateUser">
      		<!-- action result and page mapping -->
      		<result name="success">/console/pages/adminpages/newusers.jsp</result>
-     		 <result name="error">/console/pages/error.jsp</result>
+     		 <result name="error">/console/pages/adminpages/error.jsp</result>
      	</action>
      	
      	<action name="simulateHome" class="com.demo.action.LoginAction" method="simulateHome">
      		<!-- action result and page mapping -->
      		  <result name="success">/console/pages/profitResult.jsp</result>
      		<result name="adminsuccess">/console/pages/adminpages/simulateHome.jsp</result>
-     		 <result name="error">/console/pages/error.jsp</result>
+     		 <result name="error">/console/pages/adminpages/error.jsp</result>
      	</action>
      	
      	<action name="runSimulate" class="com.demo.action.LoginAction" method="runSimulate">
      		<!-- action result and page mapping -->
      		<result name="success">/console/pages/adminpages/simulateHome.jsp</result>
-     		 <result name="error">/console/pages/error.jsp</result>
+     		 <result name="error">/console/pages/adminpages/error.jsp</result>
      	</action>     	
      	
   </package>
@@ -133,6 +133,7 @@
      </action>
      
       <action name="profitDetails" class="com.demo.action.RouteAction" method="profitDetails">
+           	<result name="adminsuccess">/console/pages/adminpages/profitDetail.jsp</result>
      		<result name="success">/console/pages/profitDetail.jsp</result>
      		<result name="error">/console/pages/error.jsp</result>
      </action>
@@ -143,12 +144,12 @@
     	<action name="showUser" class="com.demo.action.UserAction"
     		method="getUser">
     		<result name="success">/console/pages/student.jsp</result>
-    		<result name="error">/console/pages/error.jsp</result>
+    		<result name="error">/console/pages/adminpages/error.jsp</result>
     	</action>
     	<action name="getUser" class="com.demo.action.UserAction"
     		method="getUsers">
     		<result name="success"></result>
-    		<result name="error">/console/pages/error.jsp</result>
+    		<result name="error">/console/pages/adminpages/error.jsp</result>
     	</action>
     	<action name="showAdmin">
     		<result>/console/pages/adminpages/admin.jsp</result></action>
@@ -157,20 +158,47 @@
     		<result name="success">
     			/console/pages/adminpages/managestudents.jsp
     		</result>
-    		<result name="error">/console/pages/error.jsp</result>
+    		<result name="error">/console/pages/adminpages/error.jsp</result>
     	</action>
     	<action name="viewUser" class="com.demo.action.UserAction"
     		method="viewUser">
     		<result name="success">
     			/console/pages/adminpages/viewUser.jsp
     		</result>
-    		<result name="error">/console/pages/error.jsp</result>
+    		<result name="error">/console/pages/adminpages/error.jsp</result>
     	</action>
-    	<action name="updateUser" class="com.demo.action.UserAction"
-    		method="updateUser">
-    		<result name="success">/console/pages/adminpages/managestudents.jsp</result>
-    		<result name="error">/console/pages/error.jsp</result>
+    	<action name="setPassword" class="com.demo.action.UserAction"
+    		method="setPassword">
+    		<result name="success">/console/pages/adminpages/viewUser.jsp</result>
+    		<result name="error">/console/pages/adminpages/error.jsp</result>
     	</action>
+    	<action name="setUsername" class="com.demo.action.UserAction"
+    		method="setUsername">
+    		<result name="success">/console/pages/adminpages/viewUser.jsp</result>
+    		<result name="error">/console/pages/adminpages/error.jsp</result>
+    	</action>
+    	<action name="setOsudotnum" class="com.demo.action.UserAction"
+    		method="setOsudotnum">
+    		<result name="success">/console/pages/adminpages/viewUser.jsp</result>
+    		<result name="error">/console/pages/adminpages/error.jsp</result>
+    	</action>
+    	<action name="setMoney" class="com.demo.action.UserAction"
+    		method="setMoney">
+    		<result name="success">/console/pages/adminpages/viewUser.jsp</result>
+    		<result name="error">/console/pages/adminpages/error.jsp</result>
+    	</action>
+    	<action name="updatePassword" class="com.demo.action.UserAction" method="updatePassword">
+    		<result name="success">/console/pages/adminpages/changePassword.jsp</result>
+    		<result name="error">/console/pages/adminpages/error.jsp</result></action>
+    	<action name="updateUsername" class="com.demo.action.UserAction" method="updateUsername">
+    		<result name="success">/console/pages/adminpages/changeUsername.jsp</result>
+    		<result name="error">/console/pages/adminpages/error.jsp</result></action>
+    	<action name="updateOsudotnum" class="com.demo.action.UserAction" method="updateOsudotnum">
+    		<result name="success">/console/pages/adminpages/changeOsudotnum.jsp</result>
+    		<result name="error">/console/pages/adminpages/error.jsp</result></action>
+    	<action name="updateMoney" class="com.demo.action.UserAction" method="updateMoney">
+    		<result name="success">/console/pages/adminpages/changeMoney.jsp</result>
+    		<result name="error">/console/pages/adminpages/error.jsp</result></action>
     </package>
     
      <package name="ProfileAction" namespace="/profile"

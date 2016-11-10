@@ -36,11 +36,11 @@
       </insert>
       
       <select id="getAirportsByUserId"  resultMap="AirportResult">
-       select a.* from airport a join user_airport b on a.id = b.airportId where b.userId = #{userId}
+       select a.* from airport a join user_airport b on a.id = b.airportId where b.userId = #{userId} order by a.identifier
       </select>
       
        <select id="getAllAirport"  resultMap="AirportResult">
-       select * from airport
+       select * from airport order by identifier
       </select>
       
       <delete id="updateUserAirport">

@@ -21,7 +21,8 @@ public class AirportAction extends ActionSupport{
   private Airport toAirport;
   private String errorMsg;
   private String airportToBuy;
-  private List<Airport> userAirport;  
+  private List<Airport> userAirport;
+  private List<Airport> allAirports;
   private double demandMult;
   private Airport demandAirport;
   
@@ -32,7 +33,9 @@ public class AirportAction extends ActionSupport{
 	    	return ERROR;
 	    }
 	    int userId = (Integer)session.get("userId");
-
+	  if(allAirports==null){
+		  setAllAirports(airportService.getAllAirport());
+	  }
 	  setUserAirport(airportService.getMyAirport(userId));
 	  return SUCCESS;
   }
@@ -42,12 +45,19 @@ public String getAirport(){
 	  System.out.println(fromAirportName);
 	  System.out.println(toAirportName);
 
-	  if(fromAirport == null || toAirport == null){
-		  setErrorMsg("invalid airport input");
+	  if(fromAirport == null){
+		  setErrorMsg("Please select a departure airport");
 		  return ERROR;
 	  }
-		DecimalFormat df = new DecimalFormat("#.00");
-		distance = df.format(airportService.distance(fromAirport, toAirport));
+	  
+	  if(toAirport == null){
+		  setErrorMsg("Please select a destination airport");
+		  return ERROR;
+	  }
+	  
+	  DecimalFormat df = new DecimalFormat("#.00");
+	  distance = df.format(airportService.distance(fromAirport, toAirport));
+	  
 	  return SUCCESS;	  
   }
 
@@ -89,7 +99,7 @@ public String buyAirport(){
     	return ERROR;
     }
     if(airportToBuy==null || airportToBuy.isEmpty()){
-    	setErrorMsg("Please choose an aircraft first");
+    	setErrorMsg("Please choose a hub to buy");
     	return ERROR;
     }
     int userId = (Integer)session.get("userId");
@@ -107,6 +117,9 @@ public String buyAirport(){
     	setErrorMsg("Each user could only own one hub");
     	return ERROR;
     }
+    if(allAirports==null){
+		  setAllAirports(airportService.getAllAirport());
+	  }
     setUserAirport(list);
 	return SUCCESS;
 }
@@ -181,6 +194,24 @@ public UserService getUserService() {
 
 public void setUserService(UserService userService) {
 	this.userService = userService;
+}
+public List<Airport> getAllAirports() {
+	return allAirports;
+}
+public void setAllAirports(List<Airport> allAirports) {
+	this.allAirports = allAirports;
+}
+public double getDemandMult() {
+	return demandMult;
+}
+public void setDemandMult(double demandMult) {
+	this.demandMult = demandMult;
+}
+public Airport getDemandAirport() {
+	return demandAirport;
+}
+public void setDemandAirport(Airport demandAirport) {
+	this.demandAirport = demandAirport;
 }
 
 }

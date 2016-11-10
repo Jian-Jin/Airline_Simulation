@@ -69,7 +69,7 @@
 <br>
 <s:select label="Select your aircraft to set the route"
     tooltip="Choose Your Aircraft to set its route"
-	headerKey="-1" headerValue="Select your aircraft to set the route"
+	headerKey="" headerValue="Select your aircraft to set the route"
 	list="myPlanes"
 	name="planeToSet" />
 </h2>

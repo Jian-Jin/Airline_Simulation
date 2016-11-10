@@ -28,4 +28,7 @@
 <insert id="storeSimulateTime" >
        insert into simulateTime (runtime) values (#{time})
     </insert>
+    <delete id="deleteUserProfit">
+    	delete from user_profit where userId = #{userId}
+    </delete>
 </mapper>
