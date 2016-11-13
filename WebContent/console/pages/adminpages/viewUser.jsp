@@ -55,6 +55,9 @@
 				<br/>
 				<br/>
  				<button><a href="<s:url action='updatePassword' namespace="/user"/>" >Change Users Password</a></button>
+ 				<br/>
+ 				<br/>
+ 				<button><a href="<s:url action='resetUser' namespace="/user"/>" >Reset User</a></button>
          </div>
     
     

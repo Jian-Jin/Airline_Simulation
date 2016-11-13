@@ -199,6 +199,11 @@
     	<action name="updateMoney" class="com.demo.action.UserAction" method="updateMoney">
     		<result name="success">/console/pages/adminpages/changeMoney.jsp</result>
     		<result name="error">/console/pages/adminpages/error.jsp</result></action>
+    	<action name="resetUser" class="com.demo.action.UserAction"
+    		method="resetUser">
+    		<result name="success">/console/pages/adminpages/viewUser.jsp</result>
+    		<result name="error">/console/pages/error.jsp</result>
+    	</action>
     </package>
     
      <package name="ProfileAction" namespace="/profile"

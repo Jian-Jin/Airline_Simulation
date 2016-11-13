@@ -106,7 +106,8 @@
 		<property name="airportService" ref="airportService"></property>
 		<property name="aircraftService" ref="aircraftService"></property>
 		<property name="routeService" ref="routeService"></property>
-		<property name="simulateService" ref="simulateService"></property></bean>
+		<property name="simulateService" ref="simulateService"></property>
+		<property name="utils" ref="utils"></property></bean>
 
 	<!-- Service Bean -->
    
