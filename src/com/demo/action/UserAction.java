@@ -1,6 +1,7 @@
 package com.demo.action;
 
 import com.demo.service.UserService;
+import com.demo.service.Utils;
 
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,7 @@ public class UserAction extends ActionSupport  {
 	private String passWord;
 	private String osuDotnum;
 	private String moneyInput;
+	private String millions;
 	private List<User> allUsers;
 	private User userToDelete;
 	private User userToUpdate;
@@ -34,6 +36,7 @@ public class UserAction extends ActionSupport  {
 	private AircraftService aircraftService;
 	private AirportService airportService;
 	private RouteService routeService;
+	private Utils utils;
 	private String errorMsg;
 	private SimulateService simulateService;
 
@@ -74,6 +77,32 @@ public class UserAction extends ActionSupport  {
 		
 	}
 	
+	public String resetUser(){
+		Map session = ActionContext.getContext().getSession();
+	    if(session.get("logined")==null){
+	    	setErrorMsg("Please sign in first");
+	    	return ERROR;
+	    }
+	    int userId = (Integer)session.get("userToUpdateId");
+	    User userToUpdate = userService.getUserById(userId);
+	    
+	    
+	    
+	    double t = 600000000;
+	    
+	    userService.updateUserMoney(userId,t);
+	    routeService.deleteUserRoute(userId);
+	    aircraftService.deleteAllUserAircraft(userId);
+	    airportService.deleteUserAirport(userId);
+	    simulateService.deleteUserProfit(userId);
+	    
+	    userToUpdate.setMoney(t);
+	    userToUpdate.setMoneyString(utils.convertToMillion(t));
+	    
+	    setUserToUpdate(userToUpdate);
+	    return SUCCESS;
+	}
+	
 	public String deleteUser(){
 		Map session = ActionContext.getContext().getSession();
 	    if(session.get("logined")==null){
@@ -84,7 +113,8 @@ public class UserAction extends ActionSupport  {
 	    	setErrorMsg("Please choose an user to delete");
 	    	return ERROR;
 	    }
-		List<User> allUsers = userService.getAllUsers();
+	    
+	    List<User> allUsers = userService.getAllUsers();
 		allUsers.remove(userToDelete);
 	    for(User u : allUsers){
 	    	if(u.getName().equals(usernameToDelete)){
@@ -93,6 +123,8 @@ public class UserAction extends ActionSupport  {
 	    		break;
 	    	}
 	    }
+	    
+	    allUsers.remove(userToDelete);
 	    int userId = userToDelete.getId();
 	    
 	    routeService.deleteUserRoute(userId);
@@ -171,9 +203,15 @@ public class UserAction extends ActionSupport  {
 	    	return ERROR;
 	    }
 	    int userId = (Integer) session.get("userToUpdateId");
+	    User userToUpdate = userService.getUserById(userId);
+	    
 	    double money = Double.parseDouble(moneyInput);
 	    userService.updateUserMoney(userId, money);
-	    User userToUpdate = userService.getUserById(userId);
+	    userToUpdate.setMoney(money);
+	    userToUpdate.setMoneyString(utils.convertToMillion(money));
+	    
+	    
+	    
 	    setUserToUpdate(userToUpdate);
 	    return SUCCESS;
 	}
@@ -259,6 +297,14 @@ public class UserAction extends ActionSupport  {
 		return userToUpdate;
 	}
 	
+	public String getMillions(){
+		return millions;
+	}
+	
+	public void setMillions(String millions){
+		this.millions = millions;
+	}
+	
 	public void setUserToUpdate(User userToUpdate){
 		this.userToUpdate = userToUpdate;
 	}
@@ -299,6 +345,15 @@ public class UserAction extends ActionSupport  {
 	public void setRegisterService(RegisterService registerService) {
 		this.registerService = registerService;
 	}
+	
+	public Utils getUtils(){
+		return utils;
+	}
+	
+	public void setUtils(Utils utils){
+		this.utils = utils;
+	}
+	
 
 //
 	
