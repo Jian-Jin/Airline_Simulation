@@ -44,7 +44,7 @@
 <center><s:submit onclick ="return confirmation();" value="PURCHASE" name="PURCHASE" cssClass="btn btn-primary"/></center>
 </s:form>
 
-<h1>Below is the information of your hub:</h1>
+<h1>Your Airport Hub:</h1>
   <table class="table table-striped">
  <tr>
     <th>Name</th>

@@ -24,7 +24,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-9">
-        <h1>Below are all the aircrafts information :</h1>
+        <h1>Aircraft Information:</h1>
  <table class="table table-striped">
  <tr>
     <!-- <th>Purchase</th> -->
@@ -60,11 +60,11 @@
        
   <s:form action="buyPlane" method="post" namespace="/" theme="bootstrap" cssClass="form-horizontal">
   <h2>
-   <s:select label="Select the aircraft to buy" name="aircraftToBuy" list="names" value="" />
+   <s:select label="Purchase Aircraft" headerKey="" headerValue="Select aircraft to purchase" name="aircraftToBuy" list="names" value="" />
    </h2>
    <div class="form-group">
           <div class="col-sm-offset-3 col-md-9">
-                 <s:submit onclick = "return confirmation();" value="NEXT" name="NEXT" cssClass="btn btn-primary"/>
+                 <s:submit onclick = "return confirmation();" value="BUY" name="NEXT" cssClass="btn btn-primary"/>
           </div>
   </div>
   

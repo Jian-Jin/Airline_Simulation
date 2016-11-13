@@ -57,6 +57,10 @@ public class UserAction extends ActionSupport  {
 	    	setErrorMsg("Please sign in first");
 	    	return ERROR;
 	    }
+		if(session.get("superuser")==null){
+	    	setErrorMsg("Please sign in as admin");
+	    	return ERROR;
+		}
 	    if(usernameToUpdate==null || usernameToUpdate.isEmpty() ){
 	    	setErrorMsg("Please choose an user to update");
 	    	return ERROR;
@@ -83,6 +87,10 @@ public class UserAction extends ActionSupport  {
 	    	setErrorMsg("Please sign in first");
 	    	return ERROR;
 	    }
+	    if(session.get("superuser")==null){
+	    	setErrorMsg("Please sign in as admin");
+	    	return ERROR;
+	    }
 	    int userId = (Integer)session.get("userToUpdateId");
 	    User userToUpdate = userService.getUserById(userId);
 	    
@@ -107,6 +115,10 @@ public class UserAction extends ActionSupport  {
 		Map session = ActionContext.getContext().getSession();
 	    if(session.get("logined")==null){
 	    	setErrorMsg("Please sign in first");
+	    	return ERROR;
+	    }
+	    if(session.get("superuser")==null){
+	    	setErrorMsg("Please sign in as admin");
 	    	return ERROR;
 	    }
 	    if(usernameToDelete==null || usernameToDelete.isEmpty() ){
@@ -143,6 +155,10 @@ public class UserAction extends ActionSupport  {
 	    	setErrorMsg("Please sign in first");
 	    	return ERROR;
 	    }
+	    if(session.get("superuser")==null){
+	    	setErrorMsg("Please sign in as admin");
+	    	return ERROR;
+	    }
 	    if(passWord==null || passWord.isEmpty() ){
 	    	setErrorMsg("Please enter your osu dot number");
 	    	return ERROR;
@@ -159,6 +175,10 @@ public class UserAction extends ActionSupport  {
 		Map session = ActionContext.getContext().getSession();
 	    if(session.get("logined")==null){
 	    	setErrorMsg("Please sign in first");
+	    	return ERROR;
+	    }
+	    if(session.get("superuser")==null){
+	    	setErrorMsg("Please sign in as admin");
 	    	return ERROR;
 	    }
 	    if(userName==null || userName.isEmpty() ){
@@ -179,6 +199,10 @@ public class UserAction extends ActionSupport  {
 	    	setErrorMsg("Please sign in first");
 	    	return ERROR;
 	    }
+	    if(session.get("superuser")==null){
+	    	setErrorMsg("Please sign in as admin");
+	    	return ERROR;
+	    }
 	    if(osuDotnum==null || osuDotnum.isEmpty() ){
 	    	setErrorMsg("Please enter your osu dot number");
 	    	return ERROR;
@@ -196,6 +220,10 @@ public class UserAction extends ActionSupport  {
 		Map session = ActionContext.getContext().getSession();
 	    if(session.get("logined")==null){
 	    	setErrorMsg("Please sign in first");
+	    	return ERROR;
+	    }
+	    if(session.get("superuser")==null){
+	    	setErrorMsg("Please sign in as admin");
 	    	return ERROR;
 	    }
 	    if(moneyInput==null || moneyInput.isEmpty() ){
@@ -222,6 +250,10 @@ public class UserAction extends ActionSupport  {
 	    	setErrorMsg("Please sign in first");
 	    	return ERROR;
 	    }
+	    if(session.get("superuser")==null){
+	    	setErrorMsg("Please sign in as admin");
+	    	return ERROR;
+	    }
 	    int userId = (Integer)session.get("userToUpdateId");
 	    User userToUpdate = userService.getUserById(userId);
 	    setUserToUpdate(userToUpdate);
@@ -231,6 +263,10 @@ public class UserAction extends ActionSupport  {
 		Map session = ActionContext.getContext().getSession();
 	    if(session.get("logined")==null){
 	    	setErrorMsg("Please sign in first");
+	    	return ERROR;
+	    }
+	    if(session.get("superuser")==null){
+	    	setErrorMsg("Please sign in as admin");
 	    	return ERROR;
 	    }
 	    int userId = (Integer)session.get("userToUpdateId");
@@ -244,6 +280,10 @@ public class UserAction extends ActionSupport  {
 	    	setErrorMsg("Please sign in first");
 	    	return ERROR;
 	    }
+	    if(session.get("superuser")==null){
+	    	setErrorMsg("Please sign in as admin");
+	    	return ERROR;
+	    }
 	    int userId = (Integer)session.get("userToUpdateId");
 	    User userToUpdate = userService.getUserById(userId);
 	    setUserToUpdate(userToUpdate);
@@ -255,11 +295,17 @@ public class UserAction extends ActionSupport  {
 	    	setErrorMsg("Please sign in first");
 	    	return ERROR;
 	    }
+	    if(session.get("superuser")==null){
+	    	setErrorMsg("Please sign in as admin");
+	    	return ERROR;
+	    }
 	    int userId = (Integer)session.get("userToUpdateId");
 	    User userToUpdate = userService.getUserById(userId);
 	    setUserToUpdate(userToUpdate);
 	    return SUCCESS;
 	}
+	
+	
 	
 	
 	public List<User> getAllUsers() {

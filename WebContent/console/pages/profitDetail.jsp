@@ -34,11 +34,11 @@
  <table class="table table-striped">
  <tr>
     <th>User</th>
-    <th>AircraftName</th>
-    <th>departure Airport</th>
-    <th>departure Time</th>
-    <th>arrival Airport</th>
-    <th>arrival Time</th>
+    <th>Aircraft Name</th>
+    <th>Departure Airport</th>
+    <th>Departure Time</th>
+    <th>Arrival Airport</th>
+    <th>Arrival Time</th>
     <th>Cost</th>
     <th>Revenue</th>
     <th>Profit</th>

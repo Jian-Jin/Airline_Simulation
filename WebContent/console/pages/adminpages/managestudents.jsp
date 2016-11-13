@@ -34,8 +34,8 @@
         <h1>Users information :</h1>
  <table class="table table-striped">
  <tr>
-    <th>UserName</th>
-    <th>OsuDotNum</th>
+    <th>Usernames</th>
+    <th>OSU dot numbers</th>
     <th>Balance</th>
   </tr>
  <s:iterator value="allUsers" var="u">
@@ -54,13 +54,14 @@
   
    <s:textarea
                         tooltip="new user names split with comma e.g.Alex,Ben,...,Joe"
-                        label="New accounts to create"
+                        label="Create Accounts"
+                        placeholder="Alex,Ben,...,Joe"
                         name="newUserNames"
                         cols="20"
                         rows="3"/>
                         
    <font face="Arial" size="3" color="orange">
-     Please input all the new account names you want to create in comma-separated format e.g. Alex,Ben,Chen.123,...,Joe 
+    Input new usernames in comma-separated format e.g. Alex,Ben,Chen.123,...,Joe 
   </font>
    <div class="form-group">
           <div class="col-sm-offset-3 col-md-9">
@@ -75,7 +76,7 @@
     
 <s:form action="viewUser" method="post" namespace="/user" theme="bootstrap" cssClass="form-horizontal">
   <h2>
-   <s:select label="User to edit:" name="usernameToUpdate" list="%{allUsers.{name}}" value="" />
+   <s:select label="User to edit:" headerKey="" headerValue="Select user to edit" name="usernameToUpdate" list="%{allUsers.{name}}" value="" />
    </h2>
    <div class="form-group">
           <div class="col-sm-offset-3 col-md-9">
@@ -87,11 +88,11 @@
     <br>
   <s:form action="deleteUser" method="post" namespace="/user" theme="bootstrap" cssClass="form-horizontal">
   <h2>
-   <s:select label="User to delete:" name="usernameToDelete" list="%{allUsers.{name}}" value="" />
+   <s:select label="User to delete:" headerKey="" headerValue="Select user to delete" name="usernameToDelete" list="%{allUsers.{name}}" value="" />
    </h2>
    <div class="form-group">
           <div class="col-sm-offset-3 col-md-9">
-                 <s:submit onclick = "return confirmation();" value="DELETE" name="NEXT" cssClass="btn btn-primary"/>
+                 <s:submit onclick = "return confirmation();" value="DELETE USER" name="NEXT" cssClass="btn btn-primary"/>
           </div>
   </div>
   

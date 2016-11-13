@@ -106,7 +106,7 @@ public String buyAirport(){
     double cost = airportService.getAirport(airportToBuy).getCost();
     double money = userService.getUserMoney(userId);
     if(money<cost){
-		setErrorMsg("Not enough money to buy this aircraft.");
+		setErrorMsg("Not enough money to buy this hub.");
 		return ERROR;
 	}
 	money -= cost;
@@ -114,7 +114,7 @@ public String buyAirport(){
 	session.put("money", money);
     List<Airport> list = airportService.buyAirport(userId,airportToBuy);
     if(list == null){
-    	setErrorMsg("Each user could only own one hub");
+    	setErrorMsg("Each user may only own one hub");
     	return ERROR;
     }
     if(allAirports==null){

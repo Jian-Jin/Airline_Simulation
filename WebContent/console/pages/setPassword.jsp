@@ -54,7 +54,7 @@
 				<input onclick ="return confirmation();" type="submit" value="UPDATE" name="UPDATE" />
      	</s:form>
 				<br/>
-				<h>Balance: <s:property value="millions" />Millions</h>
+				<h>Balance: <s:property value="millions" /> Millions</h>
          </div>
 
 </div>

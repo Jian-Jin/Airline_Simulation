@@ -42,7 +42,7 @@
     	</div>
 		<div class="col-md-9">
 		<font face="Arial" size="3" color="orange">
-        <h1>Below are all the aircrafts you own:</h1>
+        <h1>My Aircraft:</h1>
  <table class="table table-striped">
  <tr>
     <th>Name</th>
@@ -79,11 +79,11 @@
 		
 		<s:form action="deleteUserAircrafts" method="post" namespace="/profile" theme="bootstrap" cssClass="form-horizontal">
   <h2>
-   <s:select label="Select the aircraft to sell (Get 50% of original price)" name="aircraftCustomizeNameToDelete" list="%{userPlanes.{customizedName}}" value="" />
+   <s:select label="Sell Aircraft (50% of cost)" headerKey="" headerValue="Select aircraft to sell" name="aircraftCustomizeNameToDelete" list="%{userPlanes.{customizedName}}" value="" />
    </h2>
    <div class="form-group">
           <div class="col-sm-offset-3 col-md-9">
-                 <s:submit onclick = "return confirmation();" value="Delete" name="Delete" cssClass="btn btn-primary"/>
+                 <s:submit onclick = "return confirmation();" value="Sell" name="Delete" cssClass="btn btn-primary"/>
           </div>
   </div>
   

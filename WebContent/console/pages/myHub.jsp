@@ -44,7 +44,7 @@
     	</div>
 		<div class="col-md-9">
 		<font face="Arial" size="3" color="orange">
-			<h1>Below is the information of your hub:</h1>
+			<h1>Hub Info:</h1>
   <table class="table table-striped">
  <tr>
     <th>Name</th>

@@ -28,7 +28,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-9">
-        <h1>Customize the aircraft <s:property value="aircraftToBuy"/> before purchase  :</h1>
+        <h1>Customize your <s:property value="aircraftToBuy"/> before purchase  :</h1>
 
 <s:actionerror theme="bootstrap"/>
 <s:actionmessage theme="bootstrap"/>
@@ -36,14 +36,14 @@
        
   <s:form action="customizePlane" method="post" namespace="/" theme="bootstrap" cssClass="form-horizontal" onsubmit="greeting()">
  <font face="Arial" size="4" color="orange">
-                        <h3>1. the percentage of first class seat here (0-100%)</h3>
+                        <h3>1. Percentage of first class seats (0-100%)</h3>
                         <br>
                         <input type="range" name="firstClassRatio" min="0" max="100" value="0" step="5" class="slider-width100" onchange="showValue(this.value,this.name)" />
 <span id="firstClassRatio">0</span>
 
                      <br>  
                      <br>
-                        <h3>2. the percentage of business class seat here (0-100%)</h3>
+                        <h3>2. Percentage of business class seats (0-100%)</h3>
 
                         <input type="range" name="businessClassRatio" min="0" max="100" value="0" step="5" onchange="showValue(this.value,this.name)" />
                         <span id="businessClassRatio">0</span>
@@ -58,13 +58,13 @@ function showValue(newValue,id)
 
 <br>
 <br>
- <h3>3. customize aircraft name:
-<input type="text" name="planeCustomizeName"  value="input your customized aircraft name"></h3>
+ <h3>3. Custom aircraft name:
+<input type="text" name="planeCustomizeName"  placeholder="Your Aircraft Name"></h3>
 </font>
                         
    <div class="form-group">
           <div class="col-sm-offset-3 col-md-9">
-                 <s:submit value="NEXT" name="NEXT" cssClass="btn btn-primary"/>
+                 <s:submit value="PURCHASE" name="NEXT" cssClass="btn btn-primary"/>
           </div>
   </div>
   <br>

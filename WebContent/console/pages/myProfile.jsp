@@ -30,7 +30,7 @@
             <div class="well sidebar-nav">
                 <ul class="nav nav-list">
                  <li><a href="<s:url action='getUserProfile' namespace="/profile"/>">My Account</a></li>  
-           		 <li><a href="<s:url action='getUserAircrafts' namespace="/profile"/>">My Aircrafts</a></li>
+           		 <li><a href="<s:url action='getUserAircrafts' namespace="/profile"/>">My Aircraft</a></li>
            		 <li><a href="<s:url action='getUserAirport' namespace="/profile"/>">My Hub</a></li>              
                  </ul>
         	</div>
@@ -45,7 +45,7 @@
 				<button><a href="<s:url action='setOsudotnumber' namespace="/profile"/>" >Change</a></button>
 				<br/>
 				<br/>
-				<h>Balance: <s:property value="millions" />Millions</h>
+				<h>Balance: <s:property value="millions" /> Million</h>
 				<br/>
 				<br/>
  				<button><a href="<s:url action='setPassword' namespace="/profile"/>" >Change Password</a></button>

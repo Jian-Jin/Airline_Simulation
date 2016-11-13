@@ -27,12 +27,12 @@
        <br> Current location : <s:property value="#session.planeCurLocation"/><h1>
   <table class="table table-striped">
  <tr>
-    <th>departure Airport</th>
-    <th>departure Day</th>
-    <th>departure Time</th>
-    <th>arrival Airport</th>
-    <th>arrival Day</th>
-    <th>arrival Time</th>
+    <th>Departure Airport</th>
+    <th>Departure Day</th>
+    <th>Departure Time</th>
+    <th>Arrival Airport</th>
+    <th>Arrival Day</th>
+    <th>Arrival Time</th>
   </tr>
  <s:iterator value="routes" var="r">
  <tr>
@@ -53,12 +53,12 @@
  <s:form action="undoRoute" namespace="/" theme="bootstrap" cssClass="form-horizontal">
    <div class="form-group">
             <div class="col-sm-offset-11 col-md-9">
-                   <s:submit value="UNDO" name="UNDO" cssClass="btn btn-primary"/>
+                   <s:submit value="UNDO LAST ROUTE ADD" name="UNDO" cssClass="btn btn-primary"/>
               </div>
  </div>
  </s:form> 
 <font face="Arial" size="3" color="orange">
-     Please make sure the final arrival airport of the last route is your initial departure airport(your hub)
+     Please make sure the final arrival airport of the last route is your initial departure airport(your hub).
   </font>
 <br>
           
@@ -68,18 +68,18 @@
  </font>
 <s:form action="addRoute" namespace="/" theme="bootstrap" cssClass="form-horizontal">
 <h2>
-<s:select label="1.departure Hour"
+<s:select label="1. Departure Hour"
 	headerValue="00"
 	list="hours"
 	name="hour" />
 	
-	<s:select label="departure Min"
+	<s:select label="Departure Min"
 	headerValue="00"
 	list="mins"
 	name="min" />
 	<br>
 <br>
-<s:select label="2. Select the aircraft arrival airport"
+<s:select label="2. Arrival Airport"
 	headerKey="-1" headerValue="Select the aircraft arrival airport"
 	list="airports"
 	name="airportToGo" listKey="name" listValue="identifier + ' - ' + name" />

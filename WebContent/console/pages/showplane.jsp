@@ -21,9 +21,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-9">
-        <h1>The aircraft purchase was successful.
+        <h1>Purchase Successful!
        <br>
-       Below are all the aircrafts you own:</h1>
+       Below are all of your aircraft:</h1>
  <table class="table table-striped">
  <tr>
     <th>Name</th>

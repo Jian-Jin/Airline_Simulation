@@ -67,8 +67,7 @@
 <s:form action="aircraftRoute" namespace="/" theme="bootstrap" cssClass="form-horizontal">
 <h2>
 <br>
-<s:select label="Select your aircraft to set the route"
-    tooltip="Choose Your Aircraft to set its route"
+<s:select label="Select aircraft:"
 	headerKey="" headerValue="Select your aircraft to set the route"
 	list="myPlanes"
 	name="planeToSet" />

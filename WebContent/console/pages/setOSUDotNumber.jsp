@@ -20,7 +20,7 @@
 <body>
 <%@include file="header.jsp"%>
 
-<font face="Comic Sans MS" size="5" color="orange">
+<font face="Ariel" size="5" color="orange">
 <h1><center>My Profile</center></h1></font>
 <font size="5" color="black">
 <b>
@@ -36,7 +36,7 @@
         	</div>
     	</div>
 		<div class="col-md-9">
-			<font face="Comic Sans MS" size="3" color="orange">
+			<font face="Ariel" size="3" color="orange">
 				<br/>
           		<h>Username: <s:property value="user.name" /></h>
           		<br/>
@@ -47,7 +47,7 @@
 				<input type="submit" value="UPDATE" name="UPDATE" />
      	</s:form>
 				<br/>
-				<h>Balance: <s:property value="millions" />Millions</h>
+				<h>Balance: <s:property value="millions" /> Millions</h>
          </div>
 
 </div>
