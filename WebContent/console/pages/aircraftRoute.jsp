@@ -70,20 +70,14 @@
  </font>
 <s:form action="addRoute" namespace="/" theme="bootstrap" cssClass="form-horizontal">
 <h2>
-<<<<<<< Updated upstream
-<s:select label="1. Departure Hour"
-=======
+
 <s:select label="1.departure Hour (local)"
->>>>>>> Stashed changes
 	headerValue="00"
 	list="hours"
 	name="hour" />
 	
-<<<<<<< Updated upstream
-	<s:select label="Departure Min"
-=======
+
 	<s:select label="departure Min (local)"
->>>>>>> Stashed changes
 	headerValue="00"
 	list="mins"
 	name="min" />
