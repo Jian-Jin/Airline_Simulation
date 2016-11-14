@@ -8,6 +8,8 @@ import com.demo.model.Airport;
 
 public interface AirportDAO {
 	  public Airport getAirportByName(@Param(value = "name") String name);
+	  public Airport getAirportByIdentifier(@Param(value = "identifier") String identifier);
+
 	  
 	  public void buyAirport(@Param(value = "userId") int userId, @Param(value = "airportId") int airportId);
 	  

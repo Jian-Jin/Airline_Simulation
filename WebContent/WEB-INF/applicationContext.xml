@@ -137,6 +137,7 @@
 		<property name="demandDao" ref="demandDAO"></property>
 		<property name="userProfitDao" ref="userProfitDAO"></property>
 		<property name="airportService" ref="airportService"></property>
+		<property name="userDao" ref="userDAO"></property>
 	</bean>
 	
     <!-- DAO Bean -->

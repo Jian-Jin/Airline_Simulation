@@ -8,23 +8,31 @@ public class Route {
 	private int userAircraftId;
 	private int fromAirport;
 	private int toAirport;
-	private String departureTime;
-	private String arrivalTime;
+	private String departureTimeZulu;
+	private String arrivalTimeZulu;
 	private int sequence;
-	private int departureDay;
-	private int arrivalDay;
+	private int departureDayZulu;
+	private int arrivalDayZulu;
 	
-	private String departureAirportName;
-	private String arrivalAirportName;
+	private String departureAirportIdentifier;
+	private String arrivalAirportIdentifier;
 	// for simulation
 	private int peopleOnboard;
 	private Aircraft aircraft;
+	
+	private String departureTimeLocal;
+	private int departureDayLocal;
+	private String arrivalTimeLocal;
+	private int arrivalDayLocal;
+	// *hours*mins
+	private String flightTime;
 	
 	private double cost;
 	private double revenue;
 	private double profit;
 	
-	
+	private int seatsPurchased;
+	private int competitorNum;
 	// user and airplaneName only populated for profit page
 	private User user;
 	private String airplaneName;
@@ -35,8 +43,8 @@ public class Route {
 		r.setUserAircraftId(this.getUserAircraftId());
 		r.setFromAirport(fromAirport);
 		r.setToAirport(toAirport);
-		r.setDepartureTime(departureTime);
-		r.setArrivalTime(arrivalTime);
+		r.setDepartureTimeZulu(departureTimeZulu);
+		r.setArrivalTimeZulu(arrivalTimeZulu);
 		r.setSequence(sequence);
 		r.setAircraft(aircraft);
 		return r;
@@ -65,17 +73,30 @@ public class Route {
 	public void setToAirport(int toAirport) {
 		this.toAirport = toAirport;
 	}
-	public String getDepartureTime() {
-		return departureTime;
+
+	public String getDepartureTimeZulu() {
+		return departureTimeZulu;
 	}
-	public void setDepartureTime(String departureTime) {
-		this.departureTime = departureTime;
+	public void setDepartureTimeZulu(String departureTimeZulu) {
+		this.departureTimeZulu = departureTimeZulu;
 	}
-	public String getArrivalTime() {
-		return arrivalTime;
+	public String getArrivalTimeZulu() {
+		return arrivalTimeZulu;
 	}
-	public void setArrivalTime(String arrivalTime) {
-		this.arrivalTime = arrivalTime;
+	public void setArrivalTimeZulu(String arrivalTimeZulu) {
+		this.arrivalTimeZulu = arrivalTimeZulu;
+	}
+	public int getDepartureDayZulu() {
+		return departureDayZulu;
+	}
+	public void setDepartureDayZulu(int departureDayZulu) {
+		this.departureDayZulu = departureDayZulu;
+	}
+	public int getArrivalDayZulu() {
+		return arrivalDayZulu;
+	}
+	public void setArrivalDayZulu(int arrivalDayZulu) {
+		this.arrivalDayZulu = arrivalDayZulu;
 	}
 	public int getSequence() {
 		return sequence;
@@ -83,29 +104,19 @@ public class Route {
 	public void setSequence(int sequence) {
 		this.sequence = sequence;
 	}
-	public String getDepartureAirportName() {
-		return departureAirportName;
+	
+
+	public String getDepartureAirportIdentifier() {
+		return departureAirportIdentifier;
 	}
-	public void setDepartureAirportName(String departureAirportName) {
-		this.departureAirportName = departureAirportName;
+	public void setDepartureAirportIdentifier(String departureAirportIdentifier) {
+		this.departureAirportIdentifier = departureAirportIdentifier;
 	}
-	public String getArrivalAirportName() {
-		return arrivalAirportName;
+	public String getArrivalAirportIdentifier() {
+		return arrivalAirportIdentifier;
 	}
-	public void setArrivalAirportName(String arrivalAirportName) {
-		this.arrivalAirportName = arrivalAirportName;
-	}
-	public int getDepartureDay() {
-		return departureDay;
-	}
-	public void setDepartureDay(int departureDay) {
-		this.departureDay = departureDay;
-	}
-	public int getArrivalDay() {
-		return arrivalDay;
-	}
-	public void setArrivalDay(int arrivalDay) {
-		this.arrivalDay = arrivalDay;
+	public void setArrivalAirportIdentifier(String arrivalAirportIdentifier) {
+		this.arrivalAirportIdentifier = arrivalAirportIdentifier;
 	}
 	public int getPeopleOnboard() {
 		return peopleOnboard;
@@ -159,6 +170,54 @@ public class Route {
 		return Utils.convertToComma(getRevenue());
 	}
 	
+	
+	
+	public String getDepartureTimeLocal() {
+		return departureTimeLocal;
+	}
+	public void setDepartureTimeLocal(String departureTimeLocal) {
+		this.departureTimeLocal = departureTimeLocal;
+	}
+	public int getDepartureDayLocal() {
+		return departureDayLocal;
+	}
+	public void setDepartureDayLocal(int departureDayLocal) {
+		this.departureDayLocal = departureDayLocal;
+	}
+	public String getArrivalTimeLocal() {
+		return arrivalTimeLocal;
+	}
+	public void setArrivalTimeLocal(String arrivalTimeLocal) {
+		this.arrivalTimeLocal = arrivalTimeLocal;
+	}
+	public int getArrivalDayLocal() {
+		return arrivalDayLocal;
+	}
+	public void setArrivalDayLocal(int arrivalDayLocal) {
+		this.arrivalDayLocal = arrivalDayLocal;
+	}
+	
+	
+	public String getFlightTime() {
+		return flightTime;
+	}
+	public void setFlightTime(String flightTime) {
+		this.flightTime = flightTime;
+	}
+	
+	
+	public int getSeatsPurchased() {
+		return seatsPurchased;
+	}
+	public void setSeatsPurchased(int seatsPurchased) {
+		this.seatsPurchased = seatsPurchased;
+	}
+	public int getCompetitorNum() {
+		return competitorNum;
+	}
+	public void setCompetitorNum(int competitorNum) {
+		this.competitorNum = competitorNum;
+	}
 	@Override
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
@@ -166,14 +225,13 @@ public class Route {
 		sb.append(",userAircraftId:").append(userAircraftId);
 		sb.append(",fromAirport:").append(fromAirport);
 		sb.append(",toAirport:").append(toAirport);
-		sb.append(",departureTime:").append(departureTime);
-		sb.append(",arrivalTime:").append(arrivalTime);
+		sb.append(",departureTime:").append(departureTimeZulu);
+		sb.append(",arrivalTime:").append(arrivalTimeZulu);
 		sb.append(",sequence:").append(sequence);
-		sb.append(",departureDay:").append(departureDay);
-		sb.append(",arrivalDay:").append(arrivalDay);
-		sb.append(",departureAirportName:").append(departureAirportName);
-		sb.append(",arrivalAirportName:").append(arrivalAirportName);
-		sb.append(",arrivalDay:").append(arrivalDay);
+		sb.append(",departureDay:").append(departureDayZulu);
+		sb.append(",arrivalDay:").append(arrivalDayZulu);
+		sb.append(",departureAirportName:").append(departureAirportIdentifier);
+		sb.append(",arrivalAirportName:").append(arrivalAirportIdentifier);
 		sb.append(",peopleOnboard:").append(peopleOnboard);
 		sb.append(",aricraft:").append(aircraft==null?"":aircraft.getName());
 		sb.append(",airplaneName:").append(airplaneName);

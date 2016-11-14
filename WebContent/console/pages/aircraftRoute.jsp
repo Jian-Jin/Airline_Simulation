@@ -28,21 +28,23 @@
   <table class="table table-striped">
  <tr>
     <th>Departure Airport</th>
-    <th>Departure Day</th>
-    <th>Departure Time</th>
+    <th>Local Departure Day</th>
+    <th>Local Departure Time</th>
     <th>Arrival Airport</th>
-    <th>Arrival Day</th>
-    <th>Arrival Time</th>
+    <th>Local Arrival Day</th>
+    <th>Local Arrival Time</th>
+    <th>Flight Time</th>
   </tr>
  <s:iterator value="routes" var="r">
  <tr>
    <!--<td><input type="radio" name="planeId" value="#p.id"></td>  -->
-   <td> <s:property value="#r.departureAirportName" /></td>
-   <td> <s:property value="#r.departureDay" /></td>
-   <td> <s:property value="#r.departureTime" /></td>
-   <td> <s:property value="#r.arrivalAirportName" /></td>
-   <td> <s:property value="#r.arrivalDay" /></td>
-   <td> <s:property value="#r.arrivalTime" /></td>
+   <td> <s:property value="#r.departureAirportIdentifier" /></td>
+   <td> <s:property value="#r.departureDayLocal" /></td>
+   <td> <s:property value="#r.departureTimeLocal" /></td>
+   <td> <s:property value="#r.arrivalAirportIdentifier" /></td>
+   <td> <s:property value="#r.arrivalDayLocal" /></td>
+   <td> <s:property value="#r.arrivalTimeLocal" /></td>
+   <td> <s:property value="#r.flightTime" /></td>
     </tr>
  </s:iterator>
 </table>
@@ -68,12 +70,20 @@
  </font>
 <s:form action="addRoute" namespace="/" theme="bootstrap" cssClass="form-horizontal">
 <h2>
+<<<<<<< Updated upstream
 <s:select label="1. Departure Hour"
+=======
+<s:select label="1.departure Hour (local)"
+>>>>>>> Stashed changes
 	headerValue="00"
 	list="hours"
 	name="hour" />
 	
+<<<<<<< Updated upstream
 	<s:select label="Departure Min"
+=======
+	<s:select label="departure Min (local)"
+>>>>>>> Stashed changes
 	headerValue="00"
 	list="mins"
 	name="min" />
