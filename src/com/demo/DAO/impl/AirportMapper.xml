@@ -27,6 +27,10 @@
       <select id="getAirportByName"  resultMap="AirportResult">
        select * from airport where name = #{name}
       </select>
+      <select id="getAirportByIdentifier"  resultMap="AirportResult">
+       select * from airport where identifier = #{identifier}
+      </select>
+      
       
       <insert id="buyAirport" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
          insert into user_airport(userId,airportId) values (#{userId},#{airportId})

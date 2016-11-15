@@ -48,4 +48,7 @@ public interface UserDAO {
 	
 	public void deleteUser(@Param(value = "id") int id);
 	public List<String> getAllUserNames();
+	public void addUserMoney(
+			@Param(value = "id") int id,
+			@Param(value = "money") double money);
 }

@@ -38,7 +38,8 @@
     <!-- <th>Purchase</th> -->
     <th>Rank</th>
     <th>User</th>
-    <th>Profit</th>
+    <th>LastSimulationProfit</th>
+    <th>Balance</th>
   </tr>
  <s:iterator value="profits" var="p">
  <tr>
@@ -46,6 +47,7 @@
    <td> <s:property value="#p.rank" /></td>
    <td> <s:property value="#p.userName" /></td>
    <td> <s:property value="#p.profitString" /></td>
+   <td> <s:property value="#p.balanceString" /></td>
     </tr>
  </s:iterator>
 </table>

@@ -61,5 +61,9 @@
       <select id="getAllUserNames"  resultType="string">
        select name from user
       </select>
+       <update id="addUserMoney">
+      update user set money = money + #{money} where id = #{id}
+      </update>
+      
       
 </mapper>

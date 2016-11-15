@@ -103,9 +103,9 @@ public class RouteAction extends ActionSupport{
 
 		routes = routeService.getAircraftRoutes(userId, planeName);
 		Route nextRoute = routes.get(routes.size()-1);
-		setPlaneCurrentLocation(nextRoute.getDepartureAirportName());
+		setPlaneCurrentLocation(nextRoute.getDepartureAirportIdentifier());
 		routes.remove(routes.size()-1);
-		String[] ss = nextRoute.getDepartureTime().split(":");
+		String[] ss = nextRoute.getDepartureTimeLocal().split(":");
 		int currentHour = Integer.valueOf(ss[0]);
 		int currentMin = Integer.valueOf(ss[1]);
 		populateTimeSlots(currentHour, currentMin);
@@ -165,10 +165,10 @@ public class RouteAction extends ActionSupport{
 	    setPlaneToSet(planeName);
 		
 
-		boolean dayPlus = false;
+		int dayPlus = 0;
 		if(hour.contains(dayPlusText)){
 			hour = hour.split(" ")[0];
-			dayPlus = true;
+			dayPlus = 1;
 		}
 			
 		String depatureTime = hour+":"+min;
@@ -177,8 +177,8 @@ public class RouteAction extends ActionSupport{
 
 		routes = routeService.getAircraftRoutes(userId, planeName);
 		Route nextRoute = routes.get(routes.size()-1);
-		session.put("planeCurLocation", nextRoute.getDepartureAirportName());
-		String[] ss = nextRoute.getDepartureTime().split(":");
+		session.put("planeCurLocation", nextRoute.getDepartureAirportIdentifier());
+		String[] ss = nextRoute.getDepartureTimeLocal().split(":");
 		int currentHour = Integer.valueOf(ss[0]);
 		int currentMin = Integer.valueOf(ss[1]);
 		populateTimeSlots(currentHour, currentMin);
@@ -212,9 +212,9 @@ public class RouteAction extends ActionSupport{
 		
 		routes = routeService.getAircraftRoutes(userId, planeName);
 		Route nextRoute = routes.get(routes.size()-1);
-		setPlaneCurrentLocation(nextRoute.getDepartureAirportName());
+		setPlaneCurrentLocation(nextRoute.getDepartureAirportIdentifier());
 		routes.remove(routes.size()-1);
-		String[] ss = nextRoute.getDepartureTime().split(":");
+		String[] ss = nextRoute.getDepartureTimeLocal().split(":");
 		int currentHour = Integer.valueOf(ss[0]);
 		int currentMin = Integer.valueOf(ss[1]);
 		populateTimeSlots(currentHour, currentMin);

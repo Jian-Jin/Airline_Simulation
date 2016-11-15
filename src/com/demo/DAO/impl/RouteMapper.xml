@@ -9,32 +9,47 @@
 		<result column="userId" property="userId"/>
 		<result column="userAircraftId" property="userAircraftId"/>
 		<result column="fromAirport" property="fromAirport"/>
-		<result column="departureTime" property="departureTime"/>
+		<result column="departureTime" property="departureTimeZulu"/>
 		<result column="toAirport" property="toAirport"/>
-		<result column="arrivalTime" property="arrivalTime"/>
+		<result column="arrivalTime" property="arrivalTimeZulu"/>
 		<result column="sequence" property="sequence"/>
-		<result column="departureDay" property="departureDay"/>
-		<result column="arrivalDay" property="arrivalDay"/>
+		<result column="departureDay" property="departureDayZulu"/>
+		<result column="arrivalDay" property="arrivalDayZulu"/>
+		
+		<result column="departureTimeLocal" property="departureTimeLocal"/>
+		<result column="departureDayLocal" property="departureDayLocal"/>
+		<result column="arrivalTimeLocal" property="arrivalTimeLocal"/>
+		<result column="arrivalDayLocal" property="arrivalDayLocal"/>
+		
 		<result column="cost" property="cost"/>
 		<result column="revenue" property="revenue"/>
 		<result column="profit" property="profit"/>
+		<result column="flightTime" property="flightTime"/>
+
 	 </resultMap>
-	 
 	<resultMap type="com.demo.model.Route" id="RouteProfitResult">
 
 		<result column="userId" property="userId"/>
 		<result column="userAircraftId" property="userAircraftId"/>
 		<result column="fromAirport" property="fromAirport"/>
-		<result column="departureTime" property="departureTime"/>
+		<result column="departureTime" property="departureTimeZulu"/>
 		<result column="toAirport" property="toAirport"/>
-		<result column="arrivalTime" property="arrivalTime"/>
+		<result column="arrivalTime" property="arrivalTimeZulu"/>
 		<result column="sequence" property="sequence"/>
-		<result column="departureDay" property="departureDay"/>
-		<result column="arrivalDay" property="arrivalDay"/>
+		<result column="departureDay" property="departureDayZulu"/>
+		<result column="arrivalDay" property="arrivalDayZulu"/>
 		<result column="cost" property="cost"/>
 		<result column="revenue" property="revenue"/>
 		<result column="profit" property="profit"/>
 		<result column="customizedName" property="airplaneName"/>
+		
+		<result column="departureTimeLocal" property="departureTimeLocal"/>
+		<result column="departureDayLocal" property="departureDayLocal"/>
+		<result column="arrivalTimeLocal" property="arrivalTimeLocal"/>
+		<result column="arrivalDayLocal" property="arrivalDayLocal"/>
+		<result column="flightTime" property="flightTime"/>
+		<result column="seatsPurchased" property="seatsPurchased"/>
+		<result column="competitorNum" property="competitorNum"/>
 	 </resultMap>
 	 
       <select id="getRoutes"  resultMap="RouteResult">
@@ -46,7 +61,8 @@
       </select>
       
       <insert id="addRoute">
-      insert into route(userId, userAircraftId, fromAirport, departureTime,departureDay, toAirport, arrivalTime,arrivalDay, sequence) values (#{userId},#{userAircraftId},#{fromAirport},#{departureTime},#{departureDay},#{toAirport},#{arrivalTime},#{arrivalDay},#{sequence})
+      insert into route(userId, userAircraftId, fromAirport, toAirport,departureTimeLocal,departureDayLocal, arrivalTimeLocal,arrivalDayLocal,departureTimeZulu,departureDayZulu, arrivalTimeZulu,arrivalDayZulu, sequence,flightTime)
+       values (#{userId},#{userAircraftId},#{fromAirport},#{toAirport},#{departureTimeLocal},#{departureDayLocal},#{arrivalTimeLocal},#{arrivalDayLocal},#{departureTimeZulu},#{departureDayZulu},#{arrivalTimeZulu},#{arrivalDayZulu},#{sequence},#{flightTime})
       </insert>
        <select id="getAllRoutes"  resultMap="RouteResult">
        select * from route order by userAircraftId,sequence
@@ -65,7 +81,7 @@
       </delete>
       
       <update id ="updateProfit">
-      	update route set cost=#{cost}, revenue = #{revenue}, profit = #{profit} where userAircraftId=#{userAircraftId} and sequence=#{sequence}
+      	update route set cost=#{cost}, revenue = #{revenue}, profit = #{profit}, competitorNum = #{competitorNum}, seatsPurchased = #{seatsPurchased} where userAircraftId=#{userAircraftId} and sequence=#{sequence}
       </update>
       
 </mapper>

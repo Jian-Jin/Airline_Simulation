@@ -8,6 +8,7 @@ import com.demo.DAO.AircraftDAO;
 import com.demo.DAO.AirportDAO;
 import com.demo.DAO.DemandDAO;
 import com.demo.DAO.RouteDAO;
+import com.demo.DAO.UserDAO;
 import com.demo.DAO.UserProfitDAO;
 import com.demo.model.Aircraft;
 import com.demo.model.Airport;
@@ -25,6 +26,8 @@ public class SimulateServiceImpl implements SimulateService, InitializingBean{
 	private DemandDAO demandDao;
 	private UserProfitDAO userProfitDao;
 	private AirportService airportService;
+	private UserDAO userDao;
+
 	private static int numberDays = 90;
 	private double basicProfit = 0;
 	private double fuelPrice = 0;
@@ -86,13 +89,13 @@ public class SimulateServiceImpl implements SimulateService, InitializingBean{
 			Route head = list.get(0);
 			Route tail = list.get(list.size()-1);
 			int dayDelta = 0;
-			if(Utils.isBefore(tail.getArrivalTime(), head.getDepartureTime())){
-				dayDelta = (tail.getArrivalDay()-head.getDepartureDay());
+			if(Utils.isBefore(tail.getArrivalTimeZulu(), head.getDepartureTimeZulu())){
+				dayDelta = (tail.getArrivalDayZulu()-head.getDepartureDayZulu());
 			}else{
-				dayDelta = tail.getArrivalDay()-head.getDepartureDay()+1;
+				dayDelta = tail.getArrivalDayZulu()-head.getDepartureDayZulu()+1;
 			}
 			int originalDelta = dayDelta;
-			int currentDay = tail.getArrivalDay();
+			int currentDay = tail.getArrivalDayZulu();
 			List<Route> newlist = new ArrayList<Route>();
 			newlist.addAll(list);
 			// repeat each user's routes list until 90 days
@@ -100,10 +103,10 @@ public class SimulateServiceImpl implements SimulateService, InitializingBean{
 				boolean flag = false;
 				for(Route r : list){
 					Route copy = r.getCopy();
-					copy.setDepartureDay(r.getDepartureDay()+dayDelta);
-					copy.setArrivalDay(r.getArrivalDay()+dayDelta);
+					copy.setDepartureDayZulu(r.getDepartureDayZulu()+dayDelta);
+					copy.setArrivalDayZulu(r.getArrivalDayZulu()+dayDelta);
 					newlist.add(copy);
-					currentDay = copy.getArrivalDay();
+					currentDay = copy.getArrivalDayZulu();
 					if(currentDay>numberDays){
 						flag = true;
 						break;
@@ -125,10 +128,10 @@ public class SimulateServiceImpl implements SimulateService, InitializingBean{
 					dayMap = new HashMap<Integer,List<Route>>();
 					airportMap.put(r.getFromAirport(), dayMap);
 				}
-				List<Route> routes = dayMap.get(r.getDepartureDay());
+				List<Route> routes = dayMap.get(r.getDepartureDayZulu());
 				if(routes == null){
 					routes = new ArrayList<Route>();
-					dayMap.put(r.getDepartureDay(), routes);
+					dayMap.put(r.getDepartureDayZulu(), routes);
 					
 				}
 				routes.add(r);
@@ -161,6 +164,9 @@ public class SimulateServiceImpl implements SimulateService, InitializingBean{
 		public double cost = 0;
 		public double revenue = 0;
 		public double profit = 0;
+		public int repeatTimes = 0;
+		public int competitorNumTotal;
+		public int seats;
 		public RouteProfit(){}
 	}
 	private void calculateProfit(List<Route> routes){
@@ -189,7 +195,7 @@ public class SimulateServiceImpl implements SimulateService, InitializingBean{
 			Airport toAirport = airports.get(route.getToAirport());
 			double distanceInMile = airportService.distance(fromAirport, toAirport);
 			profit *= distanceInMile;
-			double cost = toAirport.getLandingFee() + Utils.getFlyTime(route.getDepartureTime(),route.getArrivalTime())*a.getFuelBurn()*fuelPrice;
+			double cost = toAirport.getLandingFee() + Utils.getFlyTime(route.getDepartureTimeZulu(),route.getArrivalTimeZulu())*a.getFuelBurn()*fuelPrice;
 			double netProfit = profit/100 - cost;
 			Double userprofit = userProfitMap.get(userId);
 			if(userprofit == null){
@@ -207,11 +213,16 @@ public class SimulateServiceImpl implements SimulateService, InitializingBean{
 			routeProfit.cost += cost;
 			routeProfit.revenue += profit/100;
 			routeProfit.profit += netProfit;
+			routeProfit.repeatTimes++;
+			routeProfit.competitorNumTotal+= route.getCompetitorNum();
+			routeProfit.seats+=peopleOnBoard;
 		}
 		userProfitDao.clearUserProfit();
 		// store to db the overall rank
 		for(int userId : userProfitMap.keySet()){
 			userProfitDao.storeUserProfit(userId, userProfitMap.get(userId));
+			// update user bank account 
+			userDao.addUserMoney(userId, userProfitMap.get(userId));
 		}
 		// update each route profit 
 		updateRouteProfit(routeProfitMap);
@@ -223,7 +234,9 @@ public class SimulateServiceImpl implements SimulateService, InitializingBean{
 			String[] ss = key.split("#");
 			int userAircraftId = Integer.valueOf(ss[0]);
 			int sequence = Integer.valueOf(ss[1]);
-			routeDao.updateProfit(userAircraftId,sequence,rp.cost,rp.revenue,rp.profit);
+			int competitorAvg = rp.competitorNumTotal/rp.repeatTimes;
+			int seatAvg = rp.seats/rp.repeatTimes;
+			routeDao.updateProfit(userAircraftId,sequence,rp.cost,rp.revenue,rp.profit,competitorAvg,seatAvg);
 		}
 	}
 	
@@ -238,7 +251,7 @@ public class SimulateServiceImpl implements SimulateService, InitializingBean{
 			for(int cluster : clustermap.keySet()){
 				List<Demand> dlist = clustermap.get(cluster);
 				for(Demand d : dlist){
-					if(d.getZulu()==Integer.valueOf(r.getDepartureTime().split(":")[0])){
+					if(d.getZulu()==Integer.valueOf(r.getDepartureTimeZulu().split(":")[0])){
 						List<Route> routes = clusterRoutes.get(cluster);
 						if(routes == null){
 							routes = new ArrayList<Route>();
@@ -261,6 +274,7 @@ public class SimulateServiceImpl implements SimulateService, InitializingBean{
 			int totalweight = 0;
 			for(Route r : routes){
 				totalweight += airports.get(r.getToAirport()).getScaled();
+				r.setCompetitorNum(routes.size()-1);
 			}
 			for(Route r : routes){
 				double percent = (double)airports.get(r.getToAirport()).getScaled()/(double)totalweight;
@@ -282,6 +296,7 @@ public class SimulateServiceImpl implements SimulateService, InitializingBean{
 		for(UserProfit up : result){
 			up.setRank(rank++);
 			up.setProfitString(Utils.convertToComma(up.getProfit()));
+			up.setBalanceString(Utils.convertToComma(up.getBalance()));
 		}
 		return result;
 	}
@@ -345,8 +360,13 @@ public class SimulateServiceImpl implements SimulateService, InitializingBean{
 		
 	}
 
+	public UserDAO getUserDao() {
+		return userDao;
+	}
 
-	
+	public void setUserDao(UserDAO userDao) {
+		this.userDao = userDao;
+	}
 	
 
 }

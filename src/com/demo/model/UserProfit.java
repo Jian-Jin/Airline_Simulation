@@ -5,8 +5,11 @@ public class UserProfit {
 	private double profit;
 	private String userName;
 	private int rank;
+	private double balance;
 	
 	private String profitString;
+	private String balanceString;
+
 	
 	public int getUserId() {
 		return userId;
@@ -37,6 +40,18 @@ public class UserProfit {
 	}
 	public void setProfitString(String profitString) {
 		this.profitString = profitString;
+	}
+	public double getBalance() {
+		return balance;
+	}
+	public void setBalance(double balance) {
+		this.balance = balance;
+	}
+	public String getBalanceString() {
+		return balanceString;
+	}
+	public void setBalanceString(String balanceString) {
+		this.balanceString = balanceString;
 	}
 	
 	

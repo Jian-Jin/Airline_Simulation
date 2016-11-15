@@ -34,11 +34,14 @@
  <table class="table table-striped">
  <tr>
     <th>User</th>
-    <th>Aircraft Name</th>
-    <th>Departure Airport</th>
-    <th>Departure Time</th>
-    <th>Arrival Airport</th>
-    <th>Arrival Time</th>
+    <th>AircraftName</th>
+    <th>departure Airport</th>
+    <th>departure Time</th>
+    <th>arrival Airport</th>
+    <th>arrival Time</th>
+    <th>flight Time</th>
+    <th>Average Competitor Num</th>
+    <th>Average seats purchased</th>
     <th>Cost</th>
     <th>Revenue</th>
     <th>Profit</th>
@@ -47,11 +50,14 @@
  <tr>
    <td> <s:property value="#p.user.name" /></td>
    <td> <s:property value="#p.airplaneName" /></td>
-   <td> <s:property value="#p.departureAirportName" /></td>
-   <td> <s:property value="#p.departureTime" /></td>
+   <td> <s:property value="#p.departureAirportIdentifier" /></td>
+   <td> <s:property value="#p.departureTimeLocal" /></td>
 
-   <td> <s:property value="#p.arrivalAirportName" /></td>
-   <td> <s:property value="#p.arrivalTime" /></td>
+   <td> <s:property value="#p.arrivalAirportIdentifier" /></td>
+   <td> <s:property value="#p.arrivalTimeLocal" /></td>
+   <td> <s:property value="#p.flightTime" /></td>
+   <td> <s:property value="#p.competitorNum" /></td>
+   <td> <s:property value="#p.seatsPurchased" /></td>
    <td> <s:property value="#p.costString" /></td>
    <td> <s:property value="#p.revenueString" /></td>
    <td> <s:property value="#p.profitString" /></td>

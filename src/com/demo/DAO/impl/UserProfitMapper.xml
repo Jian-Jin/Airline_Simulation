@@ -8,10 +8,11 @@
 		<result column="userId" property="userId"/>
 		<result column="profit" property="profit"/>
 		<result column="name" property="userName"/>
+		<result column="money" property="balance"/>
 	 </resultMap>
 	 
       <select id="getAllProfit"  resultMap="UserProfitResult">
-       select up.*,us.name from user_profit up join user us on up.userId = us.id order by up.profit desc
+       select up.*,us.name,us.money from user_profit up join user us on up.userId = us.id order by us.money desc
     </select>
     <delete id="clearUserProfit">
     	delete from user_profit 
