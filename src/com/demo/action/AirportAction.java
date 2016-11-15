@@ -1,7 +1,9 @@
 package com.demo.action;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 
 import com.demo.model.Aircraft;
@@ -25,6 +27,10 @@ public class AirportAction extends ActionSupport{
   private List<Airport> allAirports;
   private double demandMult;
   private Airport demandAirport;
+  private List<Airport> allAirportDemand;
+  private List<String> names;
+  private Airport dAirport;
+  
   
   public String airportHome(){
 		Map session = ActionContext.getContext().getSession();
@@ -67,19 +73,31 @@ public String manageDemand(){
 	if(session.get("logined")==null){
     	setErrorMsg("Please sign in first");
     	return ERROR;
-  }
+  }	
  if(session.get("superuser")==null){
     	setErrorMsg("Please sign in as admin");
     	return ERROR;
-  }		
-	return SUCCESS;
+  }	
+ 
+ if(allAirportDemand==null){
+	  //setAllAirportDemand(airportService.getAllAirport());
+	 allAirportDemand=airportService.getAllAirport();
+ }
+ 	names=new ArrayList<String>(); 	
+	 for(Airport a : allAirportDemand)
+	 {
+		 names.add(a.getName());	 
+				 
+	 }	 	
+ return SUCCESS;
+ 
 }
 
 public String adjustMultiplier(){
 	demandAirport = airportService.getAirport(fromAirportName);
+		
 	//needed to parse next line because passing a double was causing problems
 	demandMult=Double.parseDouble(toAirportName);	
-	
 	if(demandAirport == null || demandMult==0){
 		setErrorMsg("invalid airport input or demand value");
 		return ERROR;
@@ -88,7 +106,7 @@ public String adjustMultiplier(){
 	// change demand value in table for airport
 	//changes the multiplier that alters the demand population for each airport
 	airportService.changeDemand(demandAirport.getId(), demandMult);
-	
+	allAirportDemand=airportService.getAllAirport();
 	return SUCCESS;		
 }
 
@@ -212,6 +230,24 @@ public Airport getDemandAirport() {
 }
 public void setDemandAirport(Airport demandAirport) {
 	this.demandAirport = demandAirport;
+}
+public List<Airport> getAllAirportDemand(){
+	return allAirportDemand;
+}
+public void setAllAirportDemand(List<Airport> allAirportDemand){
+	this.allAirportDemand=allAirportDemand;
+}
+public List<String> getNames(){
+	return names;
+}
+public void setNames(List<String> names){
+	this.names=names;
+}
+private Airport getdAirport(){
+	return dAirport;
+}
+private void setdAirport(Airport dAirport){
+	this.dAirport=dAirport;
 }
 
 }
