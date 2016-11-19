@@ -45,7 +45,7 @@
 				<button><a href="<s:url action='setOsudotnumber' namespace="/profile"/>" >Change</a></button>
 				<br/>
 				<br/>
-				<h>Balance: <s:property value="millions" /> Million</h>
+				<h>Balance: <s:property value="balance"/></h>
 				<br/>
 				<br/>
  				<button><a href="<s:url action='setPassword' namespace="/profile"/>" >Change Password</a></button>

@@ -65,8 +65,14 @@
      	<action name="buyPlane" class="com.demo.action.AircraftAction" method="buyPlane">
      		<!-- action result and page mapping -->
      		<!--<result name="success">/console/pages/showplane.jsp</result>-->
-     		<result name="success">/console/pages/aircraftcustomize.jsp</result>
+     		<result name="success">/console/pages/setStaffSalary.jsp</result>
      		<result name="error">/console/pages/error.jsp</result>
+     	</action>
+     	
+     	<action name="setStaffSalary" class="com.demo.action.AircraftAction" method="setStaffSalary">
+     		<!-- action result and page mapping -->
+     		<result name="success">/console/pages/aircraftcustomize.jsp</result>
+     		<result name="error">/console/pages/setStaffSalary.jsp</result>
      	</action>
      	
      	<action name="customizePlane" class="com.demo.action.AircraftAction" method="customizePlane">
@@ -85,6 +91,24 @@
      		<!-- action result and page mapping -->
      		<result name="success">/console/pages/adminpages/down.jsp</result>
      		<result name="error">/console/pages/error.jsp</result>
+     	</action>
+     	
+     	 <action name="aircraftStaff" class="com.demo.action.AircraftAction" method="aircraftStaff">
+     		<!-- action result and page mapping -->
+     		<result name="success">/console/pages/setAircraftStaff.jsp</result>
+     		<result name="error">/console/pages/error.jsp</result>
+     	</action>
+     	
+     	 <action name="gotoUpdateSalaryPage" class="com.demo.action.AircraftAction" method="gotoUpdateSalaryPage">
+     		<!-- action result and page mapping -->
+     		<result name="success">/console/pages/updateStaffSalary.jsp</result>
+     		<result name="error">/console/pages/setAircraftStaff.jsp</result>
+     	</action>
+     	
+     	 <action name="updateStaffSalary" class="com.demo.action.AircraftAction" method="updateStaffSalary">
+     		<!-- action result and page mapping -->
+     		<result name="success">/console/pages/setAircraftStaff.jsp</result>
+     		<result name="error">/console/pages/updateStaffSalary.jsp</result>
      	</action>
     </package>
     

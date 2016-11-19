@@ -21,8 +21,8 @@ public class AircraftServiceImpl implements AircraftService{
 	
 	@Override
 	public List<Aircraft> buyPlane(int userId, int aircraftId, String customizedName, double firstClassRatio,
-			double businessClassRatio) {
-		aircraftDao.buyPlane(userId, aircraftId, customizedName, firstClassRatio, businessClassRatio);
+			double businessClassRatio,double captainSalary, double firstOfficerSalary, double attendantSalary, double supportSalary) {
+		aircraftDao.buyPlane(userId, aircraftId, customizedName, firstClassRatio, businessClassRatio, captainSalary,  firstOfficerSalary,  attendantSalary,  supportSalary);
 		return getUserPlanes(userId);
 	}
 	
@@ -65,6 +65,15 @@ public class AircraftServiceImpl implements AircraftService{
 	@Override
 	public int getUserAircraftId(int userId, String customizedName) {
 		return aircraftDao.getPlaneUniqueId(userId, customizedName);
+	}
+	@Override
+	public Aircraft getUserPlaneByCumstomeizeName(int userId, String customizedName) {
+		return aircraftDao.getUserPlaneByCumstomeizeName(userId, customizedName);
+	}
+	@Override
+	public void updateSalary(int userId, String customizedName, double captainSalary, double firstOfficerSalary,
+			double attendantSalary, double supportSalary) {
+		 this.aircraftDao.updateSalary(userId, customizedName, captainSalary, firstOfficerSalary, attendantSalary, supportSalary);	
 	}
 
 

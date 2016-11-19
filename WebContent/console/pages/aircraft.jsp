@@ -64,7 +64,7 @@
    </h2>
    <div class="form-group">
           <div class="col-sm-offset-3 col-md-9">
-                 <s:submit onclick = "return confirmation();" value="BUY" name="NEXT" cssClass="btn btn-primary"/>
+                 <s:submit  value="NEXT" name="NEXT" cssClass="btn btn-primary"/>
           </div>
   </div>
   

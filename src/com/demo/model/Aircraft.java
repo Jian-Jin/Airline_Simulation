@@ -16,6 +16,11 @@ public class Aircraft {
    private double firstClassRatio;
    private double businessClassRatio;
    
+   private double captainSalary;
+   private double firstOfficerSalary;
+   private double attendantSalary;
+   private double supportSalary;
+   
 public int getId() {
 	return id;
 }
@@ -93,6 +98,30 @@ public double getBusinessClassRatio() {
 }
 public void setBusinessClassRatio(double businessClassRatio) {
 	this.businessClassRatio = businessClassRatio;
+}
+public double getCaptainSalary() {
+	return captainSalary;
+}
+public void setCaptainSalary(double captainSalary) {
+	this.captainSalary = captainSalary;
+}
+public double getFirstOfficerSalary() {
+	return firstOfficerSalary;
+}
+public void setFirstOfficerSalary(double firstOfficerSalary) {
+	this.firstOfficerSalary = firstOfficerSalary;
+}
+public double getAttendantSalary() {
+	return attendantSalary;
+}
+public void setAttendantSalary(double attendantSalary) {
+	this.attendantSalary = attendantSalary;
+}
+public double getSupportSalary() {
+	return supportSalary;
+}
+public void setSupportSalary(double supportSalary) {
+	this.supportSalary = supportSalary;
 }
 
 

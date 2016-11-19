@@ -20,35 +20,10 @@ body {
 </head>
 <body>
 	<%@include file="header.jsp"%>
-
-	<script type="text/javascript">
-		function confirmation() {
-			return confirm("Comfirm your aircraft to be sold!")
-		}
-	</script>
-	<font face="Arial" size="5" color="orange">
-		<h1>
-			<center>My Profile</center>
-		</h1>
-	</font>
+	<font face="Arial" size="5" color="orange"> </font>
 	<font size="5" color="black"> <b>
 			<div class="container">
 				<div class="row">
-					<div class="col-md-3">
-						<div class="well sidebar-nav">
-							<ul class="nav nav-list">
-								<li><a
-									href="<s:url action='getUserProfile' namespace="/profile"/>">My
-										Account</a></li>
-								<li><a
-									href="<s:url action='getUserAircrafts' namespace="/profile"/>">My
-										Aircrafts</a></li>
-								<li><a
-									href="<s:url action='getUserAirport' namespace="/profile"/>">My
-										Hub</a></li>
-							</ul>
-						</div>
-					</div>
 					<div class="col-md-9">
 						<font face="Arial" size="3" color="orange">
 							<h1>My Aircraft:</h1>
@@ -56,10 +31,6 @@ body {
 								<tr>
 									<th>Name</th>
 									<th>Aircraft</th>
-									<th>FirstClassRatio</th>
-									<th>BusinessClassRatio</th>
-									<th>Cost New (Million USD)</th>
-									<th>Max Seats</th>
 									<th>Captain Salary</th>
 									<th>First Officer Salary</th>
 									<th>Flight Attendant Salary</th>
@@ -70,42 +41,32 @@ body {
 										<!--<td><input type="radio" name="planeId" value="#p.id"></td>  -->
 										<td><s:property value="#p.customizedName" /></td>
 										<td><s:property value="#p.name" /></td>
-										<td><s:property value="#p.firstClassRatio" /></td>
-										<td><s:property value="#p.businessClassRatio" /></td>
-										<td><s:property value="#p.cost" /></td>
-										<td><s:property value="#p.maxSeat" /></td>
-										<td><s:property value="#p.captainSalary"/></td>
+										<td><s:property value="#p.captainSalary" /></td>
 										<td><s:property value="#p.firstOfficerSalary" /></td>
 										<td><s:property value="#p.attendantSalary" /></td>
 										<td><s:property value="#p.supportSalary" /></td>
 									</tr>
 								</s:iterator>
-								
-							</table> <s:form action="deleteUserAircrafts" method="post"
-								namespace="/profile" theme="bootstrap"
-								cssClass="form-horizontal">
+
+							</table> <s:form action="gotoUpdateSalaryPage" method="post"
+								namespace="/staff" theme="bootstrap" cssClass="form-horizontal">
 								<h2>
-									<s:select label="Sell Aircraft (50% of cost)" headerKey=""
-										headerValue="Select aircraft to sell"
-										name="aircraftCustomizeNameToDelete"
+									<s:select label="Select an aircraft to set staff salary"
+										headerKey="" headerValue="Select an aircraft"
+										name="aircraftToSetSalary"
 										list="%{userPlanes.{customizedName}}" value="" />
 								</h2>
 								<div class="form-group">
 									<div class="col-sm-offset-3 col-md-9">
-										<s:submit onclick="return confirmation();" value="Sell"
-											name="Delete" cssClass="btn btn-primary" />
+										<s:submit value="NEXT" name="NEXT" cssClass="btn btn-primary" />
 									</div>
+									<font face="Arial" size="4" color="red"> <s:property
+											value="errorMsg" />
+									</font>
 								</div>
 
 							</s:form>
 					</div>
-
-
-					<footer class="footer">
-					<p class="pull-right">
-						<a href="#">Back to top</a>
-					</p>
-					</footer>
 				</div>
 			</div>
 </body>

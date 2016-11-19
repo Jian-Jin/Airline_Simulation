@@ -64,7 +64,7 @@ function showValue(newValue,id)
                         
    <div class="form-group">
           <div class="col-sm-offset-3 col-md-9">
-                 <s:submit value="PURCHASE" name="NEXT" cssClass="btn btn-primary"/>
+                 <s:submit onclick = "return confirmation();" value="PURCHASE" name="NEXT" cssClass="btn btn-primary"/>
           </div>
   </div>
   <br>
@@ -77,10 +77,6 @@ function showValue(newValue,id)
         </div>    
     </div>
     
-    
-    <footer class="footer">
-        <p class="pull-right"><a href="#">Back to top</a></p>
-    </footer>
 </div>
 </body>
 </html>

@@ -40,7 +40,7 @@ CREATE TABLE user(id INT NOT NULL AUTO_INCREMENT, name VARCHAR(30), password VAR
 insert into user (name, password, osudotnum,superuser,money) values ('test',md5('test'),'test.1','0','600000000');
 insert into user (name, password, osudotnum,superuser) values ('admin',md5('admin'),'admin.1','1');
 
-CREATE TABLE user_aircraft(id INT NOT NULL AUTO_INCREMENT, userId INT, aircraftId INT, customizedName varchar(100), firstClassRatio double, businessClassRatio double, PRIMARY KEY(id));
+CREATE TABLE user_aircraft(id INT NOT NULL AUTO_INCREMENT, userId INT, aircraftId INT, customizedName varchar(100), firstClassRatio double, businessClassRatio double, captainSalary double, firstOfficerSalary double, attendantSalary double, supportSalary double, PRIMARY KEY(id));
 CREATE TABLE user_airport(id INT NOT NULL AUTO_INCREMENT, userId INT, airportId INT, PRIMARY KEY(id));
 CREATE TABLE initial_money(id INT, money double, PRIMARY KEY(id));
 INSERT INTO initial_money(id,money) VALUES ('1','600000000');

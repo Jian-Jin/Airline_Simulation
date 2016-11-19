@@ -11,17 +11,18 @@ import com.demo.service.AircraftService;
 import com.demo.service.AirportService;
 import com.demo.service.RouteService;
 import com.demo.service.UserService;
+import com.demo.service.Utils;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class ProfileAction  extends ActionSupport {
+public class ProfileAction extends ActionSupport {
 	private User user;
 	private List<Airport> userAirports;
 	private List<Aircraft> userPlanes;
 	private List<Airport> airportList;
 	private String errorMsg;
 	private UserService userService;
-	private int millions;
+	private String balance;
 	private AircraftService aircraftService;
 	private AirportService airportService;
 	private RouteService routeService;
@@ -29,180 +30,181 @@ public class ProfileAction  extends ActionSupport {
 	private String airportToChange;
 	private String osudotNumber;
 	private String password;
-	
-	public String getUserProfile(){
+
+	public String getUserProfile() {
 		Map session = ActionContext.getContext().getSession();
-	    if(session.get("logined")==null){
-	    	setErrorMsg("Please sign in first");
-	    	return ERROR;
-	    }
-	    int userId = (Integer)session.get("userId");
-	    User curUser = userService.getUserById(userId);
-	    setMillions((int)(curUser.getMoney()/1000000));
-	    setUser(curUser);
-	    return SUCCESS;
-	}
-	
-	public String getUserAirport(){
-		Map session = ActionContext.getContext().getSession();
-	    if(session.get("logined")==null){
-	    	setErrorMsg("Please sign in first");
-	    	return ERROR;
-	    }
-	    int userId = (Integer)session.get("userId");
-	    List<Airport> userAirports = airportService.getMyAirport(userId);
-	    setUserAirports(userAirports);
-	    List<Airport> changeList = airportService.getAllAirport();
-	    if(userAirports!=null && userAirports.size()!=0){
-	    	for(Airport cur : changeList){
-	    		if(cur.getName().equals(userAirports.get(0).getName())){
-	    			changeList.remove(cur);
-	    			break;
-	    		}
-	    	}
-	    }
-	    setAirportList(changeList);
-	    return SUCCESS;
-	}
-	
-	public String getUserAircrafts(){
-		Map session = ActionContext.getContext().getSession();
-	    if(session.get("logined")==null){
-	    	setErrorMsg("Please sign in first");
-	    	return ERROR;
-	    }
-	    int userId = (Integer)session.get("userId");
-	    List<Aircraft> aircrafts = aircraftService.getUserPlanes(userId);
-	    setUserPlanes(aircrafts);
-	    return SUCCESS;
+		if (session.get("logined") == null) {
+			setErrorMsg("Please sign in first");
+			return ERROR;
+		}
+		int userId = (Integer) session.get("userId");
+		User curUser = userService.getUserById(userId);
+		setBalance(Utils.convertToMillion(curUser.getMoney()));
+		setUser(curUser);
+		return SUCCESS;
 	}
 
-	public String deleteUserAircrafts(){
+	public String getUserAirport() {
 		Map session = ActionContext.getContext().getSession();
-	    if(session.get("logined")==null){
-	    	setErrorMsg("Please sign in first");
-	    	return ERROR;
-	    }
-	    if(aircraftCustomizeNameToDelete==null || aircraftCustomizeNameToDelete.isEmpty() ){
-	    	setErrorMsg("Please choose an aircraft to delete");
-	    	return ERROR;
-	    }
-	    int userId = (Integer)session.get("userId");
-	    Aircraft deleteAirtcraft = null;
-	    List<Aircraft> userPlanes = aircraftService.getUserPlanes(userId);
-	    for(Aircraft aircraft : userPlanes){
-	    	if(aircraft.getCustomizedName().equals(aircraftCustomizeNameToDelete)){
-	    		deleteAirtcraft = aircraft;
-	    		userPlanes.remove(aircraft);
-	    		break;
-	    	}
-	    }
-	    setUserPlanes(userPlanes);
-	    int user_aircraftId = aircraftService.getUserAircraftId(userId, aircraftCustomizeNameToDelete);
-	    double cost = deleteAirtcraft.getCost()*1000000;
-	    //increase the money
-	    double money = userService.getUserMoney(userId);
-	    money += cost*0.5;
-	    userService.updateUserMoney(userId, money);
-	    routeService.deleteUserRouteByAircraftId(userId, user_aircraftId);
-	    aircraftService.deleteUserAircraft(userId, aircraftCustomizeNameToDelete);
-	    return SUCCESS;
+		if (session.get("logined") == null) {
+			setErrorMsg("Please sign in first");
+			return ERROR;
+		}
+		int userId = (Integer) session.get("userId");
+		List<Airport> userAirports = airportService.getMyAirport(userId);
+		setUserAirports(userAirports);
+		List<Airport> changeList = airportService.getAllAirport();
+		if (userAirports != null && userAirports.size() != 0) {
+			for (Airport cur : changeList) {
+				if (cur.getName().equals(userAirports.get(0).getName())) {
+					changeList.remove(cur);
+					break;
+				}
+			}
+		}
+		setAirportList(changeList);
+		return SUCCESS;
 	}
-	
-	public String changeUserAirport(){
+
+	public String getUserAircrafts() {
 		Map session = ActionContext.getContext().getSession();
-	    if(session.get("logined")==null){
-	    	setErrorMsg("Please sign in first");
-	    	return ERROR;
-	    }
-	    if(airportToChange==null || airportToChange.isEmpty() ){
-	    	setErrorMsg("Please choose a hub to change");
-	    	return ERROR;
-	    }
-	    int userId = (Integer)session.get("userId");
-	    Airport newAirport = airportService.getAirport(airportToChange);
-	    Airport oldAirport = airportService.getMyAirport(userId).get(0);
-	    userAirports = new ArrayList<>();
-	    userAirports.add(newAirport);
-	    setUserAirports(userAirports);
-	    double newcost = newAirport.getCost()*1000000;
-	    double oldcost = oldAirport.getCost()*1000000;
-	    //change the money
-	    double money = userService.getUserMoney(userId);
-	    money = money+oldcost-newcost;
-	    userService.updateUserMoney(userId, money);
-	    routeService.deleteUserRoute(userId);
-	    airportService.updateUserAirport(userId, newAirport.getId());
-	    List<Airport> changeList = airportService.getAllAirport();
-	    for(Airport cur : changeList){
-	    	if(cur.getName().equals(newAirport.getName()));
-	    }
-	    setAirportList(changeList);
-	    return SUCCESS;
+		if (session.get("logined") == null) {
+			setErrorMsg("Please sign in first");
+			return ERROR;
+		}
+		int userId = (Integer) session.get("userId");
+		List<Aircraft> aircrafts = aircraftService.getUserPlanes(userId);
+		setUserPlanes(aircrafts);
+		return SUCCESS;
 	}
-	
-	public String updateOsudotnumber(){
+
+	public String deleteUserAircrafts() {
 		Map session = ActionContext.getContext().getSession();
-	    if(session.get("logined")==null){
-	    	setErrorMsg("Please sign in first");
-	    	return ERROR;
-	    }
-	    if(osudotNumber==null || osudotNumber.isEmpty() ){
-	    	setErrorMsg("Please enter your osu dot number");
-	    	return ERROR;
-	    }
-	    int userId = (Integer)session.get("userId");
-	    userService.updateUserOsudotnumber(userId, osudotNumber);
-	    User curUser = userService.getUserById(userId);
-	    setMillions((int)(curUser.getMoney()/1000000));
-	    setUser(curUser);
-	    return SUCCESS;
+		if (session.get("logined") == null) {
+			setErrorMsg("Please sign in first");
+			return ERROR;
+		}
+		if (aircraftCustomizeNameToDelete == null || aircraftCustomizeNameToDelete.isEmpty()) {
+			setErrorMsg("Please choose an aircraft to delete");
+			return ERROR;
+		}
+		int userId = (Integer) session.get("userId");
+		Aircraft deleteAirtcraft = null;
+		List<Aircraft> userPlanes = aircraftService.getUserPlanes(userId);
+		for (Aircraft aircraft : userPlanes) {
+			if (aircraft.getCustomizedName().equals(aircraftCustomizeNameToDelete)) {
+				deleteAirtcraft = aircraft;
+				userPlanes.remove(aircraft);
+				break;
+			}
+		}
+		setUserPlanes(userPlanes);
+		int user_aircraftId = aircraftService.getUserAircraftId(userId, aircraftCustomizeNameToDelete);
+		double cost = deleteAirtcraft.getCost() * 1000000;
+		// increase the money
+		double money = userService.getUserMoney(userId);
+		money += cost * 0.5;
+		userService.updateUserMoney(userId, money);
+		routeService.deleteUserRouteByAircraftId(userId, user_aircraftId);
+		aircraftService.deleteUserAircraft(userId, aircraftCustomizeNameToDelete);
+		return SUCCESS;
 	}
-	
-	public String setOsudotnumber(){
+
+	public String changeUserAirport() {
 		Map session = ActionContext.getContext().getSession();
-	    if(session.get("logined")==null){
-	    	setErrorMsg("Please sign in first");
-	    	return ERROR;
-	    }
-	    int userId = (Integer)session.get("userId");
-	    User curUser = userService.getUserById(userId);
-	    setMillions((int)(curUser.getMoney()/1000000));
-	    setUser(curUser);
-	    return SUCCESS;
+		if (session.get("logined") == null) {
+			setErrorMsg("Please sign in first");
+			return ERROR;
+		}
+		if (airportToChange == null || airportToChange.isEmpty()) {
+			setErrorMsg("Please choose a hub to change");
+			return ERROR;
+		}
+		int userId = (Integer) session.get("userId");
+		Airport newAirport = airportService.getAirport(airportToChange);
+		Airport oldAirport = airportService.getMyAirport(userId).get(0);
+		userAirports = new ArrayList<>();
+		userAirports.add(newAirport);
+		setUserAirports(userAirports);
+		double newcost = newAirport.getCost() * 1000000;
+		double oldcost = oldAirport.getCost() * 1000000;
+		// change the money
+		double money = userService.getUserMoney(userId);
+		money = money + oldcost - newcost;
+		userService.updateUserMoney(userId, money);
+		routeService.deleteUserRoute(userId);
+		airportService.updateUserAirport(userId, newAirport.getId());
+		List<Airport> changeList = airportService.getAllAirport();
+		for (Airport cur : changeList) {
+			if (cur.getName().equals(newAirport.getName()))
+				;
+		}
+		setAirportList(changeList);
+		return SUCCESS;
 	}
-	
-	public String updatePassword(){
+
+	public String updateOsudotnumber() {
 		Map session = ActionContext.getContext().getSession();
-	    if(session.get("logined")==null){
-	    	setErrorMsg("Please sign in first");
-	    	return ERROR;
-	    }
-	    if(password==null || password.isEmpty() ){
-	    	setErrorMsg("Please enter your new passwordr");
-	    	return ERROR;
-	    }
-	    int userId = (Integer)session.get("userId");
-	    userService.updatePassword(userId, password);
-	    User curUser = userService.getUserById(userId);
-	    setMillions((int)(curUser.getMoney()/1000000));
-	    setUser(curUser);
-	    return SUCCESS;
+		if (session.get("logined") == null) {
+			setErrorMsg("Please sign in first");
+			return ERROR;
+		}
+		if (osudotNumber == null || osudotNumber.isEmpty()) {
+			setErrorMsg("Please enter your osu dot number");
+			return ERROR;
+		}
+		int userId = (Integer) session.get("userId");
+		userService.updateUserOsudotnumber(userId, osudotNumber);
+		User curUser = userService.getUserById(userId);
+		setBalance(Utils.convertToMillion(curUser.getMoney()));
+		setUser(curUser);
+		return SUCCESS;
 	}
-	
-	public String setPassword(){
+
+	public String setOsudotnumber() {
 		Map session = ActionContext.getContext().getSession();
-	    if(session.get("logined")==null){
-	    	setErrorMsg("Please sign in first");
-	    	return ERROR;
-	    }
-	    int userId = (Integer)session.get("userId");
-	    User curUser = userService.getUserById(userId);
-	    setMillions((int)(curUser.getMoney()/1000000));
-	    setUser(curUser);
-	    return SUCCESS;
+		if (session.get("logined") == null) {
+			setErrorMsg("Please sign in first");
+			return ERROR;
+		}
+		int userId = (Integer) session.get("userId");
+		User curUser = userService.getUserById(userId);
+		setBalance(Utils.convertToMillion(curUser.getMoney()));
+		setUser(curUser);
+		return SUCCESS;
 	}
-	
+
+	public String updatePassword() {
+		Map session = ActionContext.getContext().getSession();
+		if (session.get("logined") == null) {
+			setErrorMsg("Please sign in first");
+			return ERROR;
+		}
+		if (password == null || password.isEmpty()) {
+			setErrorMsg("Please enter your new passwordr");
+			return ERROR;
+		}
+		int userId = (Integer) session.get("userId");
+		userService.updatePassword(userId, password);
+		User curUser = userService.getUserById(userId);
+		setBalance(Utils.convertToMillion(curUser.getMoney()));
+		setUser(curUser);
+		return SUCCESS;
+	}
+
+	public String setPassword() {
+		Map session = ActionContext.getContext().getSession();
+		if (session.get("logined") == null) {
+			setErrorMsg("Please sign in first");
+			return ERROR;
+		}
+		int userId = (Integer) session.get("userId");
+		User curUser = userService.getUserById(userId);
+		setBalance(Utils.convertToMillion(curUser.getMoney()));
+		setUser(curUser);
+		return SUCCESS;
+	}
+
 	public List<Airport> getUserAirports() {
 		return userAirports;
 	}
@@ -243,12 +245,12 @@ public class ProfileAction  extends ActionSupport {
 		return user;
 	}
 
-	public int getMillions() {
-		return millions;
+	public String getBalance() {
+		return balance;
 	}
 
-	public void setMillions(int millions) {
-		this.millions = millions;
+	public void setBalance(String balance) {
+		this.balance = balance;
 	}
 
 	public AircraftService getAircraftService() {
@@ -274,7 +276,6 @@ public class ProfileAction  extends ActionSupport {
 	public void setRouteService(RouteService routeService) {
 		this.routeService = routeService;
 	}
-
 
 	public String getAircraftCustomizeNameToDelete() {
 		return aircraftCustomizeNameToDelete;
@@ -315,6 +316,5 @@ public class ProfileAction  extends ActionSupport {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
+
 }

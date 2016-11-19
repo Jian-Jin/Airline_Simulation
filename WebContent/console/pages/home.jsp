@@ -35,6 +35,7 @@
         		<li><s:a href="/Demo/console/pages/home.jsp">Home</s:a></li>
            		 <li><a href="<s:url action='showAircraft' namespace="/aircraft"/>">Aircraft</a></li>
            		 <li><a href="<s:url action='showAirport' namespace="/airport"/>">Airport</a></li>
+           		 <li><a href="<s:url action='aircraftStaff' namespace="/aircraft"/>">Staff</a></li>
            		 <li><a href="<s:url action='getRoute' namespace="/route"/>">Route Setup</a></li>
            		 <li><a href="<s:url action='simulateHome' namespace="/login"/>">Simulation Result</a></li>
            		 <li><a href="<s:url action='getUserProfile' namespace="/profile"/>">My Profile</a></li>                
