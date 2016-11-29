@@ -37,19 +37,19 @@
   <s:form action="updateStaffSalary" method="post" namespace="/" theme="bootstrap" cssClass="form-horizontal" onsubmit="greeting()">
  <font face="Arial" size="4" color="orange">
                         <h3>1.Set the salary for captains (Suggest salary 100000)</h3>
-                        <input type="range" name="captainSalary" min="0" max="200000" value="100000" step="5000" class="slider-width100" onchange="showValue(this.value,this.name)" />
-						<span id="captainSalary">100000</span>
+                        <input type="range" name="captainSalary" min="0" max="200000" value="${aircraftToSet.captainSalary}" step="5000" class="slider-width100" onchange="showValue(this.value,this.name)" />
+						<span id="captainSalary">${aircraftToSet.captainSalary}</span>
                      	<br>
                         <h3>2.Set the salary for first officers (Suggest salary 75000)</h3>
-                        <input type="range" name="firstOfficerSalary" min="0" max="150000" value="75000" step="5000" onchange="showValue(this.value,this.name)" />
-                        <span id="firstOfficerSalary">75000</span>
+                        <input type="range" name="firstOfficerSalary" min="0" max="150000" value="${aircraftToSet.firstOfficerSalary}" step="5000" onchange="showValue(this.value,this.name)" />
+                        <span id="firstOfficerSalary">${aircraftToSet.firstOfficerSalary}</span>
                         <br>
                         <h3>3.Set the salary for flight attendant (Suggest salary 70000)</h3>
-                        <input type="range" name="attendantSalary" min="0" max="150000" value="70000" step="5000" onchange="showValue(this.value,this.name)" />
-                        <span id="attendantSalary">70000</span>
+                        <input type="range" name="attendantSalary" min="0" max="150000" value="${aircraftToSet.attendantSalary}" step="5000" onchange="showValue(this.value,this.name)" />
+                        <span id="attendantSalary">${aircraftToSet.attendantSalary}</span>
                         <h3>4.Set the salary for support staff (Suggest salary 50000)</h3>
-                        <input type="range" name="supportSalary" min="0" max="100000" value="50000" step="5000" onchange="showValue(this.value,this.name)" />
-                        <span id="supportSalary">50000</span>
+                        <input type="range" name="supportSalary" min="0" max="100000" value="${aircraftToSet.supportSalary}" step="5000" onchange="showValue(this.value,this.name)" />
+                        <span id="supportSalary">${aircraftToSet.supportSalary}</span>
 
 
      <script type="text/javascript">

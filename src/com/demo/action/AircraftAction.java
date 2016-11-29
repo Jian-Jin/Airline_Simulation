@@ -30,7 +30,8 @@ public class AircraftAction extends ActionSupport {
 	private String supportSalary;
 
 	private String aircraftToSetSalary;
-
+	private Aircraft aircraftToSet;
+	
 	public String getPlane() {
 		if (planes == null) {
 			planes = aircraftService.getPlane();
@@ -148,6 +149,9 @@ public class AircraftAction extends ActionSupport {
 			setUserPlanes(aircrafts);
 			return ERROR;
 		}
+		int userId = (Integer) session.get("userId");
+		Aircraft userAircraft = aircraftService.getUserPlaneByCumstomeizeName(userId, aircraftToSetSalary);
+		setAircraftToSet(userAircraft);
 		session.put("aircraftToSetSalary", aircraftToSetSalary);
 		return SUCCESS;
 	}
@@ -365,4 +369,12 @@ public class AircraftAction extends ActionSupport {
 		this.aircraftToSetSalary = aircraftToSetSalary;
 	}
 
+	public Aircraft getAircraftToSet() {
+		return aircraftToSet;
+	}
+
+	public void setAircraftToSet(Aircraft aircraftToSet) {
+		this.aircraftToSet = aircraftToSet;
+	}
+	
 }
