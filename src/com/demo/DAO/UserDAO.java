@@ -51,4 +51,9 @@ public interface UserDAO {
 	public void addUserMoney(
 			@Param(value = "id") int id,
 			@Param(value = "money") double money);
+	
+	public int getIdbyName(@Param(value = "username") String username);
+	
 }
+
+

@@ -94,9 +94,17 @@
           <div class="col-sm-offset-3 col-md-9">
                  <s:submit onclick = "return confirmation();" value="DELETE USER" name="NEXT" cssClass="btn btn-primary"/>
           </div>
-  </div>
-  
+  </div>  
   </s:form>    
+  
+  <s:form action="goToAdminPage" method="post" namespace="/user" theme="bootstrap" cssClass="form-horizontal">
+    
+   <div class="form-group">
+          <div class="col-sm-offset-3 col-md-9">
+                 <s:submit onclick = "return confirmation();" value="Administrator Account" name="NEXT" cssClass="btn btn-primary"/>
+          </div>
+  </div>  
+   </s:form>  
 
         </div>    
     </div>

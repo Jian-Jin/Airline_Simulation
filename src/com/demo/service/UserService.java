@@ -16,4 +16,5 @@ public interface UserService {
 	public void updateUserOsudotnumber(int id, String osudotnumber);
 	public void updateUsername(int id, String username);
 	public void updatePassword(int id, String password);
+	public int getIdbyName(String username);
 }

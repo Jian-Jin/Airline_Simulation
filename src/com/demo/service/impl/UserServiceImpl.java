@@ -148,5 +148,10 @@ public class UserServiceImpl implements UserService{
 		userDao.updatePassword(id, password);
 	}
 	
+	@Override
+	public int getIdbyName(String username){
+		return userDao.getIdbyName(username);
+	}
+	
 
 }

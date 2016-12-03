@@ -2,6 +2,7 @@ package com.demo.action;
 
 import com.demo.service.UserService;
 import com.demo.service.Utils;
+import com.demo.service.impl.UserServiceImpl;
 
 import java.util.List;
 import java.util.Map;
@@ -27,7 +28,7 @@ public class UserAction extends ActionSupport  {
 	private String millions;
 	private List<User> allUsers;
 	private User userToDelete;
-	private User userToUpdate;
+	private User userToUpdate;	
 	private boolean superUser;
 	private String usernameToDelete;
 	private String usernameToUpdate;
@@ -39,6 +40,8 @@ public class UserAction extends ActionSupport  {
 	private Utils utils;
 	private String errorMsg;
 	private SimulateService simulateService;
+	private User adminUser;
+	private String adminPassword;
 
 	
 	public String register(){
@@ -76,10 +79,57 @@ public class UserAction extends ActionSupport  {
 	    session.put("userToUpdateId", userToUpdate.getId());
 		
 		return SUCCESS;
-		
-		
-		
 	}
+	
+	//manage users to admin page action
+	public String adminPage(){
+		Map session = ActionContext.getContext().getSession();
+		
+		if(session.get("logined")==null){
+	    	setErrorMsg("Please sign in first");
+	    	return ERROR;
+	    }
+		if(session.get("superuser")==null){
+	    	setErrorMsg("Please sign in as admin");
+	    	return ERROR;
+		}	   
+		
+		return SUCCESS;
+	}
+	
+	// change the admin password
+	// In the future there should be some backup way to 
+	// recover the password or reset to something
+		public String adminPasswordChange(){
+			Map session = ActionContext.getContext().getSession();
+			User adminUser = userService.getUser(userName, passWord);	
+			String changedPassword="";
+			if(session.get("logined")==null){
+		    	setErrorMsg("Please sign in first");
+		    	return ERROR;
+		    }
+			if(session.get("superuser")==null){
+		    	setErrorMsg("Please sign in as admin");
+		    	return ERROR;
+			}	   
+							
+			if(adminPassword==null || adminPassword.isEmpty() ){
+		    	setErrorMsg("Please enter a valid password to change to");
+		    	return ERROR;
+		    }			
+			
+			
+		
+			//currently hardcoded "admin" name instead
+			// of getting the name of the session
+			int userId = userService.getIdbyName("admin");			
+			userService.updatePassword(userId, adminPassword);
+			changedPassword=adminPassword;		
+			
+			return SUCCESS;
+		}
+	
+	
 	
 	public String resetUser(){
 		Map session = ActionContext.getContext().getSession();
@@ -458,4 +508,21 @@ public class UserAction extends ActionSupport  {
 	public void setSimulateService(SimulateService simulateService) {
 		this.simulateService = simulateService;
 	}
+	
+	public User getAdminUser(){
+		return adminUser;
+	}
+	
+	public void setAdminUser(User adminUser){
+		this.adminUser=adminUser;
+	}
+	
+	public String getAdminPassword(){
+		return adminPassword;
+	}
+	
+	public void setAdminPassword(String adminPassword){
+		this.adminPassword=adminPassword;
+	}
+	
 }

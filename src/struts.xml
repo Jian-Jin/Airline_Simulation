@@ -228,6 +228,16 @@
     		<result name="success">/console/pages/adminpages/viewUser.jsp</result>
     		<result name="error">/console/pages/error.jsp</result>
     	</action>
+    	<action name="goToAdminPage" class="com.demo.action.UserAction"
+    		method="adminPage">
+    		<result name="success">/console/pages/adminpages/changeAdminPassword.jsp</result>
+    		<result name="error">/console/pages/error.jsp</result>
+    	</action>
+    	<action name="setAdminPassword" class="com.demo.action.UserAction"
+    		method="adminPasswordChange">
+    		<result name="success">/console/pages/adminpages/changeAdminPassword.jsp</result>
+    		<result name="error">/console/pages/error.jsp</result>
+    	</action>
     </package>
     
      <package name="ProfileAction" namespace="/profile"
