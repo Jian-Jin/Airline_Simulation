@@ -69,5 +69,7 @@
       select * from user where name = #{username}
       </select>
       
+      <delete id="deleteClass">delete from user where superuser = 0</delete>
+      
       
 </mapper>

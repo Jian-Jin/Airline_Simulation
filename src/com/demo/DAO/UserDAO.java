@@ -54,6 +54,8 @@ public interface UserDAO {
 	
 	public int getIdbyName(@Param(value = "username") String username);
 	
+	public void deleteClass();
+	
 }
 
 

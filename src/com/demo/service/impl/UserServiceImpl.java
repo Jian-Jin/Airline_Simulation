@@ -153,5 +153,10 @@ public class UserServiceImpl implements UserService{
 		return userDao.getIdbyName(username);
 	}
 	
+	@Override
+	public void deleteClass(){
+		userDao.deleteClass();
+	}
+	
 
 }

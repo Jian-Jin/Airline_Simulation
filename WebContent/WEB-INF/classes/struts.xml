@@ -236,7 +236,17 @@
     	<action name="setAdminPassword" class="com.demo.action.UserAction"
     		method="adminPasswordChange">
     		<result name="success">/console/pages/adminpages/changeAdminPassword.jsp</result>
-    		<result name="error">/console/pages/error.jsp</result>
+    		<result name="error">/console/pages/adminpages/error.jsp</result>
+    	</action>
+    	<action name="goToDeleteClass" class="com.demo.action.UserAction"
+    		method="goToDeleteClass">
+    		<result name="success">/console/pages/adminpages/deleteClass.jsp</result>
+    		<result name="error">/console/pages/adminpages/error.jsp</result>
+    	</action>
+    	<action name="deleteClass" class="com.demo.action.UserAction"
+    		method="deleteClass">
+    		<result name="success">/console/pages/adminpages/success.jsp</result>
+    		<result name="error">/console/pages/adminpages/error.jsp</result>
     	</action>
     </package>
     

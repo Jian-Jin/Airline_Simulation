@@ -116,9 +116,7 @@ public class UserAction extends ActionSupport  {
 			if(adminPassword==null || adminPassword.isEmpty() ){
 		    	setErrorMsg("Please enter a valid password to change to");
 		    	return ERROR;
-		    }			
-			
-			
+		    }				
 		
 			//currently hardcoded "admin" name instead
 			// of getting the name of the session
@@ -128,8 +126,38 @@ public class UserAction extends ActionSupport  {
 			
 			return SUCCESS;
 		}
-	
-	
+		
+		// Manage Users page to Delete Class page
+		public String goToDeleteClass(){
+			Map session = ActionContext.getContext().getSession();			
+			if(session.get("logined")==null){
+		    	setErrorMsg("Please sign in first");
+		    	return ERROR;
+		    }
+			if(session.get("superuser")==null){
+		    	setErrorMsg("Please sign in as admin");
+		    	return ERROR;
+			}	   		
+			
+			return SUCCESS;
+		}
+		
+		//Removes all users from database who are not superusers
+		public String deleteClass(){
+			Map session = ActionContext.getContext().getSession();			
+			if(session.get("logined")==null){
+		    	setErrorMsg("Please sign in first");
+		    	return ERROR;
+		    }
+			if(session.get("superuser")==null){
+		    	setErrorMsg("Please sign in as admin");
+		    	return ERROR;
+			}	   		
+			
+			userService.deleteClass();
+			
+			return SUCCESS;
+		}
 	
 	public String resetUser(){
 		Map session = ActionContext.getContext().getSession();

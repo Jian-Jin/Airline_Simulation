@@ -17,4 +17,5 @@ public interface UserService {
 	public void updateUsername(int id, String username);
 	public void updatePassword(int id, String password);
 	public int getIdbyName(String username);
+	public void deleteClass();
 }

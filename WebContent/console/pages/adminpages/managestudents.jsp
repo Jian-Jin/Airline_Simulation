@@ -95,7 +95,7 @@
                  <s:submit onclick = "return confirmation();" value="DELETE USER" name="NEXT" cssClass="btn btn-primary"/>
           </div>
   </div>  
-  </s:form>    
+  </s:form>   
   
   <s:form action="goToAdminPage" method="post" namespace="/user" theme="bootstrap" cssClass="form-horizontal">
     
@@ -106,6 +106,15 @@
   </div>  
    </s:form>  
 
+<s:form action="goToDeleteClass" method="post" namespace="/user" theme="bootstrap" cssClass="form-horizontal">
+    
+   <div class="form-group">
+          <div class="col-sm-offset-3 col-md-9">
+                 <s:submit onclick = "return confirmation();" value="Delete ALL Users" name="NEXT" cssClass="btn btn-primary"/>
+          </div>
+  </div>  
+   </s:form>  
+   
         </div>    
     </div>
     
