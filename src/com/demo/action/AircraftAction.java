@@ -79,8 +79,8 @@ public class AircraftAction extends ActionSupport {
 				double money = userService.getUserMoney(userId);
 				// cost
 				money -= plane.getCost() * 1000000;
-				double sum = salary[0] * 3 + salary[1] * 3 + salary[2] * 7 + salary[3] * 10;
-				money -= sum;
+//				double sum = salary[0] * 3 + salary[1] * 3 + salary[2] * 7 + salary[3] * 10;
+//				money -= sum;
 				userService.updateUserMoney(userId, money);
 				session.put("money", money);
 				return SUCCESS;
@@ -97,20 +97,19 @@ public class AircraftAction extends ActionSupport {
 
 	public String setStaffSalary() {
 		Map session = ActionContext.getContext().getSession();
-		int userId = (Integer) session.get("userId");
-		String aircraftToBuy = (String) session.get("aircraftToBuy");
-		Aircraft plane = aircraftService.getPlaneByName(aircraftToBuy).get(0);
+//		String aircraftToBuy = (String) session.get("aircraftToBuy");
+//		Aircraft plane = aircraftService.getPlaneByName(aircraftToBuy).get(0);
 		double[] salary = new double[4];
 		salary[0] = Double.valueOf(captainSalary);
 		salary[1] = Double.valueOf(firstOfficerSalary);
 		salary[2] = Double.valueOf(attendantSalary);
 		salary[3] = Double.valueOf(supportSalary);
-		double money = userService.getUserMoney(userId);
+//		double money = userService.getUserMoney(userId);
 		double sum = salary[0] * 3 + salary[1] * 3 + salary[2] * 7 + salary[3] * 10;
-		if (sum > money - plane.getCost() * 1000000) {
-			setErrorMsg("Not enough money to pay all the salary.");
-			return ERROR;
-		}
+//		if (sum > money - plane.getCost() * 1000000) {
+//			setErrorMsg("Not enough money to pay all the salary.");
+//			return ERROR;
+//		}
 		session.put("salary", salary);
 		return SUCCESS;
 	}
@@ -125,16 +124,16 @@ public class AircraftAction extends ActionSupport {
 		double fs = Double.valueOf(firstOfficerSalary);
 		double as = Double.valueOf(attendantSalary);
 		double ss = Double.valueOf(supportSalary);
-		double money = userService.getUserMoney(userId);
-		//calculate the difference
-		double difference = cs + fs + as + ss - (userAircraft.getCaptainSalary()+userAircraft.getFirstOfficerSalary() + userAircraft.getAttendantSalary() +userAircraft.getSupportSalary());
-		if (difference > money) {
-			setErrorMsg("Not enough money to pay all the salary.");
-			return ERROR;
-		}
+//		double money = userService.getUserMoney(userId);
+//		//calculate the difference
+//		double difference = cs + fs + as + ss - (userAircraft.getCaptainSalary()+userAircraft.getFirstOfficerSalary() + userAircraft.getAttendantSalary() +userAircraft.getSupportSalary());
+//		if (difference > money) {
+//			setErrorMsg("Not enough money to pay all the salary.");
+//			return ERROR;
+//		}
 		aircraftService.updateSalary(userId, aircraftToSetSalary, cs, fs, as, ss);
-		money -= difference;
-		userService.updateUserMoney(userId, money);
+//		money -= difference;
+//		userService.updateUserMoney(userId, money);
 		List<Aircraft> aircrafts = aircraftService.getUserPlanes(userId);
 		setUserPlanes(aircrafts);
 		return SUCCESS;
