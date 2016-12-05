@@ -31,9 +31,11 @@ public class SimulateServiceImpl implements SimulateService, InitializingBean {
 	private static int numberDays = 90;
 	private double basicProfit = 0;
 	private double fuelPrice = 0;
+	private static double firstOfficerSuggestSalary = 75000;
+	private static double captainSuggestSalary = 100000;
 	// key airport ID
 	private Map<Integer, Airport> airports = new HashMap<Integer, Airport>();
-	// key: timezone -- key:cluster value:list
+	// key: timezone -- key:cluster value:list of Demand
 	private Map<Integer, Map<Integer, List<Demand>>> demands = new HashMap<Integer, Map<Integer, List<Demand>>>();
 
 	@Override
@@ -58,21 +60,26 @@ public class SimulateServiceImpl implements SimulateService, InitializingBean {
 		}
 	}
 
+	/* 
+	 * The major logic of simulation run
+	 * parameters are inputed from user
+	 */
 	@Override
 	public void runSimulate(double fuelPrice, double basicProfit) {
 		System.out.println("Started run simulation at " + new Date());
 		List<String> downPlaneList = aircraftDao.getDownPlanes();
 		Set<String> downPlanes = new HashSet<String>();
 		downPlanes.addAll(downPlaneList);
-		// user previous price if zero
+		// use previous price if zero
 		if (fuelPrice != 0)
 			this.basicProfit = basicProfit;
 		if (basicProfit != 0)
 			this.fuelPrice = fuelPrice;
 		List<Route> allRoutes = routeDao.getAllRoutes();
+		// assign aircarft info to each route object
 		assignAircraft(allRoutes);
 
-		// key: userAircraftId
+		// key: userAircraftId, a unique id of table user_aircraft
 		Map<Integer, List<Route>> map = new HashMap<Integer, List<Route>>();
 		for (Route r : allRoutes) {
 			List<Route> list = map.get(r.getUserAircraftId());
@@ -84,7 +91,7 @@ public class SimulateServiceImpl implements SimulateService, InitializingBean {
 		}
 		List<Route> wholeRoutes = new ArrayList<Route>();
 
-		// populate map with routes of DayNum(90) days
+		// populate map with routes of DayNum(90) days by repeating each route cycle
 		for (int userAircraftId : map.keySet()) {
 			List<Route> list = map.get(userAircraftId);
 			Route head = list.get(0);
@@ -120,7 +127,7 @@ public class SimulateServiceImpl implements SimulateService, InitializingBean {
 			map.put(userAircraftId, newlist);
 			wholeRoutes.addAll(newlist);
 		}
-		// key - airportId Value:Map<Key:day Value:List<ROUTE>>
+		// key - airportId Value:Map<Key:day(1-90) Value:List<ROUTE>>
 		Map<Integer, Map<Integer, List<Route>>> airportMap = new HashMap<Integer, Map<Integer, List<Route>>>();
 		for (int id : map.keySet()) {
 			List<Route> list = map.get(id);
@@ -181,13 +188,16 @@ public class SimulateServiceImpl implements SimulateService, InitializingBean {
 		String time = calendar.getTime().toString();
 		userProfitDao.clearSimulateTime();
 		userProfitDao.storeSimulateTime(time);
+		// a map to store user's final profit
 		Map<Integer, Double> userProfitMap = new HashMap<Integer, Double>();
-		// Map<Integer,Aircraft> userCraftMap = new HashMap<Integer,Aircraft>();
 		for (Route route : routes) {
 
 			Aircraft a = route.getAircraft();
 			int userId = route.getUserId();
 			int peopleOnBoard = Math.min(a.getMaxSeat(), route.getPeopleOnboard());
+			// adjust the demand based on staff salary
+			peopleOnBoard = adjustDemandByStaffSalary(a, peopleOnBoard);
+			peopleOnBoard = Math.min(a.getMaxSeat(), peopleOnBoard);
 			double firstClassRatio = a.getFirstClassRatio() / 100d;
 			double busClassRatio = a.getBusinessClassRatio() / 100d;
 			double econClassRatio = (100d - firstClassRatio - busClassRatio) / 100d;
@@ -225,6 +235,7 @@ public class SimulateServiceImpl implements SimulateService, InitializingBean {
 			routeProfit.seats += peopleOnBoard;
 		}
 		userProfitDao.clearUserProfit();
+		deductStaffSalary(userProfitMap);
 		// store to db the overall rank
 		for (int userId : userProfitMap.keySet()) {
 			userProfitDao.storeUserProfit(userId, userProfitMap.get(userId));
@@ -233,6 +244,50 @@ public class SimulateServiceImpl implements SimulateService, InitializingBean {
 		}
 		// update each route profit
 		updateRouteProfit(routeProfitMap);
+	}
+	
+	/**
+	 * deduct the quarterly salary from user's profit
+	 */
+	private void deductStaffSalary(Map<Integer, Double> userProfitMap){
+		for(int userId :userProfitMap.keySet()){
+			double currentProfit = userProfitMap.get(userId);
+			List<Aircraft> planes = aircraftDao.getUserPlanes(userId);
+			for(Aircraft a : planes){
+				currentProfit -= (a.getAttendantSalary()/4+a.getFirstOfficerSalary()/4
+						+a.getCaptainSalary()/4+a.getSupportSalary()/4);
+			}
+			userProfitMap.put(userId, currentProfit);
+			
+		}
+	}
+
+	/*
+	 * Make it 3 captains per aircraft and 3 first officers per aircraft.  
+	 * Lets make demand between 0% and 49% = 0.  Between 50% - 99% = 75% and anything above 100% incease by 10% only. 
+	 */
+	private int adjustDemandByStaffSalary(Aircraft a, int peopleOnBoard) {
+		double result = peopleOnBoard;
+		double ratio1 = a.getCaptainSalary()/captainSuggestSalary;
+		if(ratio1<0.5){
+			result = 0;
+		}else if(ratio1<1){
+			result *= 0.75;
+		}else{
+			result *= 1.1;
+		}
+		
+		double ratio2 = a.getFirstOfficerSalary()/firstOfficerSuggestSalary;
+		if(ratio2<0.5){
+			result = 0;
+		}else if(ratio2<1){
+			result *= 0.75;
+		}else{
+			result *= 1.1;
+		}
+		System.out.println("adjust demand for "+a.getCustomizedName()+" from "+peopleOnBoard + " to "+(int)result);
+		return (int)result;
+		
 	}
 
 	private void updateRouteProfit(Map<String, RouteProfit> routeProfitMap) {

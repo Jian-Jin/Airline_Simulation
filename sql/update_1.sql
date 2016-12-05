@@ -34,7 +34,6 @@ INSERT INTO aircraft(id,name,cost,maxSeat,rangeVal,speed,fuelCapacity,fuelBurn,t
 INSERT INTO aircraft(id,name,cost,maxSeat,rangeVal,speed,fuelCapacity,fuelBurn,takeOffDis,landingDis) VALUES(21,'MD-83',45,155,2900,504,7000,999,8000,4500);
 
 
-CREATE TABLE route(userId INT, userAircraftId INT, fromAirport INT, departureTime varchar(20), departureDay INT, toAirport INT, arrivalTime varchar(20),arrivalDay INT, sequence INT, cost double, revenue double, profit double);
 CREATE TABLE user(id INT NOT NULL AUTO_INCREMENT, name VARCHAR(30), password VARCHAR(32), superuser BOOLEAN, osudotnum VARCHAR(30), money double,PRIMARY KEY(id));
 #two accounts for test
 insert into user (name, password, osudotnum,superuser,money) values ('test',md5('test'),'test.1','0','600000000');
@@ -47,3 +46,4 @@ INSERT INTO initial_money(id,money) VALUES ('1','600000000');
 CREATE TABLE down_aircraft(name VARCHAR(30));
 CREATE TABLE user_profit(userId INT,profit double);
 CREATE TABLE simulateTime(runtime varchar(100));
+CREATE TABLE route(userId INT, userAircraftId INT, fromAirport INT, toAirport INT,departureTimeLocal varchar(20), departureDayLocal INT,  arrivalTimeLocal varchar(20),arrivalDayLocal INT, departureTimeZulu varchar(20), departureDayZulu INT,  arrivalTimeZulu varchar(20),arrivalDayZulu INT, sequence INT,cost double, revenue double, profit double,flightTime varchar(20),seatsPurchased INT, competitorNum INT);
