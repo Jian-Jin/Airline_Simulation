@@ -53,8 +53,7 @@
  <s:form action="generateUser" method="post" namespace="/login" theme="bootstrap" cssClass="form-horizontal">
   
    <s:textarea
-                        tooltip="new user names split with comma e.g.Alex,Ben,...,Joe"
-                        label="Create Accounts"
+                        label="Create Accounts:"
                         placeholder="Alex,Ben,...,Joe"
                         name="newUserNames"
                         cols="20"

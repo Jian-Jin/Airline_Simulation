@@ -36,8 +36,7 @@
 <s:fielderror theme="bootstrap"/>
  <s:form action="downAircraft" method="post" namespace="/aircraft" theme="bootstrap" cssClass="form-horizontal">
   <s:checkboxlist
-                        tooltip="Choose down aircrafts"
-                        label="Choose down aircrafts"
+                        label="Choose down aircrafts:"
                         list="names"
                         value="downAircrafts"
                         name="aircraftsToDown"/>

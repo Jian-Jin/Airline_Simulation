@@ -26,7 +26,7 @@
         <div class="col-md-9">
             <font face="Verdana" size="5" color="#ccccff">
         
-        Last Simulation run time : <s:property value="simulateRunTime" />
+        Last Simulation Run Time : <s:property value="simulateRunTime" />
         </font>
         <br>
         <br>
@@ -68,10 +68,7 @@
         </div>    
     </div>
     
-    
-    <footer class="footer">
-        <p class="pull-right"><a href="#">Back to top</a></p>
-    </footer>
+
 </div>
 
 </body>

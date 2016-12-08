@@ -35,13 +35,13 @@
  <tr>
     <th>User</th>
     <th>AircraftName</th>
-    <th>departure Airport</th>
-    <th>departure Time</th>
-    <th>arrival Airport</th>
-    <th>arrival Time</th>
-    <th>flight Time</th>
+    <th>Departure Airport</th>
+    <th>Departure Time</th>
+    <th>Arrival Airport</th>
+    <th>Arrival Time</th>
+    <th>Flight Time</th>
     <th>Average Competitor Num</th>
-    <th>Average seats purchased</th>
+    <th>Average Seats Purchased</th>
     <th>Cost</th>
     <th>Revenue</th>
     <th>Profit</th>
@@ -69,10 +69,6 @@
         </div>    
     </div>
     
-    
-    <footer class="footer">
-        <p class="pull-right"><a href="#">Back to top</a></p>
-    </footer>
 </div>
 
 </body>

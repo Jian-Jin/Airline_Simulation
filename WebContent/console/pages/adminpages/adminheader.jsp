@@ -29,7 +29,7 @@
         <ul class="nav navbar-nav">
             <li class="active"><a href="<s:url action='manageUser' namespace="/login"/>">Manage Users</a></li>            
             <li><a href="<s:url action='manageDemand' namespace="/airport"/>">Adjust Demand Values</a></li>
-            <li><a href="<s:url action='downAircraftHome' namespace="/aircraft"/>">Down Aircrafts</a></li>
+            <li><a href="<s:url action='downAircraftHome' namespace="/aircraft"/>">Down Aircraft</a></li>
             <li><a href="<s:url action='simulateHome' namespace="/login"/>">Run Simulation</a></li>
             <li><a href="<s:url action='signout' namespace="/login"/>">Log Out</a></li>
         </ul>

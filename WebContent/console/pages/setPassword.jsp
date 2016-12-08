@@ -37,7 +37,7 @@
             <div class="well sidebar-nav">
                 <ul class="nav nav-list">
                  <li><a href="<s:url action='getUserProfile' namespace="/profile"/>">My Account</a></li>  
-           		 <li><a href="<s:url action='getUserAircrafts' namespace="/profile"/>">My Aircrafts</a></li>
+           		 <li><a href="<s:url action='getUserAircrafts' namespace="/profile"/>">My Aircraft</a></li>
            		 <li><a href="<s:url action='getUserAirport' namespace="/profile"/>">My Hub</a></li>              
                  </ul>
         	</div>
