@@ -24,14 +24,14 @@
 <div class="container">
     <div class="row">
         <div class="col-md-9">
-        <h1>Below are all the aircrafts you have :</h1>
+        <h1>Below are all the aircraft you have :</h1>
         <table class="table table-striped">
  <tr>
     <!-- <th>Purchase</th> -->
     <th>Name</th>
     <th>Aircraft</th>
-    <th>FirstClassRatio</th>
-    <th>BusinessClassRatio</th>
+    <th>First Class Ratio</th>
+    <th>Business Class Ratio</th>
     <th>Cost New (Million USD)</th>
     <th>Max Seats</th>
     <th>Range (SM, full capacity)</th>
@@ -83,11 +83,8 @@
 
         </div>    
     </div>
-    
-    
-    <footer class="footer">
-        <p class="pull-right"><a href="#">Back to top</a></p>
-    </footer>
+        
+   
 </div>
 
 

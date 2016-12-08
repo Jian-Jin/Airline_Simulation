@@ -45,10 +45,6 @@
    </s:form>
    <h2>THIS CAN NOT BE UNDONE!!</h2> 
     
-    
-    <footer class="footer">
-        <p class="pull-right"><a href="#">Back to top</a></p>
-    </footer>
 </div>
 </body>
 </html>

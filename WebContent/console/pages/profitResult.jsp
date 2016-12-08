@@ -26,7 +26,7 @@
         <div class="col-md-9">
             <font face="Verdana" size="5" color="#ccccff">
         
-        Simulate run time : <s:property value="simulateRunTime" />
+        Last Simulation run time : <s:property value="simulateRunTime" />
         </font>
         <br>
         <br>
@@ -39,7 +39,7 @@
     <!-- <th>Purchase</th> -->
     <th>Rank</th>
     <th>User</th>
-    <th>LastSimulationProfit</th>
+    <th>Last Simulation Profit</th>
     <th>Balance</th>
   </tr>
  <s:iterator value="profits" var="p">
