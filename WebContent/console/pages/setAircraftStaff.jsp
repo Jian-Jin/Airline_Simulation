@@ -51,7 +51,7 @@ body {
 							</table> <s:form action="gotoUpdateSalaryPage" method="post"
 								namespace="/staff" theme="bootstrap" cssClass="form-horizontal">
 								<h2>
-									<s:select label="Select an aircraft to set staff salary"
+									<s:select label="Select an aircraft to set staff salary(yearly)"
 										headerKey="" headerValue="Select an aircraft"
 										name="aircraftToSetSalary"
 										list="%{userPlanes.{customizedName}}" value="" />

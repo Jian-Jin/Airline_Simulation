@@ -42,7 +42,7 @@ body {
 										Account</a></li>
 								<li><a
 									href="<s:url action='getUserAircrafts' namespace="/profile"/>">My
-										Aircrafts</a></li>
+										Aircraft</a></li>
 								<li><a
 									href="<s:url action='getUserAirport' namespace="/profile"/>">My
 										Hub</a></li>
